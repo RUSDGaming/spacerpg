@@ -18,4 +18,11 @@
 *.pidb.meta
 
 # Unity3D Generated File On Crash Reports
-sysinfo.txt
+sysinfo.tx
+
+# Paid Assets
+/Assets/SpriteTile*
+
+#other Assets that i don't want to push
+/Assets/codeandweb.com*
+/Plugins/*
