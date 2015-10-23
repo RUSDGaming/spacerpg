@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour {
     public float rotationSpeed;
     public bool relativeInput;
     public bool disableInput;
-    
 
+    public int id;
     private Vector3 mousePosition ;
     private Rigidbody2D body;
 

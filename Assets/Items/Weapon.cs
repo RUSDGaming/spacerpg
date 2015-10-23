@@ -44,9 +44,9 @@ public class Weapon : MonoBehaviour {
         {
             if(energy >= energyCost)
             {
-                audioSorce.pitch = Random.Range(.8f, 1.2f);
+                audioSorce.pitch = Random.Range(1f, 1.3f);
                 audioSorce.PlayOneShot(laserSound);
-                Debug.Log("fired a bullet");
+              //  Debug.Log("fired a bullet");
                 energyOut = energy - energyCost;
                 GameObject projectileInstance = (GameObject) Instantiate(projectile,parentTransform.position,parentTransform.rotation);
                 projectileInstance.SendMessage("IsPlayer", true);

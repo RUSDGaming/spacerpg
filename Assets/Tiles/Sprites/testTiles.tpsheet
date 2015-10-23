@@ -4,10 +4,11 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # http://www.codeandweb.com/texturepacker/unity
 #
-# Sprite sheet: testTiles.png (64 x 128)
-# $TexturePacker:SmartUpdate:1d28a251e40f82737231e0c69d331264:d9d4843afd0932dce7bb59aeb9517a83:60670fcb30ff86476e8f9689d23b9214$
+# Sprite sheet: testTiles.png (128 x 128)
+# $TexturePacker:SmartUpdate:14058266fb75f010e537bcba0f9bbb96:2e516e54f03840aec3931802a778615b:60670fcb30ff86476e8f9689d23b9214$
 #
 
 SpaceRPGTileSet_0;3;93;32;32;0.5;0.5
 SpaceRPGTileSet_1;3;57;32;32;0.5;0.5
 SpaceRPGTileSet_2;3;21;32;32;0.5;0.5
+SpaceRPGTileSet_3;39;98;27;27;0.4074074074074074;0.5925925925925926

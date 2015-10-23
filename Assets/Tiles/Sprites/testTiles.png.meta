@@ -7,6 +7,7 @@ TextureImporter:
     21300000: SpaceRPGTileSet_0
     21300002: SpaceRPGTileSet_1
     21300004: SpaceRPGTileSet_2
+    21300006: SpaceRPGTileSet_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -82,6 +83,16 @@ TextureImporter:
         height: 32
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpaceRPGTileSet_3
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 98
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: .407407403, y: .592592597}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
