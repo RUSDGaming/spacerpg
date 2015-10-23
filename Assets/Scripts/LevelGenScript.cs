@@ -45,12 +45,12 @@ public class LevelGenScript : MonoBehaviour
             {
                 rooms++;
                 
-                yield return new WaitForSeconds(.1f);
+                yield return new WaitForSeconds(.0f);
             }
             else
             {
                 fails++;
-                yield return new WaitForSeconds(.01f) ;
+                yield return new WaitForSeconds(.0f) ;
             }
         }
         Debug.Log("rooms Created" + rooms);
@@ -82,8 +82,7 @@ public class LevelGenScript : MonoBehaviour
 
     bool CreateBox(int startX, int startY, int w, int h,LevelGenInfo info)
     {
-        bool spawnPortal = true;
-
+        
         if (DoesCollide(startX, startY, w, h,info))
         {
             //Debug.Log("The room Collieded With Something");
@@ -109,15 +108,15 @@ public class LevelGenScript : MonoBehaviour
                         Tile.SetTile(new Int2(x, y), 0, info.floorTile, false);
                         if(startPoint.x == -1 )
                         {                          
+                            // the start point will be the first room generated.
                             startPoint = new Int2(startX + w / 2, startY + h / 2);
                             Debug.Log("Setting Start Point : " + startPoint);
-                            spawnPortal = false;
+                           
                         }
-                        if(endPoint.x == -1 &&  spawnPortal)
-                        {
-                            endPoint= new Int2(startX + w / 2, startY + h / 2);
-                            Debug.Log("Setting end Point : " + endPoint);
-                        }
+                         // the endpoint will be the last room generated
+                         endPoint= new Int2(startX + w / 2, startY + h / 2);
+                            
+                        
                     }
                 }
 
@@ -178,9 +177,9 @@ public class LevelGenScript : MonoBehaviour
 
         }        
 
-        for (int x = startX + info.padding; x < startX + w + info.padding; x++)
+        for (int x = startX - info.padding; x < startX + w + info.padding; x++)
         {
-            for (int y = startY + info.padding; y < startY + h + info.padding; y++)
+            for (int y = startY - info.padding; y < startY + h + info.padding; y++)
             {
                 // if a tile is not null then something is there...
                 if (Tile.GetTile(new Int2(x, y)).tile != -1)
