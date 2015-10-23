@@ -22,8 +22,6 @@ namespace Game.Events
             subscribers.Add(sub);
            // Debug.Log("added a subscriber");
            // Debug.Log(sub.GetType().ToString());
-
-            
            // Debug.Log(sub is PortalSubscriber);
         }
 

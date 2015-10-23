@@ -17,6 +17,7 @@ namespace Game.Events
     public class LevelFinishedLoadingEventArgs : GameEventArgs
     {
        public Vector2 startPos;
+        public Vector2 endPos;
     }
 
 

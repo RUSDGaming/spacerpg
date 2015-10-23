@@ -12,7 +12,7 @@ public class LevelGenScript : MonoBehaviour
 
     
     Int2 startPoint = new Int2(-1,-1);
-    Int2 endPoint;
+    Int2 endPoint = new Int2(-1,-1);
 
     public TextAsset myLevel;
     // Use this for initialization
@@ -63,6 +63,9 @@ public class LevelGenScript : MonoBehaviour
 
         LevelFinishedLoadingEventArgs args = new LevelFinishedLoadingEventArgs();
         args.startPos = Tile.MapToWorldPosition(startPoint);
+        args.endPos = Tile.MapToWorldPosition(endPoint);
+        Debug.Log("startpos"+args.startPos);
+        Debug.Log("end pos"+args.endPos);
 
         GameEventSystem.PublishEvent(typeof(LevelLoadedSubscriber), args);
     }
@@ -79,6 +82,7 @@ public class LevelGenScript : MonoBehaviour
 
     bool CreateBox(int startX, int startY, int w, int h,LevelGenInfo info)
     {
+        bool spawnPortal = true;
 
         if (DoesCollide(startX, startY, w, h,info))
         {
@@ -103,10 +107,16 @@ public class LevelGenScript : MonoBehaviour
                     {
                         //Debug.Log("setting floor tile");
                         Tile.SetTile(new Int2(x, y), 0, info.floorTile, false);
-                        if(startPoint.x == -1)
-                        {
+                        if(startPoint.x == -1 )
+                        {                          
                             startPoint = new Int2(startX + w / 2, startY + h / 2);
                             Debug.Log("Setting Start Point : " + startPoint);
+                            spawnPortal = false;
+                        }
+                        if(endPoint.x == -1 &&  spawnPortal)
+                        {
+                            endPoint= new Int2(startX + w / 2, startY + h / 2);
+                            Debug.Log("Setting end Point : " + endPoint);
                         }
                     }
                 }
