@@ -3,22 +3,23 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour {
 
+    
 
     public GameObject projectile;
 
     public Transform parentTransform;
 
     [SerializeField]
-    AudioClip laserSound;
+    protected AudioClip laserSound;
     
-    AudioSource audioSorce;
+    protected    AudioSource audioSorce;
 
     public float damage;
     public float fireRate;    
     public float energyCost;    
     public int ammo;
 
-    private float lastShot = 0;
+    protected float lastShot = 0;
 
  
 
@@ -35,11 +36,11 @@ public class Weapon : MonoBehaviour {
         lastShot = -fireRate;
     }
 
-    public bool TryToFire(float energy, out float energyOut)
+    public virtual bool TryToFire(ref float energy)
     {
 
         
-        energyOut = energy;
+       
         if(Time.time - lastShot  >= fireRate )
         {
             if(energy >= energyCost)
@@ -47,7 +48,7 @@ public class Weapon : MonoBehaviour {
                 audioSorce.pitch = Random.Range(1f, 1.3f);
                 audioSorce.PlayOneShot(laserSound);
               //  Debug.Log("fired a bullet");
-                energyOut = energy - energyCost;
+                 energy -= energyCost;
                 GameObject projectileInstance = (GameObject) Instantiate(projectile,parentTransform.position,parentTransform.rotation);
                 projectileInstance.SendMessage("IsPlayer", true);
                 lastShot = Time.time;

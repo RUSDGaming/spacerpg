@@ -32,7 +32,7 @@ public class ProjectileScript : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
        // Debug.Log("tag hit is: " +  other.tag);
-       // Debug.Log(other.gameObject.layer);
+        //Debug.Log(other.gameObject.layer);
         
         if (playerBullet && other.CompareTag("Enemy" ))
         {

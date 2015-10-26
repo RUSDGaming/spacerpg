@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Game.Interfaces;
+using System;
 
-public class Ship : MonoBehaviour {
-    
- 
+public class Ship : MonoBehaviour ,iShip{
+
+
     [SerializeField]
-    WeaponSlot[] weaponSlots;
+    float energyRegen = 2;
+
+    
+    public WeaponSlot[] weaponSlots;
 
     [SerializeField]
     ItemScript[] capacitors;
@@ -18,6 +23,16 @@ public class Ship : MonoBehaviour {
 
     [SerializeField]
     ItemScript[] armors;
+
+    [SerializeField]
+    float moveForce = 5000;
+    [SerializeField]
+    float maxSpeed = 10f;
+
+    [SerializeField]
+    ControlSwitcher switcher;
+
+    Rigidbody2D body;
 
 
     public float currentHealth;
@@ -33,31 +48,37 @@ public class Ship : MonoBehaviour {
 
     public float baseArmor;
 
-
+    public int itemSlots;
 
     // Use this for initialization
     void Start () {
-	
-	}
+        currentEnergy = maxEnergy;
+        currentHealth = maxHealth;
+        body = GetComponent<Rigidbody2D>();
+        switcher = GetComponentInParent<ControlSwitcher>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+    void FixedUpdate()
+    {
+        regenEnergy();
+    }
 
     // tries to fire all the weapons in the group
-    public void TryToFire(int weaponGroup)
+    public bool TryToFire(int weaponGroup)
     {
         foreach (WeaponSlot weaponSlot in weaponSlots)
         {
             if (weaponSlot.weapon != null) {
                 Weapon weapon =  weaponSlot.weapon.GetComponent<Weapon>();                
-                weapon.TryToFire(currentEnergy, out currentEnergy);
-               
-
+                weapon.TryToFire(ref currentEnergy);
             }
             
         }
+        return false;
 
     }
 
@@ -85,5 +106,35 @@ public class Ship : MonoBehaviour {
     void Destroy()
     {
         Debug.Log("Player Should be Destroyed");
+        Debug.Log("Playe Should not control Core");
+        switcher.SwitchToShipCore();        
     }
+
+    
+
+    public void MoveUnit(Vector2 force)
+    {
+        body.AddForce(force * Time.fixedDeltaTime * moveForce);
+
+        if (body.velocity.magnitude > maxSpeed)
+        {
+            body.velocity = body.velocity.normalized * maxSpeed;
+        }
+    }
+
+    public void RotateUnit(float deg)
+    {
+        body.MoveRotation(body.rotation + deg);
+    }
+
+
+    void regenEnergy()
+    {
+        currentEnergy += energyRegen * Time.fixedDeltaTime;
+        if (currentEnergy > maxEnergy)
+        {
+            currentEnergy = maxEnergy;
+        }
+    }
+
 }

@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Game.Interfaces;
+
 
 public class PlayerController : MonoBehaviour {
 
 
     private float horizontal;
     private float vertical;
-    public float maxSpeed;
-    public float moveForce;
-    public float rotationSpeed;
+    //public float maxSpeed;
+    //public float moveForce;
+   //public float rotationSpeed;
     public bool relativeInput;
     public bool disableInput;
 
@@ -23,9 +25,10 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody2D>();
+        ship = GetComponent<iShip>();
 	}
 
-    public Ship ship;
+    public iShip ship;
 
 	// Update is called once per frame
 	void Update () {
@@ -45,23 +48,25 @@ public class PlayerController : MonoBehaviour {
         Vector3 cross = Vector3.Cross(bodyToMouse, transform.up);
         
         if (cross.z > 0)
-            angleBetween = -angleBetween;       
-        if (relativeInput)
-        {
-        body.AddRelativeForce(new Vector2(horizontal, vertical) * Time.fixedDeltaTime * moveForce);
-        }
-        else
-        {
-            body.AddForce(new Vector2(horizontal, vertical) * Time.fixedDeltaTime * moveForce);
-        }
+            angleBetween = -angleBetween;      
+         
+        ship.MoveUnit(new Vector2(horizontal, vertical));
+        //if (relativeInput)
+        //{
+        //body.AddRelativeForce(new Vector2(horizontal, vertical) * Time.fixedDeltaTime * moveForce);
+        //}
+        //else
+        //{
+        //    body.AddForce(new Vector2(horizontal, vertical) * Time.fixedDeltaTime * moveForce);
+        //}
               
-        body.MoveRotation(body.rotation + angleBetween);
-        
+        //body.MoveRotation(body.rotation + angleBetween);
+        ship.RotateUnit(angleBetween);
         // limit them move ment to the max speed;
-        if(body.velocity.magnitude > maxSpeed)
-        {
-            body.velocity = body.velocity.normalized * maxSpeed;
-        }
+        //if(body.velocity.magnitude > maxSpeed)
+        //{
+        //    body.velocity = body.velocity.normalized * maxSpeed;
+        //}
 
         if (fireDown)
         {

@@ -1,14 +1,12 @@
 fileFormatVersion: 2
-guid: 92e6b64e635a9384bb86b776d8fdca67
-timeCreated: 1445334034
+guid: 1fca22e0cf1e803499a5a3d314e3fb24
+timeCreated: 1445333523
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: SpaceRPGTileSet_0
     21300002: SpaceRPGTileSet_1
     21300004: SpaceRPGTileSet_2
-    21300006: SpaceRPGTileSet_3
-    21300008: SpaceRPGTileSet_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -31,11 +29,11 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 4096
   textureSettings:
-    filterMode: 0
-    aniso: 16
+    filterMode: -1
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -49,7 +47,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -80,26 +78,6 @@ TextureImporter:
         serializedVersion: 2
         x: 3
         y: 21
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpaceRPGTileSet_3
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 98
-        width: 27
-        height: 27
-      alignment: 9
-      pivot: {x: .407407403, y: .592592597}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpaceRPGTileSet_4
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 93
         width: 32
         height: 32
       alignment: 0
