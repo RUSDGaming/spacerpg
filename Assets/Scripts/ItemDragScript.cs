@@ -6,13 +6,14 @@ using System;
 public class ItemDragScript : MonoBehaviour , IBeginDragHandler, IDragHandler,IEndDragHandler{
 
 
-    public static GameObject selecetdItem;
+    public  GameObject selecetdItem;
     public GameObject realGamePrefab;
 
     Vector3 startPosition;
     Transform startParent;
     //bool isOnShipSlot = false;
     ShipSlot shipSlot;
+    public int inventoryIndex;
     
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -41,7 +42,20 @@ public class ItemDragScript : MonoBehaviour , IBeginDragHandler, IDragHandler,IE
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        selecetdItem = null;
+        //selecetdItem = null;
+
+        var ray = eventData.pointerCurrentRaycast;
+        //var ray = Input.mous;
+        //var ray =  Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        //Debug.Log(ray.ToString());
+        
+        Slot slot =  ray.gameObject.transform.parent.gameObject.GetComponent<Slot>();
+        if(slot != null)
+        {
+            slot.SetItem(selecetdItem.GetComponent<ItemDragScript>());
+        }
+
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         if (transform.parent == startParent)
         {

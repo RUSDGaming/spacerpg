@@ -2,11 +2,18 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.UI;
 
-public class ShipSlot : MonoBehaviour, IDropHandler {
+public class ShipSlot : MonoBehaviour, IDropHandler
+{
 
+
+  
 
     public WeaponSlot weaponSlot;
+
+ 
+    
 
     public GameObject item
     {
@@ -25,9 +32,9 @@ public class ShipSlot : MonoBehaviour, IDropHandler {
         if (!item)
         {
             Debug.Log("Dragged an item onto the ship");
-            ItemDragScript.selecetdItem.transform.SetParent(this.transform);
-            ItemDragScript.selecetdItem.transform.localPosition = Vector3.zero;
-            
+           // ItemDragScript.selecetdItem.transform.SetParent(this.transform);
+          //  ItemDragScript.selecetdItem.transform.localPosition = Vector3.zero;
+
             weaponSlot.SetUpWeapon(item.GetComponent<ItemDragScript>().realGamePrefab);
 
         }
@@ -36,4 +43,6 @@ public class ShipSlot : MonoBehaviour, IDropHandler {
     {
         weaponSlot.SetUpWeapon(null);
     }
+
+    
 }

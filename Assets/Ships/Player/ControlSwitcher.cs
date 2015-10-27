@@ -20,15 +20,15 @@ public class ControlSwitcher : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if (shipCore.activeInHierarchy)
-        {
-            menu.SetShip(shipCore);
-            menu.playerController = shipCore.GetComponent<PlayerController>();
-        }
         if (mainShip.activeInHierarchy)
         {
             menu.SetShip(mainShip);
             menu.playerController = mainShip.GetComponent<PlayerController>();
+        } else if (shipCore.activeInHierarchy)
+        {
+            Debug.Log("Ship core was acative!!!!");
+            menu.SetShip(shipCore);
+            menu.playerController = shipCore.GetComponent<PlayerController>();
         }
 
 	}

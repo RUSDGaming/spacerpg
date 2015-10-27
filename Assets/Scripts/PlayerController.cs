@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     public Vector2 bodyToMouse;
     public float angleBetween;
     public bool fireDown;
+    public iShip ship;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +29,6 @@ public class PlayerController : MonoBehaviour {
         ship = GetComponent<iShip>();
 	}
 
-    public iShip ship;
 
 	// Update is called once per frame
 	void Update () {
