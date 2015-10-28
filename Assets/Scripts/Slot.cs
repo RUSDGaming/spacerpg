@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+
+[RequireComponent (typeof(Image))]
 public class Slot : MonoBehaviour ,IDropHandler {
 
 
@@ -22,6 +24,7 @@ public class Slot : MonoBehaviour ,IDropHandler {
     public void Start()
     {
         image = GetComponent<Image>();
+    
     }
     public GameObject item
     {
@@ -36,7 +39,7 @@ public class Slot : MonoBehaviour ,IDropHandler {
     }
 
 
-    public void SetItem(ItemDragScript script)
+    public virtual void SetItem(ItemDragScript script)
     {
 
         // get a reffrence to this so you can moddifie it after you move it;
@@ -53,12 +56,6 @@ public class Slot : MonoBehaviour ,IDropHandler {
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (!item)
-        {
-            //ItemDragScript.selecetdItem.transform.SetParent(this.transform);
-            //ItemDragScript.selecetdItem.transform.localPosition = Vector3.zero;
-
-        }
     }
 
 
@@ -68,6 +65,7 @@ public class Slot : MonoBehaviour ,IDropHandler {
         {
             case Inventory.InventoryType.SHIP:
                 {
+
                     image.color = shipColor;
                     break;
                 }

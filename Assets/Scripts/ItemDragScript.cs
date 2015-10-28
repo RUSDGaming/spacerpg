@@ -24,13 +24,6 @@ public class ItemDragScript : MonoBehaviour , IBeginDragHandler, IDragHandler,IE
         GetComponent<CanvasGroup>().blocksRaycasts = false;
 
         shipSlot = transform.parent.GetComponent<ShipSlot>();
-        if (shipSlot)
-        {           
-            
-            Debug.Log("Dragged an item off a ship slot");
-            // shipSlot.removeItem();
-        }
-
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -48,12 +41,41 @@ public class ItemDragScript : MonoBehaviour , IBeginDragHandler, IDragHandler,IE
         //var ray = Input.mous;
         //var ray =  Camera.main.ScreenPointToRay(Input.mousePosition);
         
-        //Debug.Log(ray.ToString());
-        
+       // Debug.Log(ray.ToString());
+        // this is when you drag over empty screen
+        if(ray.gameObject != null)
+        {
+
+
         Slot slot =  ray.gameObject.transform.parent.gameObject.GetComponent<Slot>();
         if(slot != null)
         {
-            slot.SetItem(selecetdItem.GetComponent<ItemDragScript>());
+                if (slot.GetComponent<ShipSlot>())
+                {
+                    //Debug.Log("item ended over ship slot");
+                    if (!selecetdItem.GetComponent<ItemDragScript>().realGamePrefab)
+                    {
+                        slot.SetItem(selecetdItem.GetComponent<ItemDragScript>());
+                    }else if(selecetdItem.GetComponent<ItemDragScript>().realGamePrefab.GetComponent<Weapon>())
+                    {
+                        slot.SetItem(selecetdItem.GetComponent<ItemDragScript>());
+                    }
+                }else if (shipSlot)
+                {
+                    if(!slot.transform.GetChild(0).GetComponent<ItemDragScript>().realGamePrefab){
+                        slot.SetItem(selecetdItem.GetComponent<ItemDragScript>());
+                    }else if(slot.transform.GetChild(0).GetComponent<ItemDragScript>().realGamePrefab.GetComponent<Weapon>()) {
+                        slot.SetItem(selecetdItem.GetComponent<ItemDragScript>());
+                    }
+                }
+                else
+                {
+                    slot.SetItem(selecetdItem.GetComponent<ItemDragScript>());
+
+                }
+
+
+        }
         }
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;

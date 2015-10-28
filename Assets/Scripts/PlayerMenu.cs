@@ -15,11 +15,18 @@ public class PlayerMenu : MonoBehaviour
 
     public GameObject slot;
     public GameObject shipSlot;
+    [SerializeField]
+    Sprite defaultSprite;
 
+
+    public GameObject ship;
     public bool shipNearChest = false;
 
     [SerializeField]
     GameObject slotHolder;
+
+    [SerializeField]
+    GameObject shipImage;
 
     bool menuOpen = false;
 
@@ -56,54 +63,61 @@ public class PlayerMenu : MonoBehaviour
 
     void OpenMenu()
     {
-        Inventory[] inventories = gameObject.transform.parent.GetComponentsInChildren<Inventory>(true);
-        //Debug.Log(inventories.Length);
         DeactivateInventorySlots();
-        int count = 0;
-        foreach(Inventory inventory in inventories)
+        OpenInventorySlots();
+        OpenWeaponSlots();
+
+    }
+    void OpenWeaponSlots()
+    {
+        Ship shipScript = ship.GetComponent<Ship>();
+        
+
+        for (int i = 0; i < shipScript.weaponSlots.Length; i++)
         {
-            if(inventory.iventoryType == Inventory.InventoryType.STATIONARY)
+            GameObject shipSlotInstance = shipImage.transform.GetChild(i).gameObject;
+            shipSlotInstance.SetActive(true);
+
+            shipSlotInstance.transform.localPosition = shipScript.weaponSlots[i].transform.localPosition * 32;
+            ItemDragScript ids = shipSlotInstance.transform.GetChild(0).GetComponent<ItemDragScript>();
+
+            //Debug.Log(shipSlotInstance.transform.GetChild(0));
+            ids.realGamePrefab = shipScript.weaponSlots[i].weapon;
+            ids.GetComponent<Image>().sprite = shipScript.weaponSlots[i].gameObject.GetComponent<SpriteRenderer>().sprite;
+            if(ids.realGamePrefab == null)
             {
-                Debug.Log("player stationary Inventory not yet implemented");
-                continue;
+                ids.GetComponent<Image>().sprite = defaultSprite;
             }
-
-            Debug.Log("inv length"+ inventory.items.Length);
-            for(int i = 0; i < inventory.items.Length; i++)
-            {
-
-                Slot slot = slotHolder.transform.GetChild(i + count).gameObject.GetComponent<Slot>();
-                slot.SetColor(inventory.iventoryType);
-                slot.gameObject.SetActive(true);
-                Transform slotItem = slot.transform.GetChild(0);
-                ItemDragScript ids = slotItem.GetComponent<ItemDragScript>();
-
-                if (inventory.items[i] != null)
-                {
-                    ids.realGamePrefab = inventory.items[i].gameObject;
-                    ids.GetComponent<ItemDragScript>().inventoryIndex = i;
-                    slotItem.GetComponent<Image>().sprite = inventory.items[i].gameObject.GetComponent<SpriteRenderer>().sprite;
-                }
-                else
-                {
-                    // if there were any previous items clear them out
-                    ids.realGamePrefab = null;
-                    slotItem.GetComponent<Image>().sprite = null;
-                }
-
-                
-            }
-            count += inventory.items.Length; 
         }
-
     }
 
     void CloseMenu()
     {
+        CloseInventorySlots();
+        CloseWeaponSlots();
+    }
+    void CloseWeaponSlots()
+    {
+        Ship shipScript = ship.GetComponent<Ship>();
 
+
+        for (int i = 0; i < shipScript.weaponSlots.Length; i++)
+        {
+            GameObject shipSlotInstance = shipImage.transform.GetChild(i).gameObject;          
+            ItemDragScript ids = shipSlotInstance.transform.GetChild(0).GetComponent<ItemDragScript>();
+            shipScript.weaponSlots[i].SetUpWeapon(ids.realGamePrefab);
+            //            Debug.Log(shipSlotInstance.transform.GetChild(0));
+            //          ids.realGamePrefab = shipScript.weaponSlots[i].weapon;
+            ids.GetComponent<Image>().sprite = defaultSprite;
+            
+
+        }
+    }
+
+    void OpenInventorySlots()
+    {
         Inventory[] inventories = gameObject.transform.parent.GetComponentsInChildren<Inventory>(true);
         //Debug.Log(inventories.Length);
-        DeactivateInventorySlots();
         int count = 0;
         foreach (Inventory inventory in inventories)
         {
@@ -117,26 +131,63 @@ public class PlayerMenu : MonoBehaviour
             for (int i = 0; i < inventory.items.Length; i++)
             {
 
-                Slot slot = slotHolder.transform.GetChild(i + count).gameObject.GetComponent<Slot>();                
+                Slot slot = slotHolder.transform.GetChild(i + count).gameObject.GetComponent<Slot>();
+                slot.SetColor(inventory.iventoryType);
+                slot.gameObject.SetActive(true);
                 Transform slotItem = slot.transform.GetChild(0);
                 ItemDragScript ids = slotItem.GetComponent<ItemDragScript>();
 
-                if(ids.realGamePrefab != null)
+                if (inventory.items[i] != null)
                 {
-                inventory.items[i] = ids.realGamePrefab.GetComponent<Item>();
+                    ids.realGamePrefab = inventory.items[i].gameObject;
+                    ids.GetComponent<ItemDragScript>().inventoryIndex = i;
+                    
+                    slotItem.GetComponent<Image>().sprite = inventory.items[i].gameObject.GetComponent<SpriteRenderer>().sprite;
+                }
+                else
+                {
+                    // if there were any previous items clear them out
+                    ids.realGamePrefab = null;
+                    slotItem.GetComponent<Image>().sprite = defaultSprite;
+                }
+            }
+            count += inventory.items.Length;
+        }
+    }
+
+    void CloseInventorySlots()
+    {
+        Inventory[] inventories = gameObject.transform.parent.GetComponentsInChildren<Inventory>(true);
+        int count = 0;
+        foreach (Inventory inventory in inventories)
+        {
+            if (inventory.iventoryType == Inventory.InventoryType.STATIONARY)
+            {
+                Debug.Log("player stationary Inventory not yet implemented");
+                continue;
+            }
+
+            Debug.Log("inv length" + inventory.items.Length);
+            for (int i = 0; i < inventory.items.Length; i++)
+            {
+
+                Slot slot = slotHolder.transform.GetChild(i + count).gameObject.GetComponent<Slot>();
+                Transform slotItem = slot.transform.GetChild(0);
+                ItemDragScript ids = slotItem.GetComponent<ItemDragScript>();
+
+                if (ids.realGamePrefab != null)
+                {
+                    inventory.items[i] = ids.realGamePrefab.GetComponent<Item>();
                 }
                 else
                 {
                     inventory.items[i] = null;
-                }                
-
-
-                
+                }
             }
             count += inventory.items.Length;
         }
-
     }
+
 
     void DeactivateInventorySlots()
     {
@@ -144,12 +195,17 @@ public class PlayerMenu : MonoBehaviour
         {
             go.gameObject.SetActive(false);
         }
+        foreach(Transform slot in shipImage.transform)
+        {
+            slot.gameObject.SetActive(false);
+        }
     }
 
-    public void SetShip(GameObject ship)
+    public void SetShip(GameObject shipObject)
     {
+        this.ship = shipObject;
         Ship shipScript = ship.GetComponent<Ship>();
-        int currentSlots = slotHolder.transform.childCount;
+       // int currentSlots = slotHolder.transform.childCount;
         //if (shipScript == null)
         //{
         //    ChangeSlots(currentSlots, 1);
@@ -164,26 +220,19 @@ public class PlayerMenu : MonoBehaviour
         //try
         //{
         ShipLayout.transform.GetChild(0).GetComponent<Image>().sprite = shipSprite;
-        if (shipScript != null)
-        {
-            foreach (Transform shipSlot in ShipLayout.transform.GetChild(0).transform)
-            {
-                GameObject.Destroy(shipSlot.gameObject);
-            }
-            for (int i = 0; i < shipScript.weaponSlots.Length; i++)
-            {
-                GameObject shipSlotInstance = GameObject.Instantiate(shipSlot);
-                
-                shipSlotInstance.transform.SetParent( ShipLayout.transform.GetChild(0).transform,false);
-                //shipSlotInstance.transform.position = shipScript.weaponSlots[i].transform.position;
-                shipSlotInstance.GetComponent<RectTransform>().localPosition = shipScript.weaponSlots[i].transform.position * 32;
-                
-                shipSlotInstance.GetComponent<ShipSlot>().weaponSlot = shipScript.weaponSlots[i];
-                GameObject weapon_Inv = GameObject.Instantiate(shipScript.weaponSlots[i].GetComponent<WeaponSlot>().weapon_Inv);
-                weapon_Inv.transform.SetParent(  shipSlotInstance.transform,false);
-                weapon_Inv.transform.localPosition = Vector3.zero;
-            }
-        }
+        //if (shipScript != null)
+        //{
+            
+        //    for (int i = 0; i < shipScript.weaponSlots.Length; i++)
+        //    {
+        //        GameObject shipSlotInstance = shipImage.transform.GetChild(i).gameObject;
+        //        shipSlotInstance.SetActive(true);
+                                
+        //        shipSlotInstance.transform.localPosition = shipScript.weaponSlots[i].transform.position * 32;
+        //        shipSlotInstance.transform.GetChild(0).GetComponent<ItemDragScript>().realGamePrefab = shipScript.weaponSlots[i].weapon;
+
+        //    }
+        //}
         //}
         //catch(Exception e)
         //{

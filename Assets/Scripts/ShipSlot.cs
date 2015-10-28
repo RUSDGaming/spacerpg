@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI;
 
-public class ShipSlot : MonoBehaviour, IDropHandler
+public class ShipSlot : Slot, IDropHandler
 {
 
 
@@ -12,19 +12,12 @@ public class ShipSlot : MonoBehaviour, IDropHandler
 
     public WeaponSlot weaponSlot;
 
- 
-    
 
-    public GameObject item
+    public override void SetItem(ItemDragScript script)
     {
-        get
-        {
-            if (transform.childCount > 0)
-            {
-                return transform.GetChild(0).gameObject;
-            }
-            return null;
-        }
+        base.SetItem(script);
+
+
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -35,13 +28,13 @@ public class ShipSlot : MonoBehaviour, IDropHandler
            // ItemDragScript.selecetdItem.transform.SetParent(this.transform);
           //  ItemDragScript.selecetdItem.transform.localPosition = Vector3.zero;
 
-            weaponSlot.SetUpWeapon(item.GetComponent<ItemDragScript>().realGamePrefab);
+          //  weaponSlot.SetUpWeapon(item.GetComponent<ItemDragScript>().realGamePrefab);
 
         }
     }
     public void removeItem()
     {
-        weaponSlot.SetUpWeapon(null);
+      //  weaponSlot.SetUpWeapon(null);
     }
 
     
