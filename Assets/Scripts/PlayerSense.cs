@@ -58,7 +58,7 @@ public class PlayerSense : MonoBehaviour {
         {
             body.MoveRotation(body.rotation + angle);
         }
-        if (angle < 10)
+        if (angle < maxTurnRate)
         {
             body.AddRelativeForce(Vector2.up * Time.fixedDeltaTime * enemyScript.moveForce);
         }

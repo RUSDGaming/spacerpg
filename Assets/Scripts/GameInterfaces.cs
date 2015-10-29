@@ -24,7 +24,7 @@ namespace Game.Interfaces
 
     public interface Movable
     {
-        void MoveUnit(Vector2 force);
+        void MoveUnit(Vector2 force,bool relativeInput);
     }
     
     public interface Rotatable

@@ -15,7 +15,7 @@ public class ItemJuice : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time) * vertical, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y +  Mathf.Sin(Time.time) * vertical, transform.position.z);
         transform.Rotate(Vector3.forward * Time.deltaTime * rotationSpeed);
         
     }

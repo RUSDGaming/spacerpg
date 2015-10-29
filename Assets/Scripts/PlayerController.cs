@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour {
     private Vector3 mousePosition ;
     private Rigidbody2D body;
 
-    public Vector2 bodyToMouse;
-    public float angleBetween;
-    public bool fireDown;
+    Vector2 bodyToMouse;
+    float angleBetween;
+    bool fireDown;
     public iShip ship;
 
 	// Use this for initialization
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
         if (cross.z > 0)
             angleBetween = -angleBetween;      
          
-        ship.MoveUnit(new Vector2(horizontal, vertical));
+        ship.MoveUnit(new Vector2(horizontal, vertical),relativeInput);
         //if (relativeInput)
         //{
         //body.AddRelativeForce(new Vector2(horizontal, vertical) * Time.fixedDeltaTime * moveForce);

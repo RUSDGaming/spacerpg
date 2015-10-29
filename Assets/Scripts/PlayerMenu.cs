@@ -35,6 +35,8 @@ public class PlayerMenu : MonoBehaviour
         ShipLayout.SetActive(false);
         Stats.SetActive(false);
         Inventory_UI.SetActive(false);
+        Stats.SetActive(true);
+        menuOpen = true;
     }
 
     void Update()
@@ -47,6 +49,7 @@ public class PlayerMenu : MonoBehaviour
                 playerController.disableInput = false;
                 ShipLayout.SetActive(false);
                 Inventory_UI.SetActive(false);
+                Stats.SetActive(false);
                 menuOpen = !menuOpen;
 
             }
@@ -66,11 +69,14 @@ public class PlayerMenu : MonoBehaviour
         DeactivateInventorySlots();
         OpenInventorySlots();
         OpenWeaponSlots();
-
     }
+
     void OpenWeaponSlots()
     {
         Ship shipScript = ship.GetComponent<Ship>();
+
+        if (!shipScript)        
+            return;
         
 
         for (int i = 0; i < shipScript.weaponSlots.Length; i++)
@@ -99,6 +105,10 @@ public class PlayerMenu : MonoBehaviour
     void CloseWeaponSlots()
     {
         Ship shipScript = ship.GetComponent<Ship>();
+
+        if (!shipScript)   
+            return;
+  
 
 
         for (int i = 0; i < shipScript.weaponSlots.Length; i++)

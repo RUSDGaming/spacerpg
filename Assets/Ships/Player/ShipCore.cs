@@ -99,7 +99,7 @@ public class ShipCore : MonoBehaviour , iShip {
         return false;
     }
 
-    public void MoveUnit(Vector2 force)
+    public void MoveUnit(Vector2 force,bool relativeInput)
     {
         body.AddForce(force * Time.fixedDeltaTime * moveForce);
 

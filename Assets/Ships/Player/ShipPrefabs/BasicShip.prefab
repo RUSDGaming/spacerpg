@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11427136}
   - 50: {fileID: 5097016}
   - 61: {fileID: 6110744}
+  - 114: {fileID: 11402038}
   m_Layer: 8
   m_Name: BasicShip
   m_TagString: Player
@@ -103,7 +104,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -162,6 +163,20 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &11402038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4b07d8c08141140a5dd6ee0d00280f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 40
+  items: []
+  iventoryType: 2
 --- !u!114 &11405276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,7 +207,7 @@ MonoBehaviour:
   baseForce: 5000
   baseMaxSpeed: 10
   baseArmor: 1
-  itemSlots: 0
+  itemSlots: 5
 --- !u!114 &11427136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 154508, guid: 583efdbd6e44b71488915368ab0a31a6, type: 2}
+  weapon_Inv: {fileID: 110870, guid: e0dd80323b122e649b5d5a6d728b3393, type: 2}
   aboveShip: 1
 --- !u!212 &21225106
 SpriteRenderer:

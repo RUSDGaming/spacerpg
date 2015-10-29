@@ -31,6 +31,8 @@ public class Ship : MonoBehaviour ,iShip{
 
     [SerializeField]
     ControlSwitcher switcher;
+    [SerializeField]
+    float maxTurnRate = 10f;
 
     Rigidbody2D body;
 
@@ -49,6 +51,7 @@ public class Ship : MonoBehaviour ,iShip{
     public float baseArmor;
 
     public int itemSlots;
+
 
     // Use this for initialization
     void Start () {
@@ -112,9 +115,16 @@ public class Ship : MonoBehaviour ,iShip{
 
     
 
-    public void MoveUnit(Vector2 force)
+    public void MoveUnit(Vector2 force,bool relativeInput)
     {
+        if (relativeInput)
+        {
+            body.AddRelativeForce(force * Time.fixedDeltaTime * moveForce);
+        }
+        else
+        {
         body.AddForce(force * Time.fixedDeltaTime * moveForce);
+        }
 
         if (body.velocity.magnitude > maxSpeed)
         {
@@ -124,7 +134,16 @@ public class Ship : MonoBehaviour ,iShip{
 
     public void RotateUnit(float deg)
     {
-        body.MoveRotation(body.rotation + deg);
+
+        if (Mathf.Abs(deg) > maxTurnRate * Time.fixedDeltaTime)
+        {
+            body.MoveRotation(body.rotation + (maxTurnRate * Mathf.Sign(deg)) * Time.fixedDeltaTime);
+        }
+        else
+        {
+            body.MoveRotation(body.rotation + deg);
+        }
+        
     }
 
 
