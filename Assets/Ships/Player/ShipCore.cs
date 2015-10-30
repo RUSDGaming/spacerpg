@@ -77,6 +77,7 @@ public class ShipCore : MonoBehaviour , iShip {
     private void Destroy()
     {
         Debug.Log("Game Over Sad Face");
+        Application.LoadLevel("MainMenu");
     }
 
     public bool TryToFire(int weaponGroup)
@@ -101,7 +102,14 @@ public class ShipCore : MonoBehaviour , iShip {
 
     public void MoveUnit(Vector2 force,bool relativeInput)
     {
-        body.AddForce(force * Time.fixedDeltaTime * moveForce);
+        if (relativeInput)
+        {
+            body.AddRelativeForce(force * Time.fixedDeltaTime * moveForce);
+        }
+        else
+        {
+            body.AddForce(force * Time.fixedDeltaTime * moveForce);
+        }
 
         if (body.velocity.magnitude > maxSpeed)
         {

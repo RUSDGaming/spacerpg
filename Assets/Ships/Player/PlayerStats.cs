@@ -85,7 +85,7 @@ public class PlayerStats : MonoBehaviour
         if (statBook.TryGetValue(stat, out statLevel))
         {
             statLevel++;
-            statBook.Add(stat, statLevel);
+            statBook[stat] =  statLevel;
         }
     }
     
@@ -94,7 +94,7 @@ public class PlayerStats : MonoBehaviour
     /// <br></br>
     /// and when he closes his menu after he makes changes
     /// </summary>
-    private void SavePlayerStats()
+    public void SavePlayerStats()
     {
         foreach(STATS stat in Enum.GetValues(typeof(STATS)))
         {

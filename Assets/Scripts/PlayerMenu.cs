@@ -8,13 +8,15 @@ using System;
 public class PlayerMenu : MonoBehaviour
 {
 
-    public GameObject ShipLayout;
-    public GameObject Stats;
-    public GameObject Inventory_UI;
+   // public GameObject ShipLayout;
+   // public GameObject Stats;
+    //public GameObject Inventory_UI;
     public PlayerController playerController;
+    public GameObject mainMenu;
+    public PlayerStats playerStats;
 
-    public GameObject slot;
-    public GameObject shipSlot;
+    //public GameObject slot;
+   // public GameObject shipSlot;
     [SerializeField]
     Sprite defaultSprite;
 
@@ -32,11 +34,7 @@ public class PlayerMenu : MonoBehaviour
 
     void Start()
     {
-        ShipLayout.SetActive(false);
-        Stats.SetActive(false);
-        Inventory_UI.SetActive(false);
-        Stats.SetActive(true);
-        menuOpen = true;
+        mainMenu.SetActive(false);                
     }
 
     void Update()
@@ -47,19 +45,16 @@ public class PlayerMenu : MonoBehaviour
             {
                 CloseMenu();
                 playerController.disableInput = false;
-                ShipLayout.SetActive(false);
-                Inventory_UI.SetActive(false);
-                Stats.SetActive(false);
-                menuOpen = !menuOpen;
+                mainMenu.SetActive(false);
+                menuOpen = false;
 
             }
             else
             {
                 OpenMenu();
                 playerController.disableInput = true;
-                ShipLayout.SetActive(true);
-                Inventory_UI.SetActive(true);
-                menuOpen = !menuOpen;
+                mainMenu.SetActive(true);
+                menuOpen = true;
             }
         }
     }
@@ -101,6 +96,7 @@ public class PlayerMenu : MonoBehaviour
     {
         CloseInventorySlots();
         CloseWeaponSlots();
+        playerStats.SavePlayerStats();
     }
     void CloseWeaponSlots()
     {
@@ -229,7 +225,7 @@ public class PlayerMenu : MonoBehaviour
 
         //try
         //{
-        ShipLayout.transform.GetChild(0).GetComponent<Image>().sprite = shipSprite;
+       shipImage.GetComponent<Image>().sprite = shipSprite;
         //if (shipScript != null)
         //{
             
@@ -249,25 +245,25 @@ public class PlayerMenu : MonoBehaviour
         //    Debug.LogError(e.ToString());
         //}
     }
-    void ChangeSlots(int currentSlots, int shipSlots)
-    {
-        if (shipSlots > currentSlots)
-        {
-            for (int i = currentSlots; i < shipSlots; i++)
-            {
-                GameObject slotInstance = GameObject.Instantiate(slot);
-                slotInstance.transform.parent = slotHolder.transform;
-            }
-        }
-        else if (shipSlots < currentSlots)
-        {
-            for (int i = currentSlots; shipSlots < i; i--)
-            {
+    //void ChangeSlots(int currentSlots, int shipSlots)
+    //{
+    //    if (shipSlots > currentSlots)
+    //    {
+    //        for (int i = currentSlots; i < shipSlots; i++)
+    //        {
+    //            GameObject slotInstance = GameObject.Instantiate(slot);
+    //            slotInstance.transform.parent = slotHolder.transform;
+    //        }
+    //    }
+    //    else if (shipSlots < currentSlots)
+    //    {
+    //        for (int i = currentSlots; shipSlots < i; i--)
+    //        {
 
-                GameObject.Destroy(slotHolder.transform.GetChild(i - 1).gameObject);
-            }
-        }
-    }
+    //            GameObject.Destroy(slotHolder.transform.GetChild(i - 1).gameObject);
+    //        }
+    //    }
+    //}
 
 
 

@@ -9,6 +9,8 @@ public class StatMenuScript : MonoBehaviour
     private Text description;
     [SerializeField]
     private Text level;
+    private int levelInt = 0;
+
     [SerializeField]
     private Button addLevelButton;
 
@@ -21,12 +23,19 @@ public class StatMenuScript : MonoBehaviour
     public string Level
     {
         get{ return level.text; }
-        set{ level.text = value; }
+        set{
+            level.text = value;
+            int.TryParse(value, out levelInt);
+        }
     }
 
     public void setUpButton(PlayerStats.STATS stat, PlayerStats playerStats)
     {
-        addLevelButton.onClick.AddListener(() => { playerStats.LevelUpStat(stat); } );
+        addLevelButton.onClick.AddListener(() => {
+            playerStats.LevelUpStat(stat);
+            levelInt++;
+            Level = levelInt.ToString();
+        });
     }
    
 }
