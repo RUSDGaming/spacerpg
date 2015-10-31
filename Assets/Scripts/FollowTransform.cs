@@ -10,7 +10,13 @@ public class FollowTransform : MonoBehaviour {
     Transform backGround;
 
     [SerializeField]
-    float paralaxRatio = .9f;
+    float backGroundParalaxRatio = .9f;
+
+
+    [SerializeField]
+    Transform transform1;
+    [SerializeField]
+    float transform1Paralax;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +26,11 @@ public class FollowTransform : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if(backGround)
-        backGround.transform.position = followObject.transform.position * paralaxRatio;
+        backGround.position = followObject.position * backGroundParalaxRatio;
+
+        if (transform1)
+            transform1.position = followObject.position * transform1Paralax;
+
 	}
     void LateUpdate()
     {

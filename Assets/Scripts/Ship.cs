@@ -3,6 +3,11 @@ using System.Collections;
 using Game.Interfaces;
 using System;
 
+
+[RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(PlayerController))]
 public class Ship : MonoBehaviour ,iShip{
 
 
@@ -10,7 +15,7 @@ public class Ship : MonoBehaviour ,iShip{
     float energyRegen = 2;
 
     
-    public WeaponSlot[] weaponSlots;
+    public WeaponInventory[] weaponSlots;
 
     [SerializeField]
     ItemScript[] capacitors;
@@ -50,7 +55,7 @@ public class Ship : MonoBehaviour ,iShip{
 
     public float baseArmor;
 
-    public int itemSlots;
+    //public int itemSlots;
 
 
     // Use this for initialization
@@ -59,6 +64,7 @@ public class Ship : MonoBehaviour ,iShip{
         currentHealth = maxHealth;
         body = GetComponent<Rigidbody2D>();
         switcher = GetComponentInParent<ControlSwitcher>();
+       
     }
 	
 	// Update is called once per frame
@@ -73,10 +79,10 @@ public class Ship : MonoBehaviour ,iShip{
     // tries to fire all the weapons in the group
     public bool TryToFire(int weaponGroup)
     {
-        foreach (WeaponSlot weaponSlot in weaponSlots)
+        foreach (WeaponInventory weaponSlot in weaponSlots)
         {
-            if (weaponSlot.weapon != null) {
-                Weapon weapon =  weaponSlot.weapon.GetComponent<Weapon>();                
+            if (weaponSlot.items[0] != null) {
+                Weapon weapon =  weaponSlot.items[0].GetComponent<Weapon>();                
                 weapon.TryToFire(ref currentEnergy);
             }
             

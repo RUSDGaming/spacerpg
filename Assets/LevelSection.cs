@@ -36,8 +36,8 @@ public class LevelSection : MonoBehaviour {
         for (int i = 0; i < numAsteroids; i++)
         {
            GameObject asteroidInstance = (GameObject) Instantiate(asteroid,
-                new Vector3(Random.Range(tileScale, sectionWidth * tileScale - 4),
-                            Random.Range(tileScale, sectionHeight * tileScale - 4)),
+                new Vector3(Random.Range(tileScale, sectionWidth * tileScale - tileScale*2),
+                            Random.Range(tileScale, sectionHeight * tileScale - tileScale * 2)),
                 Quaternion.identity);
             float randomScale = Random.Range(.5f, 2.5f);
             asteroidInstance.transform.localScale = new Vector3(randomScale,randomScale );
@@ -50,8 +50,8 @@ public class LevelSection : MonoBehaviour {
 
         for (int i = 0; i < numEnimes; i++){
             Instantiate(enemy, 
-                new Vector3(Random.Range(tileScale, sectionWidth * tileScale - 4),
-                            Random.Range(tileScale, sectionHeight * tileScale -1 )),
+                new Vector3(Random.Range(tileScale, sectionWidth * tileScale - tileScale * 2),
+                            Random.Range(tileScale, sectionHeight * tileScale- tileScale * 2)),
                 Quaternion.identity);
         }
 

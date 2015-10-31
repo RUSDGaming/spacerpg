@@ -22,12 +22,14 @@ public class ControlSwitcher : MonoBehaviour {
 	void Start () {
         if (mainShip.activeInHierarchy)
         {
+            cameraFollower.followObject = mainShip.transform;
             menu.SetShip(mainShip);
             menu.playerController = mainShip.GetComponent<PlayerController>();
         } else if (shipCore.activeInHierarchy)
         {
             Debug.Log("Ship core was acative!!!!");
             menu.SetShip(shipCore);
+            cameraFollower.followObject = shipCore.transform;
             menu.playerController = shipCore.GetComponent<PlayerController>();
         }
 

@@ -14,13 +14,42 @@ GameObject:
   - 114: {fileID: 11430604}
   - 114: {fileID: 11481072}
   - 82: {fileID: 8295270}
+  - 114: {fileID: 11454620}
+  - 114: {fileID: 11490804}
   m_Layer: 8
   m_Name: ShipCore
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!1 &175280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 403754}
+  m_Layer: 8
+  m_Name: Cargo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &403754
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 439752}
+  m_RootOrder: 0
 --- !u!4 &439752
 Transform:
   m_ObjectHideFlags: 1
@@ -30,7 +59,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 403754}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &5040262
@@ -41,7 +71,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148752}
   m_Mass: 1
-  m_LinearDrag: 5
+  m_LinearDrag: 1
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_IsKinematic: 0
@@ -143,12 +173,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90da3f5e41d68d746a0e4af227709a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relativeInput: 0
+  relativeInput: 1
   disableInput: 0
   id: 0
-  bodyToMouse: {x: 0, y: 0}
-  angleBetween: 0
-  fireDown: 0
+--- !u!114 &11454620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4b07d8c08141140a5dd6ee0d00280f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 1
+  items: []
+  inventoryType: 0
+  cargo: {fileID: 403754}
 --- !u!114 &11481072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,9 +213,21 @@ MonoBehaviour:
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   audioSource: {fileID: 8295270}
   laserSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
-  moveForce: 5000
-  maxSpeed: 10
+  moveForce: 8000
+  maxSpeed: 25
   itemSlots: 0
+--- !u!114 &11490804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c68bc741a015fa44a41aabc7a04394f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
 --- !u!212 &21202584
 SpriteRenderer:
   m_ObjectHideFlags: 1

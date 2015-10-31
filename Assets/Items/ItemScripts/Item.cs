@@ -25,8 +25,8 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Inventory inv =  other.GetComponent<Inventory>();
-            inv.StoreItem(this);
-            gameObject.SetActive(false);
+            if(inv.StoreItem(this))
+                gameObject.SetActive(false);
         }
     }
 }

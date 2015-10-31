@@ -39,7 +39,7 @@ public class Weapon :Item {
     public virtual bool TryToFire(ref float energy)
     {
 
-        
+        //Debug.Log("trying to fire laser with energy : " + energy);
        
         if(Time.time - lastShot  >= fireRate )
         {

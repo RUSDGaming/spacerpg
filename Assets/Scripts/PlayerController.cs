@@ -11,9 +11,9 @@ public class PlayerController : MonoBehaviour {
     //public float maxSpeed;
     //public float moveForce;
    //public float rotationSpeed;
-    public bool relativeInput;
+    public bool relativeInput = true;
     public bool disableInput;
-
+    // need to move this 
     public int id;
     private Vector3 mousePosition ;
     private Rigidbody2D body;
