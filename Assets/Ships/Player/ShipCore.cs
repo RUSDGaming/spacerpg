@@ -122,4 +122,9 @@ public class ShipCore : MonoBehaviour , iShip {
     {
         body.MoveRotation(body.rotation + deg);
     }
+
+    public void SetActualStats(PlayerStats stats)
+    {
+        Debug.Log("ship core not set up yet to load actual stats");
+    }
 }

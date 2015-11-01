@@ -20,7 +20,7 @@ public class TurretScript : MonoBehaviour {
     void FixedUpdate()
     {
         bodyToMouse = mousePosition - transform.position;
-        Debug.Log("transform posti" + transform.up);
+        //Debug.Log("transform posti" + transform.up);
         angleBetween = Vector2.Angle(bodyToMouse, (Vector2)transform.up);
         Vector3 cross = Vector3.Cross(bodyToMouse, transform.up);
 

@@ -11,52 +11,52 @@ using System;
 public class Ship : MonoBehaviour ,iShip{
 
 
-    [SerializeField]
-    float energyRegen = 2;
 
-    
+
+    #region equipment
     public WeaponInventory[] weaponSlots;
-
     [SerializeField]
     ItemScript[] capacitors;
-
     [SerializeField]
     ItemScript[] engines;
-
     [SerializeField]
     ItemScript[] thrusters;
-
-    [SerializeField]
+   [SerializeField]
     ItemScript[] armors;
+    #endregion
 
-    [SerializeField]
-    float moveForce = 5000;
-    [SerializeField]
-    float maxSpeed = 10f;
 
     [SerializeField]
     ControlSwitcher switcher;
-    [SerializeField]
-    float maxTurnRate = 10f;
+
 
     Rigidbody2D body;
 
+    #region Ship Base Stats
+    [SerializeField]    float baseHealth;
+    [SerializeField]    float baseArmor;
+    [SerializeField]    float baseMaxSheild;
+    [SerializeField]    float baseMaxEnergy;
+    [SerializeField]    float baseEnergyRegen;
+    [SerializeField]    float baseMoveForce;
+    [SerializeField]    float baseMaxSpeed;
+    [SerializeField]    float baseTurnRate;
+    #endregion
 
-    public float currentHealth;
-    public float maxHealth;
 
-    public float baseEnergy;
-    public float baseEnergyRegen;
-    public float maxEnergy;
-    public float currentEnergy;
-
-    public float baseForce;
-    public float baseMaxSpeed;
-
-    public float baseArmor;
-
-    //public int itemSlots;
-
+    #region Actual Stats
+    [SerializeField] float maxHealth;
+    [SerializeField] float currentHealth;
+    [SerializeField] float armor;
+    [SerializeField] float maxSheild;
+    [SerializeField] float currentSheild;
+    [SerializeField] float maxEnergy;
+    [SerializeField] float currentEnergy;
+    [SerializeField] float energyRegen;
+    [SerializeField] float moveForce;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float turnRate;
+    #endregion
 
     // Use this for initialization
     void Start () {
@@ -66,11 +66,26 @@ public class Ship : MonoBehaviour ,iShip{
         switcher = GetComponentInParent<ControlSwitcher>();
        
     }
+	public void SetActualStats(PlayerStats stats)
+    {
+        
+        stats.SetActualStat(PlayerStats.STATS.HEALTH, baseHealth,ref maxHealth);        
+        currentHealth = maxHealth;        
+        stats.SetActualStat(PlayerStats.STATS.ARMOR, baseArmor, ref armor);
+        stats.SetActualStat(PlayerStats.STATS.SHEILD, baseMaxSheild, ref maxSheild);        
+        currentSheild = maxSheild;        
+        stats.SetActualStat(PlayerStats.STATS.ENERGY_REGENERATION, baseEnergyRegen, ref energyRegen);        
+        stats.SetActualStat(PlayerStats.STATS.ENERGY_CAPACITY, baseMaxEnergy, ref maxEnergy);
+        currentEnergy = maxEnergy;
+
+        stats.SetActualStat(PlayerStats.STATS.MOVE_SPEED, baseMoveForce, ref moveForce);        
+        stats.SetActualStat(PlayerStats.STATS.MOVE_SPEED, baseMaxSpeed, ref maxSpeed);
+        stats.SetActualStat(PlayerStats.STATS.TURN_RATE, baseTurnRate, ref turnRate);        
+        
+
+
+    }
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
     void FixedUpdate()
     {
         regenEnergy();
@@ -141,9 +156,9 @@ public class Ship : MonoBehaviour ,iShip{
     public void RotateUnit(float deg)
     {
 
-        if (Mathf.Abs(deg) > maxTurnRate * Time.fixedDeltaTime)
+        if (Mathf.Abs(deg) > turnRate * Time.fixedDeltaTime)
         {
-            body.MoveRotation(body.rotation + (maxTurnRate * Mathf.Sign(deg)) * Time.fixedDeltaTime);
+            body.MoveRotation(body.rotation + (turnRate * Mathf.Sign(deg)) * Time.fixedDeltaTime);
         }
         else
         {

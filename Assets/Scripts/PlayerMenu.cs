@@ -8,18 +8,16 @@ using System;
 public class PlayerMenu : MonoBehaviour
 {
 
-   // public GameObject ShipLayout;
-   // public GameObject Stats;
-    //public GameObject Inventory_UI;
+
     public PlayerController playerController;
     public GameObject mainMenu;
     public PlayerStats playerStats;
-
-    //public GameObject slot;
-   // public GameObject shipSlot;
+    
     [SerializeField]
     Sprite defaultSprite;
 
+    [SerializeField]
+    ControlSwitcher switcher;
 
     public GameObject ship;
     public bool shipNearChest = false;
@@ -63,57 +61,17 @@ public class PlayerMenu : MonoBehaviour
     {
         DeactivateInventorySlots();
         OpenInventorySlots();
-     //   OpenWeaponSlots();
     }
 
-    void OpenWeaponSlots()
-    {
-        Ship shipScript = ship.GetComponent<Ship>();
-
-        if (!shipScript)        
-            return;
-        
-
-        for (int i = 0; i < shipScript.weaponSlots.Length; i++)
-        {
-            GameObject shipSlotInstance = shipImage.transform.GetChild(i).gameObject;
-            shipSlotInstance.SetActive(true);
-
-            shipSlotInstance.transform.localPosition = shipScript.weaponSlots[i].transform.localPosition * 32;
-            ItemDragScript ids = shipSlotInstance.transform.GetChild(0).GetComponent<ItemDragScript>();
-
-            //Debug.Log(shipSlotInstance.transform.GetChild(0));
-            ids.realGamePrefab = shipScript.weaponSlots[i].items[0].gameObject;
-            ids.GetComponent<Image>().sprite = shipScript.weaponSlots[i].transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite;
-            if(ids.realGamePrefab == null)
-            {
-                ids.GetComponent<Image>().sprite = defaultSprite;
-            }
-        }
-    }
+   
 
     void CloseMenu()
     {
         CloseInventorySlots();
-    //    CloseWeaponSlots();
         playerStats.SavePlayerStats();
+        switcher.reloadShipStats();
     }
-    void CloseWeaponSlots()
-    {
-        Ship shipScript = ship.GetComponent<Ship>();
-
-        if (!shipScript)   
-            return;
-
-        for (int i = 0; i < shipScript.weaponSlots.Length; i++)
-        {
-            GameObject shipSlotInstance = shipImage.transform.GetChild(i).gameObject;          
-            ItemDragScript ids = shipSlotInstance.transform.GetChild(0).GetComponent<ItemDragScript>();
-            shipScript.weaponSlots[i].StoreItem(ids.realGamePrefab.GetComponent<Item>(), 0);                     
-            ids.GetComponent<Image>().sprite = defaultSprite;   
-        }
-    }
-
+  
     void OpenInventorySlots()
     {
         Inventory[] inventories = gameObject.transform.parent.GetComponentsInChildren<Inventory>(true);
@@ -227,61 +185,13 @@ public class PlayerMenu : MonoBehaviour
     public void SetShip(GameObject shipObject)
     {
         this.ship = shipObject;
-        Ship shipScript = ship.GetComponent<Ship>();
-       // int currentSlots = slotHolder.transform.childCount;
-        //if (shipScript == null)
-        //{
-        //    ChangeSlots(currentSlots, 1);
-        //}
-        //else
-        //{
-        //    ChangeSlots(currentSlots, shipScript.itemSlots);
-        //}
-
+        Ship shipScript = ship.GetComponent<Ship>();       
         Sprite shipSprite = ship.GetComponent<SpriteRenderer>().sprite;
-
-        //try
-        //{
+        
        shipImage.GetComponent<Image>().sprite = shipSprite;
-        //if (shipScript != null)
-        //{
-            
-        //    for (int i = 0; i < shipScript.weaponSlots.Length; i++)
-        //    {
-        //        GameObject shipSlotInstance = shipImage.transform.GetChild(i).gameObject;
-        //        shipSlotInstance.SetActive(true);
-                                
-        //        shipSlotInstance.transform.localPosition = shipScript.weaponSlots[i].transform.position * 32;
-        //        shipSlotInstance.transform.GetChild(0).GetComponent<ItemDragScript>().realGamePrefab = shipScript.weaponSlots[i].weapon;
-
-        //    }
-        //}
-        //}
-        //catch(Exception e)
-        //{
-        //    Debug.LogError(e.ToString());
-        //}
+        
     }
-    //void ChangeSlots(int currentSlots, int shipSlots)
-    //{
-    //    if (shipSlots > currentSlots)
-    //    {
-    //        for (int i = currentSlots; i < shipSlots; i++)
-    //        {
-    //            GameObject slotInstance = GameObject.Instantiate(slot);
-    //            slotInstance.transform.parent = slotHolder.transform;
-    //        }
-    //    }
-    //    else if (shipSlots < currentSlots)
-    //    {
-    //        for (int i = currentSlots; shipSlots < i; i--)
-    //        {
-
-    //            GameObject.Destroy(slotHolder.transform.GetChild(i - 1).gameObject);
-    //        }
-    //    }
-    //}
-
+    
 
 
 

@@ -8,7 +8,7 @@ namespace Game.Interfaces
     //public interface PlayerEnteredPortal: IEventSystemHandler
     //{
     //    void Event(int playerID, int portalNumber);
-        
+
     //}
 
 
@@ -24,9 +24,9 @@ namespace Game.Interfaces
 
     public interface Movable
     {
-        void MoveUnit(Vector2 force,bool relativeInput);
+        void MoveUnit(Vector2 force, bool relativeInput);
     }
-    
+
     public interface Rotatable
     {
         void RotateUnit(float deg);
@@ -36,5 +36,9 @@ namespace Game.Interfaces
     {
         int GetSlotCount();
     }
-    public interface iShip : DamageUnit , Shooter , Movable,Rotatable{ }
+    public interface SetStats{
+        void SetActualStats(PlayerStats stats);
+    }
+
+    public interface iShip : DamageUnit , Shooter , Movable,Rotatable, SetStats { }
 }

@@ -16,22 +16,20 @@ public class ControlSwitcher : MonoBehaviour {
     [SerializeField]
     PlayerMenu menu;
 
-    
+    [SerializeField]
+    PlayerStats playerStats;
 
 	// Use this for initialization
 	void Start () {
         if (mainShip.activeInHierarchy)
         {
-            cameraFollower.followObject = mainShip.transform;
-            menu.SetShip(mainShip);
-            menu.playerController = mainShip.GetComponent<PlayerController>();
+            SwitchToMainShip();
         } else if (shipCore.activeInHierarchy)
-        {
-            Debug.Log("Ship core was acative!!!!");
-            menu.SetShip(shipCore);
-            cameraFollower.followObject = shipCore.transform;
-            menu.playerController = shipCore.GetComponent<PlayerController>();
+        {         
+            SwitchToShipCore();
+           
         }
+
 
 	}
 	
@@ -48,7 +46,7 @@ public class ControlSwitcher : MonoBehaviour {
         cameraFollower.followObject = shipCore.transform;
         menu.SetShip(shipCore);
         menu.playerController = shipCore.GetComponent<PlayerController>();
-
+        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats);
     }
 
     public void SwitchToMainShip()
@@ -59,6 +57,14 @@ public class ControlSwitcher : MonoBehaviour {
         cameraFollower.followObject = mainShip.transform;
         menu.playerController = mainShip.GetComponent<PlayerController>();
         menu.SetShip(mainShip);
+        mainShip.GetComponent<Ship>().SetActualStats(playerStats);
+    }
+
+    public void reloadShipStats()
+    {
+        Debug.Log("reloading shipSttast");
+        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats);
+        mainShip.GetComponent<Ship>().SetActualStats(playerStats);
     }
 
 }

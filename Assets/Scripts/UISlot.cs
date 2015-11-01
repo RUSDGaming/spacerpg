@@ -103,7 +103,7 @@ public class UISlot : MonoBehaviour  {
                 }
             case Inventory.InventoryType.WEAPON_SLOT:
                 {
-                    image.color = coreColor;
+                    //image.color = coreColor;
                     break;
                 }
             default:

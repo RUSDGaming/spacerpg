@@ -3,9 +3,10 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
+
 public class PlayerStats : MonoBehaviour
 {
-     
+
 
     public enum STATS
     {
@@ -27,13 +28,14 @@ public class PlayerStats : MonoBehaviour
 
     public Dictionary<STATS, int> statBook = new Dictionary<STATS, int>();
 
-    // improve health // you will have te ability to use scrap to repair yourself
-    // improve armor  // is good vs projectiles
-    // improve sheild // is good vs lasers
+    #region stat descriptions
+    // improve health // 5% 
+    // improve armor  // 5%
+    // improve sheild // 5% increase in strength
 
 
-    // improve turn rate
-    // improve move speed
+    // improve turn rate // 10%
+    // improve move speed // 5%
 
 
     // improve weapon damage // will increase all weapons base damage
@@ -43,8 +45,8 @@ public class PlayerStats : MonoBehaviour
     // improve projectile // firerate , armor pen, ammo capacity  
     // improve explosion //  blast radius, damage, 
 
-    // improve energy regen // increases capacity 2 times energy regen
-    // improve energy capacity // increases energy regen by x% of capacity
+    // improve energy regen // 5%
+    // improve energy capacity // 5%
 
     //**** improve elemmental damage;
     // fire  dot 
@@ -53,11 +55,35 @@ public class PlayerStats : MonoBehaviour
     // ice slows move and turn radius
     // light heals allies
     // dark deals damage based on other magic levels 
+    #endregion
 
     // Use this for initialization
     void Start()
     {
         LoadPlayerStats();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ResetPlayerStats();
+        }
+    }
+
+    private void ResetPlayerStats()
+    {
+        int i = 0;
+        foreach (STATS stat in Enum.GetValues(typeof(STATS)))
+        {
+            int statLevel = 0;            
+            PlayerPrefs.SetInt(stat.ToString(), statLevel);
+            statBook[stat] = 0;
+            StatMenuScript sms = statHolder.transform.GetChild(i).GetComponent<StatMenuScript>();
+            i++;
+            sms.Description = enumMethods.GetString(stat);
+            sms.Level = statLevel.ToString();
+        }
+        
     }
 
 
@@ -67,9 +93,9 @@ public class PlayerStats : MonoBehaviour
         int i = 0;
         foreach (STATS stat in Enum.GetValues(typeof(STATS)))
         {
-           int statLevel =  PlayerPrefs.GetInt(stat.ToString());
+            int statLevel = PlayerPrefs.GetInt(stat.ToString());
             statBook.Add(stat, statLevel);
-            StatMenuScript sms =  statHolder.transform.GetChild(i).GetComponent<StatMenuScript>();
+            StatMenuScript sms = statHolder.transform.GetChild(i).GetComponent<StatMenuScript>();
             i++;
             sms.Description = enumMethods.GetString(stat);
             sms.Level = statLevel.ToString();
@@ -79,16 +105,17 @@ public class PlayerStats : MonoBehaviour
     }
 
 
+
     public void LevelUpStat(STATS stat)
     {
         int statLevel;
         if (statBook.TryGetValue(stat, out statLevel))
         {
             statLevel++;
-            statBook[stat] =  statLevel;
+            statBook[stat] = statLevel;
         }
     }
-    
+
     /// <summary>
     /// This should be called when ever a player goes back to the hub 
     /// <br></br>
@@ -96,19 +123,35 @@ public class PlayerStats : MonoBehaviour
     /// </summary>
     public void SavePlayerStats()
     {
-        foreach(STATS stat in Enum.GetValues(typeof(STATS)))
+        foreach (STATS stat in Enum.GetValues(typeof(STATS)))
         {
             int statLevel;
-            if(statBook.TryGetValue(stat,out statLevel))
+            if (statBook.TryGetValue(stat, out statLevel))
             {
                 PlayerPrefs.SetInt(stat.ToString(), statLevel);
             }
         }
     }
+    
 
-    // Update is called once per frame
-    void Update()
+    public void SetActualStat(PlayerStats.STATS stat, float baseValue, ref float actualValue)
     {
+        int level = 0;
+        if (statBook.TryGetValue(stat, out level))
+        {
+            switch (stat)
+            {
+                case STATS.HEALTH: actualValue = baseValue * (1 + .05f * level); return;
+                case STATS.ARMOR: goto case STATS.HEALTH;                    
+                case STATS.SHEILD: goto case STATS.HEALTH;                    
+                case STATS.TURN_RATE:  actualValue = baseValue * (1 + .1f * level); return;
+                case STATS.MOVE_SPEED: goto case STATS.HEALTH;
+                case STATS.ENERGY_REGENERATION: goto case STATS.HEALTH;
+                case STATS.ENERGY_CAPACITY: goto case STATS.HEALTH;
+                default: actualValue = baseValue; break;
+            }
+        }
+        actualValue = baseValue;
 
     }
 }
@@ -116,7 +159,7 @@ public class PlayerStats : MonoBehaviour
 
 static class enumMethods
 {
-    public static string GetString(this PlayerStats.STATS stat)
+    public static string GetString(PlayerStats.STATS stat)
     {
         switch (stat)
         {
