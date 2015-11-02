@@ -31,16 +31,17 @@ public class Ship : MonoBehaviour ,iShip{
 
 
     Rigidbody2D body;
+    ShowForceFeild forceFeild;
 
     #region Ship Base Stats
-    [SerializeField]    float baseHealth;
-    [SerializeField]    float baseArmor;
-    [SerializeField]    float baseMaxSheild;
-    [SerializeField]    float baseMaxEnergy;
-    [SerializeField]    float baseEnergyRegen;
-    [SerializeField]    float baseMoveForce;
-    [SerializeField]    float baseMaxSpeed;
-    [SerializeField]    float baseTurnRate;
+    [SerializeField]   public float baseHealth;
+    [SerializeField]   public float baseArmor;
+    [SerializeField]   public float baseMaxSheild;
+    [SerializeField]   public float baseMaxEnergy;
+    [SerializeField]   public float baseEnergyRegen;
+    [SerializeField]   public float baseMoveForce;
+    [SerializeField]   public float baseMaxSpeed;
+    [SerializeField]   public float baseTurnRate;
     #endregion
 
 
@@ -64,6 +65,7 @@ public class Ship : MonoBehaviour ,iShip{
         currentHealth = maxHealth;
         body = GetComponent<Rigidbody2D>();
         switcher = GetComponentInParent<ControlSwitcher>();
+        forceFeild = GetComponentInChildren<ShowForceFeild>();
        
     }
 	public void SetActualStats(PlayerStats stats)
@@ -89,6 +91,7 @@ public class Ship : MonoBehaviour ,iShip{
     void FixedUpdate()
     {
         regenEnergy();
+        RegenSheild();
     }
 
     // tries to fire all the weapons in the group
@@ -110,14 +113,48 @@ public class Ship : MonoBehaviour ,iShip{
     {
 
     }
-    public void Damage(float value)
+    public void Damage(float damage)
     {
-        currentHealth -= value;
+        float damageToShip = 0;
+        damageToShip = DamageSheild(damage);
+        damageToShip = DamageArmor(damageToShip);
+        currentHealth -= damageToShip;
         if(currentHealth <= 0)
         {
             Destroy();
         }
     }
+
+    float DamageArmor(float damage)
+    {
+        float shipDamage =  damage - armor;
+
+        if(shipDamage > 0)
+        {
+            return shipDamage;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    float DamageSheild(float damage)
+    {
+        currentSheild -= damage;
+        forceFeild.ShowSheild(maxSheild, currentSheild);
+        if(currentSheild >= 0)
+        {
+            return 0;
+        }
+        else
+        {
+            float damageRemaing = -currentSheild;
+            currentSheild = 0;
+            return damageRemaing;
+        }
+    }
+    
 
     public float GetThrust()
     {
@@ -177,4 +214,24 @@ public class Ship : MonoBehaviour ,iShip{
         }
     }
 
+    void RegenSheild()
+    {
+
+        if(currentSheild >= maxSheild)
+        {
+            currentSheild = maxSheild;
+            return;
+        }
+
+        float sheildRegenAmount = maxSheild * .1f * Time.fixedDeltaTime;
+
+        if (sheildRegenAmount * 10f > currentEnergy)
+            return;
+
+        currentEnergy -= sheildRegenAmount * 10f;
+        currentSheild += sheildRegenAmount;
+
+
+
+    }
 }

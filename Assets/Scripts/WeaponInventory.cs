@@ -29,7 +29,7 @@ public class WeaponInventory : Inventory {
 
     public override bool StoreItem(Item item, int index)
     {
-        Debug.Log("trying to store Item with index : " + index);
+        //Debug.Log("trying to store Item with index : " + index);
         SetUpWeapon(item);
         if (item)
         {

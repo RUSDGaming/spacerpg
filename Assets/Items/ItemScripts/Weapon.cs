@@ -1,23 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
 public class Weapon :Item {
 
     
 
     public GameObject projectile;
 
-    public Transform parentTransform;
+    ///public Transform parentTransform;
 
     [SerializeField]
-    protected AudioClip laserSound;
+    protected AudioClip weaponSound;
     
-    protected    AudioSource audioSorce;
+    protected AudioSource audioSource;
 
     public float damage;
     public float fireRate;    
     public float energyCost;    
-    public int ammo;
+    
 
     protected float lastShot = 0;
 
@@ -29,10 +30,10 @@ public class Weapon :Item {
         
         
 	}
-	public void Init(Transform parentTransform, AudioSource audioSorce)
+	public void Init(Transform parentTransform, AudioSource audioSource)
     {
-        this.audioSorce = audioSorce;
-        this.parentTransform = parentTransform;
+        this.audioSource = audioSource;
+        //this.parentTransform = parentTransform;
         lastShot = -fireRate;
     }
 
@@ -45,12 +46,17 @@ public class Weapon :Item {
         {
             if(energy >= energyCost)
             {
-                audioSorce.pitch = Random.Range(1f, 1.3f);
-                audioSorce.PlayOneShot(laserSound);
+                audioSource.pitch = Random.Range(1f, 1.3f);
+                audioSource.PlayOneShot(weaponSound);
               //  Debug.Log("fired a bullet");
                  energy -= energyCost;
-                GameObject projectileInstance = (GameObject) Instantiate(projectile,parentTransform.position,parentTransform.rotation);
-                projectileInstance.SendMessage("IsPlayer", true);
+                GameObject projectileInstance = (GameObject) Instantiate(projectile,transform.position,transform.rotation);
+                
+                ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
+                projectileScript.IsPlayer(true);
+                projectileScript.damage = damage;
+                
+
                 lastShot = Time.time;
 
                 return true;

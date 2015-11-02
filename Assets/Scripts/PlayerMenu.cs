@@ -57,7 +57,7 @@ public class PlayerMenu : MonoBehaviour
         }
     }
 
-    void OpenMenu()
+    public void OpenMenu()
     {
         DeactivateInventorySlots();
         OpenInventorySlots();
@@ -86,13 +86,16 @@ public class PlayerMenu : MonoBehaviour
                 continue;
             }
 
-            //Debug.Log("inv length" + inventory.items.Length);
+           // Debug.Log(inventory.inventoryType.ToString());
+           // Debug.Log(inventory.transform.ToString());
+
             for (int i = 0; i < inventory.items.Length; i++)
             {
                 UISlot slot;
-
                 if(inventory.inventoryType == Inventory.InventoryType.WEAPON_SLOT)
                 {
+                    //Debug.Log("weapon Inv is " + inventory.items.Length);
+                   // Debug.Log(" weapon Count is : " + weaponCount);
                     slot = shipImage.transform.GetChild(weaponCount).gameObject.GetComponent<ShipSlot>();
                     slot.transform.localPosition = inventory.transform.localPosition * 32;
                     weaponCount++;

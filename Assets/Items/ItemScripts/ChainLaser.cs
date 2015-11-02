@@ -45,12 +45,12 @@ public class ChainLaser : Weapon {
             return false;
         }
 
-        audioSorce.pitch = Random.Range(1f, 1.3f);
-        audioSorce.PlayOneShot(laserSound);
+        audioSource.pitch = Random.Range(1f, 1.3f);
+        audioSource.PlayOneShot(weaponSound);
         energy -= energyCost;
-        Vector3 spawnPos = parentTransform.position;
+        Vector3 spawnPos = transform.position;
         spawnPos.x += Random.Range(-.3f, .3f);
-        GameObject projectileInstance = (GameObject)Instantiate(projectile, spawnPos, parentTransform.rotation);
+        GameObject projectileInstance = (GameObject)Instantiate(projectile, spawnPos, transform.rotation);
         projectileInstance.SendMessage("IsPlayer", true);
         lastShot = Time.time;
 

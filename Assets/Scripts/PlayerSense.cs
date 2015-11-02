@@ -78,7 +78,6 @@ public class PlayerSense : MonoBehaviour {
         {
             playerSensed = true;
             playerPosition = other.transform.position;
-
         }
     }
     void OnTriggerExit2D(Collider2D other)

@@ -40,11 +40,13 @@ public class ControlSwitcher : MonoBehaviour {
 
     public void SwitchToShipCore()
     {
+        
         shipCore.SetActive(true);
         shipCore.transform.position = mainShip.transform.position;
         mainShip.SetActive(false);
         cameraFollower.followObject = shipCore.transform;
         menu.SetShip(shipCore);
+        shipCore.GetComponent<PlayerController>().disableInput = false;
         menu.playerController = shipCore.GetComponent<PlayerController>();
         shipCore.GetComponent<ShipCore>().SetActualStats(playerStats);
     }
@@ -62,9 +64,26 @@ public class ControlSwitcher : MonoBehaviour {
 
     public void reloadShipStats()
     {
-        Debug.Log("reloading shipSttast");
+        //Debug.Log("reloading shipSttast");
         shipCore.GetComponent<ShipCore>().SetActualStats(playerStats);
         mainShip.GetComponent<Ship>().SetActualStats(playerStats);
+    }
+
+    public void SetMainShip(GameObject shipPrefab)
+    {
+        shipCore.transform.position = mainShip.transform.position;
+        GameObject newShip =  Instantiate(shipPrefab, mainShip.transform.position, Quaternion.identity) as GameObject;
+        
+        // set the parent to nulll so the menu doesnt think its an inventory it should read from
+        mainShip.transform.SetParent(null);
+        Destroy(mainShip.gameObject);
+        mainShip = newShip;
+
+        newShip.transform.SetParent(this.transform);
+        newShip.GetComponent<PlayerController>().disableInput = true;
+        SwitchToMainShip();
+        // this reloads all the invertorys of the new ship...
+        menu.OpenMenu();
     }
 
 }

@@ -1,0 +1,20 @@
+Make missiles track cursor, so you can avoid obsticals and hit weak spots.. 
+
+gravity have planets try to pull you in
+
+moving aseteroids
+
+heat damage when too close to stars
+
+
+multiple path orders to collect powerups / weapons / ships / something
+increase difficulty when you collect...
+radomize what you would want to get first...
+
+free roam feel with linear progression.
+
+
+https://docs.google.com/document/d/1EPrqbQfVzi9op08hfB1gfQDjnlXShC97LvaqhOWk7Qo/edit
+todo
+
+work on more ship equiptibles.
