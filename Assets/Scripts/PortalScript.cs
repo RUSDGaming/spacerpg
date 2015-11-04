@@ -7,7 +7,7 @@ using Game.Events;
 public class PortalScript : MonoBehaviour {
 
 
-    public GameLogic gl;
+   
     public int id;
     /// <summary>
     /// This is what the portal tell s the level gen to make. 

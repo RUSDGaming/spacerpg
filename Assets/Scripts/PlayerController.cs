@@ -51,27 +51,12 @@ public class PlayerController : MonoBehaviour {
             angleBetween = -angleBetween;      
          
         ship.MoveUnit(new Vector2(horizontal, vertical),relativeInput);
-        //if (relativeInput)
-        //{
-        //body.AddRelativeForce(new Vector2(horizontal, vertical) * Time.fixedDeltaTime * moveForce);
-        //}
-        //else
-        //{
-        //    body.AddForce(new Vector2(horizontal, vertical) * Time.fixedDeltaTime * moveForce);
-        //}
-              
-        //body.MoveRotation(body.rotation + angleBetween);
+       
         ship.RotateUnit(angleBetween);
-        // limit them move ment to the max speed;
-        //if(body.velocity.magnitude > maxSpeed)
-        //{
-        //    body.velocity = body.velocity.normalized * maxSpeed;
-        //}
-
+        
         if (fireDown)
-        {
-            //Debug.Log("Player Controller caalling ship to fire");
-            ship.TryToFire(0);
+        {           
+            ship.TryToFire(0,true);
             fireDown = false;
         }
         

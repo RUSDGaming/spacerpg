@@ -19,7 +19,7 @@ namespace Game.Interfaces
 
     public interface Shooter
     {
-        bool TryToFire(int weaponGroup);
+        bool TryToFire(int weaponGroup, bool isPlayer);
     }
 
     public interface Movable

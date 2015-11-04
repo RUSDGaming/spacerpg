@@ -15,7 +15,7 @@ public class ProjectileWeapon : Weapon {
 	
 	}
 
-    public override bool TryToFire(ref float energy)
+    public override bool TryToFire(ref float energy,bool isPlayer)
     {
 
         //Debug.Log("trying to fire laser with energy : " + energy);
@@ -30,7 +30,7 @@ public class ProjectileWeapon : Weapon {
                 currentAmmo--;
                 GameObject projectileInstance = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
                 ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
-                projectileScript.IsPlayer(true);
+                projectileScript.IsPlayer(isPlayer);
                 projectileScript.damage = damage;
                 lastShot = Time.time;
                 return true;

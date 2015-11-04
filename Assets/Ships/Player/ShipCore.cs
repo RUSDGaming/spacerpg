@@ -80,7 +80,7 @@ public class ShipCore : MonoBehaviour , iShip {
         Application.LoadLevel("MainMenu");
     }
 
-    public bool TryToFire(int weaponGroup)
+    public bool TryToFire(int weaponGroup,bool isPlayer)
     {
         if (Time.time - lastShot >= fireRate)
         {

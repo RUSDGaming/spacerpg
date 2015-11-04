@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelWidth: 50
   levelHeight: 200
-  player: {fileID: 2121123256}
+  player: {fileID: 0}
 --- !u!4 &325786107
 Transform:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ Prefab:
     - target: {fileID: 11408804, guid: 5468a14c5239b1446a40389fd97f3641, type: 2}
       propertyPath: followObject
       value: 
-      objectReference: {fileID: 2121123256}
+      objectReference: {fileID: 0}
     - target: {fileID: 11408804, guid: 5468a14c5239b1446a40389fd97f3641, type: 2}
       propertyPath: paralaxRatio
       value: .949999988
@@ -1608,7 +1608,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 325786107}
   m_RootOrder: 0
---- !u!4 &2121123256 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 483178, guid: d598d96320b3d2a40bcb27ce0cc75330, type: 2}
-  m_PrefabInternal: {fileID: 1683998608}

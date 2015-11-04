@@ -61,13 +61,13 @@ public class Ship : MonoBehaviour ,iShip{
 
     // Use this for initialization
     void Start () {
-        currentEnergy = maxEnergy;
-        currentHealth = maxHealth;
+        //currentEnergy = maxEnergy;
+        //currentHealth = maxHealth;
         body = GetComponent<Rigidbody2D>();
         switcher = GetComponentInParent<ControlSwitcher>();
-        forceFeild = GetComponentInChildren<ShowForceFeild>();
-       
+        forceFeild = GetComponentInChildren<ShowForceFeild>();       
     }
+
 	public void SetActualStats(PlayerStats stats)
     {
         
@@ -95,13 +95,13 @@ public class Ship : MonoBehaviour ,iShip{
     }
 
     // tries to fire all the weapons in the group
-    public bool TryToFire(int weaponGroup)
+    public bool TryToFire(int weaponGroup, bool isPlayer)
     {
         foreach (WeaponInventory weaponSlot in weaponSlots)
         {
             if (weaponSlot.items[0] != null) {
                 Weapon weapon =  weaponSlot.items[0].GetComponent<Weapon>();                
-                weapon.TryToFire(ref currentEnergy);
+                weapon.TryToFire(ref currentEnergy,true);
             }
             
         }
@@ -230,8 +230,5 @@ public class Ship : MonoBehaviour ,iShip{
 
         currentEnergy -= sheildRegenAmount * 10f;
         currentSheild += sheildRegenAmount;
-
-
-
     }
 }

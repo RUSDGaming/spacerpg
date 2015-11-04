@@ -37,7 +37,7 @@ public class Weapon :Item {
         lastShot = -fireRate;
     }
 
-    public virtual bool TryToFire(ref float energy)
+    public virtual bool TryToFire(ref float energy,bool isPlayer)
     {
 
         //Debug.Log("trying to fire laser with energy : " + energy);
@@ -53,7 +53,7 @@ public class Weapon :Item {
                 GameObject projectileInstance = (GameObject) Instantiate(projectile,transform.position,transform.rotation);
                 
                 ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
-                projectileScript.IsPlayer(true);
+                projectileScript.IsPlayer(isPlayer);
                 projectileScript.damage = damage;
                 
 

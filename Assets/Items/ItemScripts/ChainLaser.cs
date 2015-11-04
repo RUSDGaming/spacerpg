@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Game.Interfaces;
 public class ChainLaser : Weapon {
 
 
@@ -21,7 +22,7 @@ public class ChainLaser : Weapon {
 	}
 
 
-    public override bool TryToFire(ref float energy)
+    public override bool TryToFire(ref float energy, bool isPlayer)
     {
         Debug.Log("Trying to fire miniGun");
         if(energy < energyCost)

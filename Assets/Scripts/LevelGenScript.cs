@@ -9,7 +9,8 @@ public class LevelGenScript : MonoBehaviour
 {
 
 
-
+    [SerializeField]
+    Transform playerRespawn;
     
     Int2 startPoint = new Int2(-1,-1);
     Int2 endPoint = new Int2(-1,-1);
@@ -19,7 +20,14 @@ public class LevelGenScript : MonoBehaviour
     void Start()
     {
         Tile.SetCamera();    
-         Tile.LoadLevel(myLevel);        
+        Tile.LoadLevel(myLevel);
+
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+
+        foreach (PlayerController player in players)
+        {
+            player.gameObject.transform.position = playerRespawn.position;
+        }
     }
 
     public IEnumerator GenerateRandomLevel(LevelGenInfo info)
@@ -228,13 +236,26 @@ public class LevelGenScript : MonoBehaviour
     
     public IEnumerator AddRandomLevelToCurrent(LevelGenInfo info)
     {
-        StartCoroutine(GenerateRandomLevel(info));
+        //StartCoroutine(GenerateRandomLevel(info));
+        StartCoroutine(CreateBoxLevel(info));
         yield return new WaitForSeconds(0);
 
         
     }
 
 
+    IEnumerator CreateBoxLevel(LevelGenInfo info)
+    {
+
+        LevelFinishedLoadingEventArgs args = new LevelFinishedLoadingEventArgs();
+        startPoint = new Int2(info.levelWidth / 2 + info.startX, info.levelHeight / 2 + info.startY);
+        endPoint= new Int2(info.levelWidth + info.startX -5 , info.levelHeight  + info.startY -5);
+        args.startPos = Tile.MapToWorldPosition(startPoint);
+        args.endPos = Tile.MapToWorldPosition(endPoint);
+        createBorder(info);
+        GameEventSystem.PublishEvent(typeof(LevelLoadedSubscriber), args);
+        yield return new WaitForSeconds(0);
+    }
 
    
 

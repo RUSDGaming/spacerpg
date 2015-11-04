@@ -40,7 +40,7 @@ public class ProjectileScript : MonoBehaviour {
     {
 
         //Debug.Log("tag hit is: " + other.tag);
-        Debug.Log(other.gameObject.layer.ToString());
+       // Debug.Log(other.gameObject.layer.ToString());
 
         if (other.isTrigger)
             return;
