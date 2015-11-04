@@ -1,0 +1,57 @@
+have 7 sectors
+randomize what sectors are good to go to first.
+
+make each sector increase the difficulty when you complete it. 
+
+7 sectors
+
+fire
+
+ice
+
+acid
+
+electric
+
+dark
+
+light
+
+
+when you defeat one of the regions you unlock the ability to use that power. 
+these enemies will then show up in other regions. 
+
+
+
+final boss
+
+
+Classes:
+	Neutreul nothing special. 
+
+	Tank
+Bonus: Health, armor, sheild 
+Harm: speed, TurnRate
+
+	Mage
+Bonus: Fire, Light, Acid, electric, light, dark
+Harm: health, sheild, armor
+
+	Utility 
+Bonus: Energy, Sheild, speed
+Harm: Health, armor
+
+	Offense
+Bonus: Damage, Firerate, speed, turnrate, projectile, laser, explosion
+Harm: Health, Sheild, Armor
+
+
+
+Each world will have a few things.  
+
+It will have a boss that you have to beat to unlock the portal. 
+
+It will be filled with enimies most in groups.
+
+
+
