@@ -8,6 +8,8 @@ using Game.Events;
 public class LevelGenScript : MonoBehaviour
 {
 
+    [SerializeField]    Transform levelTransform;
+    [SerializeField] GameObject Boss;
 
     [SerializeField]
     Transform playerRespawn;
@@ -246,17 +248,24 @@ public class LevelGenScript : MonoBehaviour
 
     IEnumerator CreateBoxLevel(LevelGenInfo info)
     {
-
         LevelFinishedLoadingEventArgs args = new LevelFinishedLoadingEventArgs();
         startPoint = new Int2(info.levelWidth / 2 + info.startX, info.levelHeight / 2 + info.startY);
         endPoint= new Int2(info.levelWidth + info.startX -5 , info.levelHeight  + info.startY -5);
         args.startPos = Tile.MapToWorldPosition(startPoint);
         args.endPos = Tile.MapToWorldPosition(endPoint);
         createBorder(info);
+        SpawnBoss(info);
         GameEventSystem.PublishEvent(typeof(LevelLoadedSubscriber), args);
+
         yield return new WaitForSeconds(0);
     }
 
-   
+   void SpawnBoss(LevelGenInfo info)
+    {
+        Int2 bossLocation = new Int2(info.startX + 5, info.startY + 5);
+        Vector3 spawnLoc = Tile.MapToWorldPosition(bossLocation);
+        GameObject go = Instantiate(Boss, spawnLoc, Quaternion.identity) as GameObject;
+        go.transform.SetParent(levelTransform);
+    }
 
 }

@@ -5,6 +5,10 @@ public class EnemyTurretScript : MonoBehaviour {
 
 
     public Transform trackingTarget;
+
+    [SerializeField]    float maxRotation = 90f;
+    [SerializeField]    float turnRate = 10f;
+    
     // Use this for initialization
     void Start()
     {
@@ -12,7 +16,7 @@ public class EnemyTurretScript : MonoBehaviour {
     }
 
     Vector2 bodyToTarget;
-    float angleBetween;
+   [SerializeField] float angleBetween;
 
     // Update is called once per frame
     void Update()
@@ -23,21 +27,88 @@ public class EnemyTurretScript : MonoBehaviour {
     void FixedUpdate()
     {
 
-        if(trackingTarget)
+        if (trackingTarget)
         {
-        bodyToTarget = trackingTarget.position - transform.position;
-        //Debug.Log("transform posti" + transform.up);
-        angleBetween = Vector2.Angle(bodyToTarget, (Vector2)transform.up);
-        Vector3 cross = Vector3.Cross(bodyToTarget, transform.up);
+            bodyToTarget = trackingTarget.position - transform.position;
+            angleBetween = Vector2.Angle(bodyToTarget, transform.up);
+            Vector3 cross = Vector3.Cross(bodyToTarget, transform.up);
+            //Debug.Log("transform.up" + transform.up);
+
+            if (cross.z > 0)
+            {
+                angleBetween = -angleBetween;              
+
+            }
 
 
-        if (cross.z > 0)
-            angleBetween = -angleBetween;
-        transform.eulerAngles = (new Vector3(0, 0, (transform.eulerAngles.z + angleBetween)));
+
+            #region fancy less that 180 stuff
+            if (maxRotation < 180)
+            {
+            float rotation = transform.localEulerAngles.z + angleBetween;
+                //Debug.Log(turnRate * Time.fixedDeltaTime);
+                angleBetween = Mathf.Abs(angleBetween);
+                if (angleBetween > turnRate * Time.fixedDeltaTime)
+                {
+                    angleBetween = turnRate * Time.fixedDeltaTime;
+                }
+
+                if (rotation > 180)
+                {
+                    rotation = rotation - 360;
+                }
+                else if (rotation < -180)
+                {
+                    rotation = rotation + 360;
+                }
+                //Debug.Log(rotation.ToString("0"));
+
+                if (Mathf.Abs(rotation) > maxRotation)
+                    return;
+
+                float currentRotation = transform.localEulerAngles.z;
+
+                if (currentRotation > 180)
+                {
+                    currentRotation = currentRotation - 360;
+                }
+                else if (currentRotation < -180)
+                {
+                    currentRotation = currentRotation + 360;
+                }
+
+                if (currentRotation > rotation)
+                {
+                    // subtract
+                    transform.localEulerAngles = (new Vector3(0, 0, transform.localEulerAngles.z - angleBetween));
+                }
+                else
+                {
+                    // add
+                    transform.eulerAngles = (new Vector3(0, 0, transform.eulerAngles.z + angleBetween));
+                }
+                return;
+            }
+            #endregion
+            //if the rotation is above 180 take the shortest path...
+
+            if (Mathf.Abs(angleBetween) > turnRate * Time.fixedDeltaTime)
+            {
+                //angleBetween = Mathf.Abs(turnRate * Time.fixedDeltaTime * Mathf.Sign(angleBetween));
+                transform.eulerAngles = (new Vector3(0, 0, transform.eulerAngles.z + (turnRate * Mathf.Sign(angleBetween)) * Time.fixedDeltaTime));
+            }
+            else
+            {
+            transform.eulerAngles = (new Vector3(0, 0, transform.eulerAngles.z + angleBetween));
+            }
+           
+
+
+
         }
         else
         {
-            transform.localEulerAngles= Vector3.zero;
+           // transform.localEulerAngles= Vector3.zero;
         }
 
 

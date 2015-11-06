@@ -35,6 +35,7 @@ public class WeaponInventory : Inventory {
         {
             item.transform.SetParent(cargo);
             item.transform.localPosition = Vector3.zero;
+            item.transform.localRotation = Quaternion.identity;
             item.gameObject.SetActive(true);
         }
 

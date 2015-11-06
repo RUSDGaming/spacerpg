@@ -11,6 +11,7 @@ using Game.Events;
 public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscriber{
 
     public Transform playerRespawn;
+    [SerializeField]  Transform generatedLevel;
     public LevelGenScript levelGen;
 
     public GameObject portal;
@@ -99,6 +100,9 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         Int2 corner2 = new Int2(levelInfo.startX + levelInfo.levelWidth, levelInfo.startY + levelInfo.levelHeight);
         Tile.DeleteTileBlock(corner1, corner2);
         
-         
+         foreach(Transform child in generatedLevel)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 }

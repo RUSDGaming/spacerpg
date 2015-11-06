@@ -350,12 +350,10 @@ MonoBehaviour:
   stackSize: 0
   currentSize: 0
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
-  parentTransform: {fileID: 0}
-  laserSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
+  weaponSound: {fileID: 0}
   damage: 1
   fireRate: 1
   energyCost: 1
-  ammo: 0
 --- !u!114 &11405276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +379,7 @@ MonoBehaviour:
   baseEnergyRegen: 2
   baseMoveForce: 5000
   baseMaxSpeed: 15
-  baseTurnRate: 360
+  baseTurnRate: 450
   maxHealth: 0
   currentHealth: 0
   armor: 0
@@ -547,7 +545,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baseTurnRate
-      value: 360
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxHealth
