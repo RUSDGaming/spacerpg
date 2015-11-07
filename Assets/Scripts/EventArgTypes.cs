@@ -20,5 +20,16 @@ namespace Game.Events
         public Vector2 endPos;
     }
 
+    public class PlayerHitEventArgs : GameEventArgs
+    {
+        public int playerId;
+        public float damageDelt;
+    }
+
+    public class PlayerHomeEventArgs: GameEventArgs
+    {
+        public int playerId;
+    }
+
 
 }

@@ -94,10 +94,11 @@ public class PlayerMenu : MonoBehaviour
                 UISlot slot;
                 if(inventory.inventoryType == Inventory.InventoryType.WEAPON_SLOT)
                 {
-                    //Debug.Log("weapon Inv is " + inventory.items.Length);
-                   // Debug.Log(" weapon Count is : " + weaponCount);
+                    
                     slot = shipImage.transform.GetChild(weaponCount).gameObject.GetComponent<ShipSlot>();
-                    slot.transform.localPosition = inventory.transform.localPosition * 32;
+                    slot.transform.localPosition = (ship.transform.InverseTransformPoint( inventory.transform.position)) *32;
+                    
+
                     weaponCount++;
                 }
                 else

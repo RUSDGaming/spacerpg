@@ -3,6 +3,17 @@ using System.Collections;
 
 public class LevelGenInfo : MonoBehaviour {
 
+    public enum LevelType
+    {
+        BOSS, ASTEROIRD
+    }
+
+    public LevelType levelType;
+    public  TextAsset premadeTileMap;
+
+    public GameObject bossPrefab;
+    public GameObject[] enimies;
+
     public int startX = 99;
     public int startY = 0;
 
@@ -20,5 +31,5 @@ public class LevelGenInfo : MonoBehaviour {
     public Material mat;
     public int wallTile = 1;
     public int floorTile = 2;
-
+  
 }

@@ -22,7 +22,7 @@ public class ChainLaser : Weapon {
 	}
 
 
-    public override bool TryToFire(ref float energy, bool isPlayer)
+    public override bool TryToFire(ref float energy, bool isPlayer,PlayerStats stats)
     {
         Debug.Log("Trying to fire miniGun");
         if(energy < energyCost)
@@ -46,13 +46,16 @@ public class ChainLaser : Weapon {
             return false;
         }
 
-        audioSource.pitch = Random.Range(1f, 1.3f);
-        audioSource.PlayOneShot(weaponSound);
         energy -= energyCost;
         Vector3 spawnPos = transform.position;
         spawnPos.x += Random.Range(-.3f, .3f);
         GameObject projectileInstance = (GameObject)Instantiate(projectile, spawnPos, transform.rotation);
-        projectileInstance.SendMessage("IsPlayer", true);
+
+        ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
+        projectileScript.IsPlayer(isPlayer);
+        // could optimize code by saving damage values. 
+        projectileScript.damage = getWeaponDamage(stats);
+        
         lastShot = Time.time;
 
         fireRate -= fireRateDecrease;

@@ -1,0 +1,3 @@
+Enemies think player is still there when he dies due to the game object just being disabled... 
+
+Ships cant fire when sheilds are down because they take all the energy

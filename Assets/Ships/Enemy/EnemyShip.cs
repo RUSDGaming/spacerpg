@@ -34,7 +34,8 @@ public class EnemyShip : MonoBehaviour , iShip{
     [SerializeField]    float turnRate;
     #endregion
 
-
+    float lastWeaponSoundPlayed;
+    float weaponSoundRate = .1f;
 
     Rigidbody2D body;
     ShowForceFeild forceFeild;
@@ -43,9 +44,9 @@ public class EnemyShip : MonoBehaviour , iShip{
     void Start () {
 
     body = GetComponent<Rigidbody2D>();
-    forceFeild = GetComponentInChildren<ShowForceFeild>();    
-	
-	}
+    forceFeild = GetComponentInChildren<ShowForceFeild>();
+        lastWeaponSoundPlayed = -weaponSoundRate;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -103,8 +104,17 @@ public class EnemyShip : MonoBehaviour , iShip{
         {
             if (weaponSlot.items[0] != null)
             {
-                Weapon weapon = weaponSlot.items[0].GetComponent<Weapon>();
-                weapon.TryToFire(ref currentEnergy,false);
+                Weapon weapon = weaponSlot.items[0].GetComponent<Weapon>();                
+                if (weapon.TryToFire(ref currentEnergy, false, null))
+                {
+                        Debug.Log(Time.time - lastWeaponSoundPlayed + ">" +weaponSoundRate);
+                    if (Time.time - lastWeaponSoundPlayed > weaponSoundRate)
+                    {
+                        lastWeaponSoundPlayed = Time.time;
+                        weapon.PlaySound();
+
+                    }
+                }
             }
 
         }

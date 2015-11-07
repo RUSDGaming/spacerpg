@@ -55,7 +55,7 @@ public class EnemyAI : MonoBehaviour
 
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Player entered radar range");
+               // Debug.Log("Player entered radar range");
                 trackingObject = other.transform;
 
                 SetTurretTracking(other.transform);

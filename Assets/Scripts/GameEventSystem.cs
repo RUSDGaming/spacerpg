@@ -48,6 +48,7 @@ namespace Game.Events
 
     public interface PortalSubscriber : SubScriber{ }
     public interface LevelLoadedSubscriber : SubScriber { }
-  
+    public interface HomeSubscriber : SubScriber { }
+    public interface PlayerDamagedSubscriber : SubScriber { };
  
 }

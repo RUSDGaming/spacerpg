@@ -8,7 +8,7 @@ using System.Linq;
 using SpriteTile;
 using Game.Events;
 
-public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscriber{
+public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscriber, HomeSubscriber{
 
     public Transform playerRespawn;
     [SerializeField]  Transform generatedLevel;
@@ -43,6 +43,11 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
             HandleLevelLoadedEvent(args);
 
         }
+        if(args.GetType() == typeof(PlayerHomeEventArgs))
+        {
+            HandleHomeEVent(args);
+        }
+        
     }
 
     void HandleLevelLoadedEvent(GameEventArgs args) {
@@ -78,10 +83,28 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         else
         {
             levelInfo = argz.info;
-            StartCoroutine(levelGen.AddRandomLevelToCurrent(argz.info));
+            levelGen.GenerateLevel(argz.info);
             levelLoaded = true;
         }
     }
+
+    void HandleHomeEVent(GameEventArgs args)
+    {
+        if (!levelLoaded)
+        {
+            return;
+        }
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+        foreach (PlayerController player in players)
+        {
+            player.gameObject.transform.position = playerRespawn.position;
+        }
+
+        levelLoaded = false;
+        Debug.Log("Destroy everything previously loadded in that other scene");
+        DestroyLevel();
+    }
+
 
     private void DestroyLevel()
     {

@@ -2,6 +2,7 @@
 using System.Collections;
 using Game.Interfaces;
 using System;
+using Game.Events;
 
 
 [RequireComponent (typeof(Rigidbody2D))]
@@ -15,14 +16,10 @@ public class Ship : MonoBehaviour ,iShip{
 
     #region equipment
     public WeaponInventory[] weaponSlots;
-    [SerializeField]
-    ItemScript[] capacitors;
-    [SerializeField]
-    ItemScript[] engines;
-    [SerializeField]
-    ItemScript[] thrusters;
-   [SerializeField]
-    ItemScript[] armors;
+    [SerializeField]    ItemScript[] capacitors;
+    [SerializeField]    ItemScript[] engines;
+    [SerializeField]    ItemScript[] thrusters;
+    [SerializeField]    ItemScript[] armors;
     #endregion
 
 
@@ -59,18 +56,21 @@ public class Ship : MonoBehaviour ,iShip{
     [SerializeField] float turnRate;
     #endregion
 
+    PlayerStats playerStats;
+
     // Use this for initialization
     void Start () {
         //currentEnergy = maxEnergy;
         //currentHealth = maxHealth;
         body = GetComponent<Rigidbody2D>();
         switcher = GetComponentInParent<ControlSwitcher>();
-        forceFeild = GetComponentInChildren<ShowForceFeild>();       
+        forceFeild = GetComponentInChildren<ShowForceFeild>();
+        lastWeaponSoundPlayed = -weaponSoundRate;
     }
 
 	public void SetActualStats(PlayerStats stats)
     {
-        
+        playerStats = stats;
         stats.SetActualStat(PlayerStats.STATS.HEALTH, baseHealth,ref maxHealth);        
         currentHealth = maxHealth;        
         stats.SetActualStat(PlayerStats.STATS.ARMOR, baseArmor, ref armor);
@@ -93,6 +93,8 @@ public class Ship : MonoBehaviour ,iShip{
         regenEnergy();
         RegenSheild();
     }
+    float lastWeaponSoundPlayed ;
+    float weaponSoundRate = .1f;
 
     // tries to fire all the weapons in the group
     public bool TryToFire(int weaponGroup, bool isPlayer)
@@ -101,7 +103,16 @@ public class Ship : MonoBehaviour ,iShip{
         {
             if (weaponSlot.items[0] != null) {
                 Weapon weapon =  weaponSlot.items[0].GetComponent<Weapon>();                
-                weapon.TryToFire(ref currentEnergy,true);
+              if(  weapon.TryToFire(ref currentEnergy, true, playerStats))
+                {
+                    if(Time.time - lastWeaponSoundPlayed > weaponSoundRate)
+                    {
+                        lastWeaponSoundPlayed = Time.time;
+                        weapon.PlaySound();
+
+                    }
+                }
+
             }
             
         }
@@ -123,6 +134,9 @@ public class Ship : MonoBehaviour ,iShip{
         {
             Destroy();
         }
+
+        PlayerHitEventArgs args = new PlayerHitEventArgs { playerId = 1, damageDelt = damageToShip };
+        GameEventSystem.PublishEvent(typeof(PlayerDamagedSubscriber), args);
     }
 
     float DamageArmor(float damage)

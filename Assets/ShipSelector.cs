@@ -31,6 +31,7 @@ public class ShipSelector : MonoBehaviour {
             info.EnergyRegenText = "Energy Regen: " + ship.baseEnergyRegen;
             info.ThrustText = "Thrust :" + ship.baseMoveForce;
             info.TurnRateText = "Turn Rate: " + ship.baseTurnRate;
+            info.SpeedText = "Max Speed : " + ship.baseMaxSpeed;
             info.MassText = "Mass: " + ship.gameObject.GetComponent<Rigidbody2D>().mass;
             info.setUpButton(ship.gameObject, switcher);
         }

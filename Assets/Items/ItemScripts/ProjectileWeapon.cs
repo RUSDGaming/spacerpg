@@ -15,7 +15,7 @@ public class ProjectileWeapon : Weapon {
 	
 	}
 
-    public override bool TryToFire(ref float energy,bool isPlayer)
+    public override bool TryToFire(ref float energy,bool isPlayer,PlayerStats stats)
     {
 
         //Debug.Log("trying to fire laser with energy : " + energy);

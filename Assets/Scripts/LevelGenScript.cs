@@ -7,6 +7,8 @@ using Game.Events;
 
 public class LevelGenScript : MonoBehaviour
 {
+  
+
 
     [SerializeField]    Transform levelTransform;
     [SerializeField] GameObject Boss;
@@ -16,6 +18,9 @@ public class LevelGenScript : MonoBehaviour
     
     Int2 startPoint = new Int2(-1,-1);
     Int2 endPoint = new Int2(-1,-1);
+
+    [SerializeField]    TextAsset bossArena;
+
 
     public TextAsset myLevel;
     // Use this for initialization
@@ -245,24 +250,55 @@ public class LevelGenScript : MonoBehaviour
         
     }
 
+    public void GenerateLevel(LevelGenInfo info) {
+        switch (info.levelType)
+        {
+            case LevelGenInfo.LevelType.BOSS:
+                StartCoroutine(CreateBossArena(info));
+                break;
+            case LevelGenInfo.LevelType.ASTEROIRD:
+                break;
+            default:
+                break;
+        }
+    }
+
+
 
     IEnumerator CreateBoxLevel(LevelGenInfo info)
     {
+        //LoadBossArena(info);
+
         LevelFinishedLoadingEventArgs args = new LevelFinishedLoadingEventArgs();
-        startPoint = new Int2(info.levelWidth / 2 + info.startX, info.levelHeight / 2 + info.startY);
-        endPoint= new Int2(info.levelWidth + info.startX -5 , info.levelHeight  + info.startY -5);
         args.startPos = Tile.MapToWorldPosition(startPoint);
         args.endPos = Tile.MapToWorldPosition(endPoint);
-        createBorder(info);
-        SpawnBoss(info);
+        //createBorder(info);
         GameEventSystem.PublishEvent(typeof(LevelLoadedSubscriber), args);
 
         yield return new WaitForSeconds(0);
     }
 
-   void SpawnBoss(LevelGenInfo info)
+    IEnumerator CreateBossArena(LevelGenInfo info) {
+
+        MapData mapBlock = Tile.LoadMapBlock(bossArena.bytes);
+        Tile.SetMapBlock(new Int2(info.startX, 0), mapBlock);
+        startPoint = new Int2(mapBlock.mapSize.x / 2 + info.startX,  info.startY + 5);
+        //endPoint= new Int2(info.levelWidth + info.startX -5 , info.levelHeight  + info.startY -5);
+        SpawnBoss(info ,mapBlock);
+
+
+        LevelFinishedLoadingEventArgs args = new LevelFinishedLoadingEventArgs();
+        args.startPos = Tile.MapToWorldPosition(startPoint);
+        //args.endPos = Tile.MapToWorldPosition(endPoint);
+        //createBorder(info);
+        GameEventSystem.PublishEvent(typeof(LevelLoadedSubscriber), args);
+
+        yield return new WaitForSeconds(0);
+    }
+     
+   void SpawnBoss(LevelGenInfo info, MapData mapBlock)
     {
-        Int2 bossLocation = new Int2(info.startX + 5, info.startY + 5);
+        Int2 bossLocation = new Int2(info.startX + mapBlock.mapSize.x /2, info.startY + mapBlock.mapSize.y/2);
         Vector3 spawnLoc = Tile.MapToWorldPosition(bossLocation);
         GameObject go = Instantiate(Boss, spawnLoc, Quaternion.identity) as GameObject;
         go.transform.SetParent(levelTransform);
