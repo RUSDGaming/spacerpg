@@ -4,8 +4,8 @@ using Game.Interfaces;
 
 public class ControlSwitcher : MonoBehaviour {
 
-    [SerializeField]    GameObject shipCore;
-    [SerializeField]    GameObject mainShip;
+    public    GameObject shipCore;
+    public    GameObject mainShip;
     [SerializeField]    FollowTransform cameraFollower;
     [SerializeField]    PlayerMenu menu;
     [SerializeField]    PlayerStats playerStats;

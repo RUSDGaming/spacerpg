@@ -12,7 +12,7 @@ using Game.Events;
 public class Ship : MonoBehaviour ,iShip{
 
 
-
+    
 
     #region equipment
     public WeaponInventory[] weaponSlots;
@@ -140,6 +140,8 @@ public class Ship : MonoBehaviour ,iShip{
 
         PlayerHitEventArgs args = new PlayerHitEventArgs { playerId = 1, damageDelt = damageToShip };
         GameEventSystem.PublishEvent(typeof(PlayerDamagedSubscriber), args);
+        if(damageToShip > 0)
+        InfoBlurbManager.CreateInfoBlurb(this.transform.position, "" + damageToShip, Color.red);
     }
 
     float DamageArmor(float damage)

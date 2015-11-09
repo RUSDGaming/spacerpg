@@ -3437,6 +3437,56 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 270526894}
+--- !u!1001 &270997517
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1058201930}
+    m_Modifications:
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 6.0999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 31.2000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -1.62920685e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 190828, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_Name
+      value: EnemyTurtleShip (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &270997518 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+  m_PrefabInternal: {fileID: 270997517}
 --- !u!1 &272606575
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,6 +5197,78 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 354973250}
+--- !u!1 &381836837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 381836838}
+  - 222: {fileID: 381836840}
+  - 114: {fileID: 381836839}
+  m_Layer: 5
+  m_Name: LevelUpText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &381836838
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381836837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1545515594}
+  m_RootOrder: 1
+  m_AnchorMin: {x: .5, y: 1}
+  m_AnchorMax: {x: .5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -40}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &381836839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381836837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .325490206, g: .941176534, b: .662745118, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8795ff05c6a5a314b933622b36548bc2, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Level Up Available!!
+--- !u!222 &381836840
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381836837}
 --- !u!1 &383324549
 GameObject:
   m_ObjectHideFlags: 0
@@ -5561,6 +5683,56 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 396581065}
+--- !u!1001 &405620300
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1058201930}
+    m_Modifications:
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -10.8999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 31.2000008
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -1.62920685e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 190828, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+      propertyPath: m_Name
+      value: EnemyTurtleShip (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &405620301 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 474358, guid: 0c5536ba6a382664ca4cfae766b4a517, type: 2}
+  m_PrefabInternal: {fileID: 405620300}
 --- !u!1 &406146558
 GameObject:
   m_ObjectHideFlags: 0
@@ -8161,6 +8333,7 @@ MonoBehaviour:
   shipNearChest: 0
   slotHolder: {fileID: 1535735766}
   shipImage: {fileID: 1154494228}
+  LevelUpText: {fileID: 381836837}
 --- !u!114 &579420597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8217,7 +8390,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!1 &588538859
 GameObject:
   m_ObjectHideFlags: 0
@@ -14926,6 +15099,8 @@ Transform:
   - {fileID: 63953600}
   - {fileID: 38764259}
   - {fileID: 1295765064}
+  - {fileID: 270997518}
+  - {fileID: 405620301}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1 &1066745357
@@ -22059,6 +22234,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1274484686}
+  - {fileID: 381836838}
   m_Father: {fileID: 1750992809}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -25220,6 +25396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cff8e3323ea2af4a9a198e6edaa63fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelUpText: {fileID: 381836837}
   statHolder: {fileID: 961862166}
   exp: 0
   level: 0
@@ -30600,7 +30777,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 478016, guid: 5468a14c5239b1446a40389fd97f3641, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 144464, guid: 5468a14c5239b1446a40389fd97f3641, type: 2}
       propertyPath: m_Name

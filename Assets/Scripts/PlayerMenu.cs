@@ -12,10 +12,9 @@ public class PlayerMenu : MonoBehaviour
     public PlayerController playerController;
     public GameObject mainMenu;
     public PlayerStats playerStats;
-    
+
     [SerializeField]
     Sprite defaultSprite;
-
     [SerializeField]
     ControlSwitcher switcher;
 
@@ -24,15 +23,16 @@ public class PlayerMenu : MonoBehaviour
 
     [SerializeField]
     GameObject slotHolder;
-
     [SerializeField]
     GameObject shipImage;
+    [SerializeField]
+    GameObject LevelUpText;
 
     bool menuOpen = false;
 
     void Start()
     {
-        mainMenu.SetActive(false);                
+        mainMenu.SetActive(false);
     }
 
     void Update()
@@ -42,37 +42,38 @@ public class PlayerMenu : MonoBehaviour
             if (menuOpen)
             {
                 CloseMenu();
-                playerController.disableInput = false;
-                mainMenu.SetActive(false);
-                menuOpen = false;
-
             }
             else
             {
                 OpenMenu();
-                playerController.disableInput = true;
-                mainMenu.SetActive(true);
-                menuOpen = true;
             }
         }
     }
 
     public void OpenMenu()
     {
+        LevelUpText.SetActive(false);
+        playerController.disableInput = true;
+        mainMenu.SetActive(true);
+        menuOpen = true;
         switcher.reloadShipStats(false);
         DeactivateInventorySlots();
         OpenInventorySlots();
     }
 
-   
+
 
     void CloseMenu()
     {
+
         CloseInventorySlots();
         playerStats.SavePlayerStats();
         switcher.reloadShipStats(false);
+        playerController.disableInput = false;
+        mainMenu.SetActive(false);
+        menuOpen = false;
     }
-  
+
     void OpenInventorySlots()
     {
         Inventory[] inventories = gameObject.transform.parent.GetComponentsInChildren<Inventory>(true);
@@ -87,18 +88,18 @@ public class PlayerMenu : MonoBehaviour
                 continue;
             }
 
-           // Debug.Log(inventory.inventoryType.ToString());
-           // Debug.Log(inventory.transform.ToString());
+            // Debug.Log(inventory.inventoryType.ToString());
+            // Debug.Log(inventory.transform.ToString());
 
             for (int i = 0; i < inventory.items.Length; i++)
             {
                 UISlot slot;
-                if(inventory.inventoryType == Inventory.InventoryType.WEAPON_SLOT)
+                if (inventory.inventoryType == Inventory.InventoryType.WEAPON_SLOT)
                 {
-                    
+
                     slot = shipImage.transform.GetChild(weaponCount).gameObject.GetComponent<ShipSlot>();
-                    slot.transform.localPosition = (ship.transform.InverseTransformPoint( inventory.transform.position)) *32;
-                    
+                    slot.transform.localPosition = (ship.transform.InverseTransformPoint(inventory.transform.position)) * 32;
+
 
                     weaponCount++;
                 }
@@ -115,7 +116,7 @@ public class PlayerMenu : MonoBehaviour
                 if (inventory.items[i] != null)
                 {
                     ids.realGamePrefab = inventory.items[i].gameObject;
-                    ids.GetComponent<ItemDragScript>().inventoryIndex = i;                    
+                    ids.GetComponent<ItemDragScript>().inventoryIndex = i;
                     slotItem.GetComponent<Image>().sprite = inventory.items[i].gameObject.GetComponent<SpriteRenderer>().sprite;
                 }
                 else
@@ -125,7 +126,7 @@ public class PlayerMenu : MonoBehaviour
                     slotItem.GetComponent<Image>().sprite = defaultSprite;
                 }
             }
-            if(inventory.inventoryType !=Inventory.InventoryType.WEAPON_SLOT )
+            if (inventory.inventoryType != Inventory.InventoryType.WEAPON_SLOT)
                 count += inventory.items.Length;
         }
     }
@@ -147,14 +148,14 @@ public class PlayerMenu : MonoBehaviour
             for (int i = 0; i < inventory.items.Length; i++)
             {
                 UISlot slot;
-                if(inventory.inventoryType == Inventory.InventoryType.WEAPON_SLOT)
-                {                   
-                    slot = shipImage.transform.GetChild(weaponCount).gameObject.GetComponent<ShipSlot>();                   
+                if (inventory.inventoryType == Inventory.InventoryType.WEAPON_SLOT)
+                {
+                    slot = shipImage.transform.GetChild(weaponCount).gameObject.GetComponent<ShipSlot>();
                     weaponCount++;
                 }
                 else
                 {
-                slot = slotHolder.transform.GetChild(i + count).gameObject.GetComponent<UISlot>();
+                    slot = slotHolder.transform.GetChild(i + count).gameObject.GetComponent<UISlot>();
                 }
 
                 Transform slotItem = slot.transform.GetChild(0);
@@ -167,7 +168,7 @@ public class PlayerMenu : MonoBehaviour
                 }
                 else
                 {
-                    inventory.StoreItem(null, i);                    
+                    inventory.StoreItem(null, i);
                 }
             }
             count += inventory.items.Length;
@@ -177,11 +178,11 @@ public class PlayerMenu : MonoBehaviour
 
     void DeactivateInventorySlots()
     {
-        foreach(Transform go in slotHolder.transform)
+        foreach (Transform go in slotHolder.transform)
         {
             go.gameObject.SetActive(false);
         }
-        foreach(Transform slot in shipImage.transform)
+        foreach (Transform slot in shipImage.transform)
         {
             slot.gameObject.SetActive(false);
         }
@@ -190,13 +191,13 @@ public class PlayerMenu : MonoBehaviour
     public void SetShip(GameObject shipObject)
     {
         this.ship = shipObject;
-        Ship shipScript = ship.GetComponent<Ship>();       
+        Ship shipScript = ship.GetComponent<Ship>();
         Sprite shipSprite = ship.GetComponent<SpriteRenderer>().sprite;
-        
-       shipImage.GetComponent<Image>().sprite = shipSprite;
-        
+
+        shipImage.GetComponent<Image>().sprite = shipSprite;
+
     }
-    
+
 
 
 

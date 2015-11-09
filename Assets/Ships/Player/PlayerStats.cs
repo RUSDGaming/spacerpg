@@ -2,11 +2,13 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 using Game.Events;
 
 public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
 {
+    [SerializeField]   GameObject levelUpText;
 
     PlayerInfo playerInfo;
 
@@ -98,11 +100,14 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
             sms.Level = statLevel.ToString();
         }
 
+        exp = 0;
+        level = 0;
+        points = 0;
         PlayerPrefs.SetFloat(EXP, 0);
         PlayerPrefs.SetInt(LEVEL, 0);
         PlayerPrefs.SetInt(POINTS, 0);
 
-
+        
 
     }
 
@@ -215,12 +220,16 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
         // if you level up you get points;
         int tempLevel = level;       
         level = Mathf.FloorToInt( exp / 100);
-        points += (level - tempLevel) *2;
+        if(level - tempLevel > 0)
+        {
+            points += (level - tempLevel) *2;
+            levelUpText.SetActive(true);
+        }
 
         PlayerPrefs.SetFloat(EXP, exp);
         PlayerPrefs.SetInt(LEVEL, level);
         PlayerPrefs.SetInt(POINTS, points);
-
+        InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp, Color.green);
     }
 
     

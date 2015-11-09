@@ -72,6 +72,9 @@ public class EnemyShip : MonoBehaviour , iShip{
         {
             DestroyShip();
         }
+
+        if (damageToShip > 0)
+            InfoBlurbManager.CreateInfoBlurb(this.transform.position, damageToShip.ToString(".0"), Color.red);
     }
 
     public void DestroyShip()
