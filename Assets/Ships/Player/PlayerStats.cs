@@ -3,10 +3,21 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
+using Game.Events;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
 {
 
+    PlayerInfo playerInfo;
+
+    // current level of the player
+    const string LEVEL = "level";
+    // current exp 
+    const string EXP = "exp";
+    // points play has to spend
+    const string POINTS = "points";
+
+    ControlSwitcher switcher;
 
     public enum STATS
     {
@@ -22,9 +33,9 @@ public class PlayerStats : MonoBehaviour
     public GameObject statHolder;
 
 
-    float exp;
-    int level;  // used to calculate how much exp you will need for the next level as well as how many points you get on leveling up. 
-    int points;  // how many points you get to spend   
+    public float exp;
+    public int level;  // used to calculate how much exp you will need for the next level as well as how many points you get on leveling up. 
+    public int points;  // how many points you get to spend   
 
     public Dictionary<STATS, int> statBook = new Dictionary<STATS, int>();
 
@@ -61,6 +72,9 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         LoadPlayerStats();
+        GameEventSystem.RegisterSubScriber(this);
+        playerInfo = GetComponent<PlayerInfo>();
+        switcher = GetComponent<ControlSwitcher>();
     }
     void Update()
     {
@@ -83,13 +97,25 @@ public class PlayerStats : MonoBehaviour
             sms.Description = enumMethods.GetString(stat);
             sms.Level = statLevel.ToString();
         }
-        
+
+        PlayerPrefs.SetFloat(EXP, 0);
+        PlayerPrefs.SetInt(LEVEL, 0);
+        PlayerPrefs.SetInt(POINTS, 0);
+
+
+
     }
 
 
     // loads a dictionary with all the player stats.  This is mainly done for readablityl and code maintaiblitly. 
     private void LoadPlayerStats()
     {
+
+
+        level = PlayerPrefs.GetInt(LEVEL);        
+        exp = PlayerPrefs.GetFloat(EXP);
+        points = PlayerPrefs.GetInt(POINTS);
+
         int i = 0;
         foreach (STATS stat in Enum.GetValues(typeof(STATS)))
         {
@@ -101,19 +127,29 @@ public class PlayerStats : MonoBehaviour
             sms.Level = statLevel.ToString();
             sms.setUpButton(stat, this);
         }
+        
 
     }
 
 
 
-    public void LevelUpStat(STATS stat)
+    public bool LevelUpStat(STATS stat)
     {
+
+        if (points < 1)
+            return false;
+
         int statLevel;
         if (statBook.TryGetValue(stat, out statLevel))
         {
             statLevel++;
             statBook[stat] = statLevel;
+            points--;
+            switcher.reloadShipStats(true);
         }
+
+
+        return true;
     }
 
     /// <summary>
@@ -131,6 +167,9 @@ public class PlayerStats : MonoBehaviour
                 PlayerPrefs.SetInt(stat.ToString(), statLevel);
             }
         }
+        PlayerPrefs.SetFloat(EXP, exp);
+        PlayerPrefs.SetInt(LEVEL, level);
+        PlayerPrefs.SetInt(POINTS, points);
     }
     
 
@@ -154,6 +193,38 @@ public class PlayerStats : MonoBehaviour
         actualValue = baseValue;
 
     }
+
+    public void HandleEvent(GameEventArgs args)
+    {
+        EnemyDiedEventArgs e = (EnemyDiedEventArgs) args;
+
+        e.exp -= level;
+        if (e.exp <= 0)
+            return;
+        
+
+        // only get half exp if you dont kill it. 
+        if(e.playerId == playerInfo.playerId)
+        {
+            exp += e.exp;
+        }
+        else
+        {
+            exp += e.exp / 2f;
+        }
+        // if you level up you get points;
+        int tempLevel = level;       
+        level = Mathf.FloorToInt( exp / 100);
+        points += (level - tempLevel) *2;
+
+        PlayerPrefs.SetFloat(EXP, exp);
+        PlayerPrefs.SetInt(LEVEL, level);
+        PlayerPrefs.SetInt(POINTS, points);
+
+    }
+
+    
+
 }
 
 

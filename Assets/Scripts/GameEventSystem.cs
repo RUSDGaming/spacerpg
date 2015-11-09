@@ -50,5 +50,5 @@ namespace Game.Events
     public interface LevelLoadedSubscriber : SubScriber { }
     public interface HomeSubscriber : SubScriber { }
     public interface PlayerDamagedSubscriber : SubScriber { };
- 
+    public interface EnemyDiedSubscriber : SubScriber { };
 }

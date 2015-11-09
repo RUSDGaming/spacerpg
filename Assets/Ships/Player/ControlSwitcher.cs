@@ -4,20 +4,16 @@ using Game.Interfaces;
 
 public class ControlSwitcher : MonoBehaviour {
 
-    [SerializeField]
-    GameObject shipCore;
+    [SerializeField]    GameObject shipCore;
+    [SerializeField]    GameObject mainShip;
+    [SerializeField]    FollowTransform cameraFollower;
+    [SerializeField]    PlayerMenu menu;
+    [SerializeField]    PlayerStats playerStats;
+    [SerializeField]    PlayerDetails playerDetails;
 
-    [SerializeField]
-    GameObject mainShip;
-
-    [SerializeField]
-    FollowTransform cameraFollower;
-
-    [SerializeField]
-    PlayerMenu menu;
-
-    [SerializeField]
-    PlayerStats playerStats;
+    [SerializeField]    ProgressBar health;
+    [SerializeField]    ProgressBar shield;
+    [SerializeField]    ProgressBar energy;
 
 	// Use this for initialization
 	void Start () {
@@ -32,9 +28,13 @@ public class ControlSwitcher : MonoBehaviour {
 
 
 	}
-	
+    Ship ship;
 	// Update is called once per frame
 	void Update () {
+
+        health.setImage(ship.currentHealth, ship.maxHealth);
+        energy.setImage(ship.currentEnergy, ship.maxEnergy);
+        shield.setImage(ship.currentSheild, ship.maxSheild);
 	
 	}
 
@@ -48,7 +48,7 @@ public class ControlSwitcher : MonoBehaviour {
         menu.SetShip(shipCore);
         shipCore.GetComponent<PlayerController>().disableInput = false;
         menu.playerController = shipCore.GetComponent<PlayerController>();
-        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats);
+        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats,true);
     }
 
     public void SwitchToMainShip()
@@ -59,14 +59,17 @@ public class ControlSwitcher : MonoBehaviour {
         cameraFollower.followObject = mainShip.transform;
         menu.playerController = mainShip.GetComponent<PlayerController>();
         menu.SetShip(mainShip);
-        mainShip.GetComponent<Ship>().SetActualStats(playerStats);
+        reloadShipStats(true);
+        ship = mainShip.GetComponent<Ship>();
     }
 
-    public void reloadShipStats()
+    public void reloadShipStats(bool heal)
     {
         //Debug.Log("reloading shipSttast");
-        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats);
-        mainShip.GetComponent<Ship>().SetActualStats(playerStats);
+        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats,heal);
+        mainShip.GetComponent<Ship>().SetActualStats(playerStats,heal);
+        playerDetails.ship = mainShip.GetComponent<Ship>();
+        playerDetails.ReadPlayerStats();
     }
 
     public void SetMainShip(GameObject shipPrefab)

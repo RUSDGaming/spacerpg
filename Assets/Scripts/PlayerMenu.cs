@@ -59,6 +59,7 @@ public class PlayerMenu : MonoBehaviour
 
     public void OpenMenu()
     {
+        switcher.reloadShipStats(false);
         DeactivateInventorySlots();
         OpenInventorySlots();
     }
@@ -69,7 +70,7 @@ public class PlayerMenu : MonoBehaviour
     {
         CloseInventorySlots();
         playerStats.SavePlayerStats();
-        switcher.reloadShipStats();
+        switcher.reloadShipStats(false);
     }
   
     void OpenInventorySlots()

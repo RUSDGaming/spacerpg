@@ -1299,6 +1299,10 @@ MonoBehaviour:
   currentSize: 0
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
+  damageRatio: 1
+  explosionRatio: 0
+  laserRatio: 0
+  projectileRatio: 0
   damage: 1
   fireRate: 1
   energyCost: 1
@@ -1317,6 +1321,10 @@ MonoBehaviour:
   currentSize: 0
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
+  damageRatio: 1
+  explosionRatio: 0
+  laserRatio: 0
+  projectileRatio: 0
   damage: 1
   fireRate: 1
   energyCost: 1
@@ -1394,6 +1402,10 @@ MonoBehaviour:
   currentSize: 0
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
+  damageRatio: 1
+  explosionRatio: 0
+  laserRatio: 0
+  projectileRatio: 0
   damage: 1
   fireRate: 1
   energyCost: 1
@@ -1459,6 +1471,10 @@ MonoBehaviour:
   currentSize: 0
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
+  damageRatio: 1
+  explosionRatio: 0
+  laserRatio: 0
+  projectileRatio: 0
   damage: 1
   fireRate: 1
   energyCost: 1
@@ -1477,6 +1493,10 @@ MonoBehaviour:
   currentSize: 0
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
+  damageRatio: 1
+  explosionRatio: 0
+  laserRatio: 0
+  projectileRatio: 0
   damage: 1
   fireRate: 1
   energyCost: 1
@@ -1560,6 +1580,7 @@ MonoBehaviour:
   moveForce: 8000
   maxSpeed: 12
   turnRate: 180
+  exp: 100
 --- !u!114 &11485280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1805,6 +1826,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: turnRate
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: exp
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

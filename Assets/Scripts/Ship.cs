@@ -43,20 +43,20 @@ public class Ship : MonoBehaviour ,iShip{
 
 
     #region Actual Stats
-    [SerializeField] float maxHealth;
-    [SerializeField] float currentHealth;
-    [SerializeField] float armor;
-    [SerializeField] float maxSheild;
-    [SerializeField] float currentSheild;
-    [SerializeField] float maxEnergy;
-    [SerializeField] float currentEnergy;
-    [SerializeField] float energyRegen;
-    [SerializeField] float moveForce;
-    [SerializeField] float maxSpeed;
-    [SerializeField] float turnRate;
+    public float maxHealth;
+    public float currentHealth;
+    public float armor;
+    public float maxSheild;
+    public float currentSheild;
+    public float maxEnergy;
+    public float currentEnergy;
+    public float energyRegen;
+    public float moveForce;
+    public float maxSpeed;
+    public float turnRate;
     #endregion
 
-    PlayerStats playerStats;
+    public PlayerStats playerStats;
 
     // Use this for initialization
     void Start () {
@@ -68,22 +68,25 @@ public class Ship : MonoBehaviour ,iShip{
         lastWeaponSoundPlayed = -weaponSoundRate;
     }
 
-	public void SetActualStats(PlayerStats stats)
+	public void SetActualStats(PlayerStats stats, bool heal)
     {
         playerStats = stats;
         stats.SetActualStat(PlayerStats.STATS.HEALTH, baseHealth,ref maxHealth);        
-        currentHealth = maxHealth;        
         stats.SetActualStat(PlayerStats.STATS.ARMOR, baseArmor, ref armor);
         stats.SetActualStat(PlayerStats.STATS.SHEILD, baseMaxSheild, ref maxSheild);        
-        currentSheild = maxSheild;        
         stats.SetActualStat(PlayerStats.STATS.ENERGY_REGENERATION, baseEnergyRegen, ref energyRegen);        
         stats.SetActualStat(PlayerStats.STATS.ENERGY_CAPACITY, baseMaxEnergy, ref maxEnergy);
-        currentEnergy = maxEnergy;
 
         stats.SetActualStat(PlayerStats.STATS.MOVE_SPEED, baseMoveForce, ref moveForce);        
         stats.SetActualStat(PlayerStats.STATS.MOVE_SPEED, baseMaxSpeed, ref maxSpeed);
-        stats.SetActualStat(PlayerStats.STATS.TURN_RATE, baseTurnRate, ref turnRate);        
-        
+        stats.SetActualStat(PlayerStats.STATS.TURN_RATE, baseTurnRate, ref turnRate);
+        if (heal)
+        {
+        currentHealth = maxHealth;        
+        currentSheild = maxSheild;        
+        currentEnergy = maxEnergy;
+
+        }
 
 
     }
@@ -245,4 +248,6 @@ public class Ship : MonoBehaviour ,iShip{
         currentEnergy -= sheildRegenAmount * 10f;
         currentSheild += sheildRegenAmount;
     }
+
+    
 }

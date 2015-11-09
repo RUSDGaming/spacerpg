@@ -2,6 +2,7 @@
 using System.Collections;
 using Game.Interfaces;
 using System;
+using Game.Events;
 
 public class EnemyShip : MonoBehaviour , iShip{
 
@@ -36,6 +37,8 @@ public class EnemyShip : MonoBehaviour , iShip{
 
     float lastWeaponSoundPlayed;
     float weaponSoundRate = .1f;
+    // how much exp this unit gives on death
+    [SerializeField]   float exp;
 
     Rigidbody2D body;
     ShowForceFeild forceFeild;
@@ -73,6 +76,10 @@ public class EnemyShip : MonoBehaviour , iShip{
 
     public void DestroyShip()
     {
+
+        EnemyDiedEventArgs args = new EnemyDiedEventArgs { playerId = 1, exp = this.exp };
+        GameEventSystem.PublishEvent(typeof(EnemyDiedSubscriber), args);
+
         GameObject.Destroy(this.gameObject);
     }
 
@@ -93,7 +100,7 @@ public class EnemyShip : MonoBehaviour , iShip{
         }        
     }
 
-    public void SetActualStats(PlayerStats stats)
+    public void SetActualStats(PlayerStats stats, bool heal)
     {
         throw new NotImplementedException();
     }
@@ -107,7 +114,7 @@ public class EnemyShip : MonoBehaviour , iShip{
                 Weapon weapon = weaponSlot.items[0].GetComponent<Weapon>();                
                 if (weapon.TryToFire(ref currentEnergy, false, null))
                 {
-                        Debug.Log(Time.time - lastWeaponSoundPlayed + ">" +weaponSoundRate);
+                        //Debug.Log(Time.time - lastWeaponSoundPlayed + ">" +weaponSoundRate);
                     if (Time.time - lastWeaponSoundPlayed > weaponSoundRate)
                     {
                         lastWeaponSoundPlayed = Time.time;

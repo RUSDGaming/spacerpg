@@ -31,5 +31,13 @@ namespace Game.Events
         public int playerId;
     }
 
+    public class EnemyDiedEventArgs : GameEventArgs
+    {
+        // who killed the enemy
+        public int playerId;
+        // how much exp the player gets for kiling the unit
+        public float exp;
+    }
+
 
 }

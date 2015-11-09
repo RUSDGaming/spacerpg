@@ -32,9 +32,12 @@ public class StatMenuScript : MonoBehaviour
     public void setUpButton(PlayerStats.STATS stat, PlayerStats playerStats)
     {
         addLevelButton.onClick.AddListener(() => {
-            playerStats.LevelUpStat(stat);
-            levelInt++;
-            Level = levelInt.ToString();
+            if (playerStats.LevelUpStat(stat)) 
+            {
+                levelInt++;
+                Level = levelInt.ToString();
+            }
+
         });
     }
    
