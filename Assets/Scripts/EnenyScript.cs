@@ -17,7 +17,7 @@ public class EnenyScript : MonoBehaviour , DamageUnit {
     AudioSource audioSorce;
 
     public GameObject projectile;
-
+    
 	// Use this for initialization
 	void Start () {
         lastFire = -fireRate;
@@ -29,7 +29,7 @@ public class EnenyScript : MonoBehaviour , DamageUnit {
         // TryToFire();
 	}
 
-    public void Damage(float damage)
+    public void Damage(float damage, int damagerId)
     {
         health -= damage;
         if(health <= 0)

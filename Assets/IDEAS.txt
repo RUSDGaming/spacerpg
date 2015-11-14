@@ -55,3 +55,6 @@ It will be filled with enimies most in groups.
 
 
 
+ai   
+
+tracking range increases dramatically when you hit enenmy. 

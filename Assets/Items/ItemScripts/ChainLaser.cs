@@ -55,7 +55,9 @@ public class ChainLaser : Weapon {
         projectileScript.IsPlayer(isPlayer);
         // could optimize code by saving damage values. 
         projectileScript.damage = getWeaponDamage(stats);
-        
+        if(stats)
+        projectileScript.id = stats.playerInfo.playerId;
+
         lastShot = Time.time;
 
         fireRate -= fireRateDecrease;

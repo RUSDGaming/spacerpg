@@ -62,7 +62,7 @@ public class EnemyShip : MonoBehaviour , iShip{
         RegenSheild();
     }
 
-    public void Damage(float damageAmount)
+    public void Damage(float damageAmount, int damagerId)
     {
         float damageToShip = 0;
         damageToShip = DamageSheild(damageAmount);
@@ -70,18 +70,22 @@ public class EnemyShip : MonoBehaviour , iShip{
         currentHealth -= damageToShip;
         if (currentHealth <= 0)
         {
-            DestroyShip();
+            DestroyShip(damagerId);
         }
 
         if (damageToShip > 0)
             InfoBlurbManager.CreateInfoBlurb(this.transform.position, damageToShip.ToString(".0"), Color.red);
     }
 
-    public void DestroyShip()
+    public void DestroyShip(int killerdId)
     {
-
+        // all the ai will have negative ids
+        if(killerdId > 0)
+        {
         EnemyDiedEventArgs args = new EnemyDiedEventArgs { playerId = 1, exp = this.exp };
         GameEventSystem.PublishEvent(typeof(EnemyDiedSubscriber), args);
+        }
+        
 
         GameObject.Destroy(this.gameObject);
     }
@@ -149,6 +153,7 @@ public class EnemyShip : MonoBehaviour , iShip{
     float DamageSheild(float damage)
     {
         currentSheild -= damage;
+        if(forceFeild)
         forceFeild.ShowSheild(maxSheild, currentSheild);
         if (currentSheild >= 0)
         {

@@ -35,7 +35,7 @@ public class EnemySpawnScript : MonoBehaviour, DamageUnit{
 
 
 	}
-    public void Damage(float damageAmount)
+    public void Damage(float damageAmount, int damagerId)
     {
         currentHealth -= damageAmount;
         if (currentHealth <= 0)

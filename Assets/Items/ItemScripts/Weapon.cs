@@ -35,7 +35,7 @@ public class Weapon :Item {
         
         
 	}
-	public void Init(Transform parentTransform, AudioSource audioSource)
+	public void Init(Transform parentTransform)
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         //this.parentTransform = parentTransform;
@@ -59,7 +59,8 @@ public class Weapon :Item {
                 projectileScript.IsPlayer(isPlayer);
                 // could optimize code by saving damage values. 
                 projectileScript.damage = getWeaponDamage(stats);
-                
+                if(stats)
+                projectileScript.id = stats.playerInfo.playerId;
 
                 lastShot = Time.time;
 

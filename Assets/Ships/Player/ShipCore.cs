@@ -65,7 +65,7 @@ public class ShipCore : MonoBehaviour , iShip {
         }
     }
 
-    public void Damage(float damageAmount)
+    public void Damage(float damageAmount, int damagerId)
     {
         this.currentHealth -= damageAmount;
         if(this.currentHealth <= 0)

@@ -32,6 +32,8 @@ public class ProjectileWeapon : Weapon {
                 ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
                 projectileScript.IsPlayer(isPlayer);
                 projectileScript.damage = damage;
+                if(stats)
+                projectileScript.id = stats.playerInfo.playerId;
                 lastShot = Time.time;
                 return true;
             }

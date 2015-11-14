@@ -127,7 +127,7 @@ public class Ship : MonoBehaviour ,iShip{
     {
 
     }
-    public void Damage(float damage)
+    public void Damage(float damage, int damagerId)
     {
         float damageToShip = 0;
         damageToShip = DamageSheild(damage);

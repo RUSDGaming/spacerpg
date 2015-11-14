@@ -14,7 +14,7 @@ namespace Game.Interfaces
 
     public interface DamageUnit
     {
-        void Damage(float damageAmount);
+        void Damage(float damageAmount, int damagerId);
     }
 
     public interface Shooter

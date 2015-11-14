@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Game.Interfaces;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class ProjectileScript : MonoBehaviour {
 
-
+    public int id = -1;
     public float speed;
     public float damage;
     public bool playerBullet;
@@ -51,14 +52,22 @@ public class ProjectileScript : MonoBehaviour {
 
         if (playerBullet && other.CompareTag("Enemy"))
         {
-            //  Debug.Log("sending message to destroy");
-            other.SendMessage("Damage", damage);
+            DamageUnit du = other.GetComponent<DamageUnit>();
+            du.Damage(damage, id);            
             DestroyObject(this.gameObject);
         }
 
         if (!playerBullet && other.CompareTag("Player"))
         {
-            other.SendMessage("Damage", damage);
+            DamageUnit du = other.GetComponent<DamageUnit>();
+            du.Damage(damage, id);
+            DestroyObject(this.gameObject);
+        }
+
+        if (other.CompareTag("Neutral"))
+        {
+            DamageUnit du = other.GetComponent<DamageUnit>();
+            du.Damage(damage, id);
             DestroyObject(this.gameObject);
         }
 

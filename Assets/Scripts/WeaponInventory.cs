@@ -8,7 +8,6 @@ public class WeaponInventory : Inventory {
    // public GameObject weapon_Inv;
     Weapon weaponScript;
    
-    AudioSource audioSource;
     
 
     [SerializeField]
@@ -17,7 +16,7 @@ public class WeaponInventory : Inventory {
     
     void Start() {
         inventoryType = InventoryType.WEAPON_SLOT;
-        audioSource = GetComponent<AudioSource>();
+       
 
         if(items[0] != null)
         {
@@ -54,7 +53,7 @@ public class WeaponInventory : Inventory {
             wep.gameObject.SetActive(true);
             // tell s the stored prefab wher it is
             weaponScript = wep.GetComponent<Weapon>();            
-            weaponScript.Init(this.transform,audioSource);
+            weaponScript.Init(this.transform);
             // gets the sprite from the game object.            
             SpriteRenderer weaponSprite = wep.GetComponent<SpriteRenderer>();
 

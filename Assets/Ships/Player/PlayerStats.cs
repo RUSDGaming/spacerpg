@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
 {
     [SerializeField]   GameObject levelUpText;
 
-    PlayerInfo playerInfo;
+    public PlayerInfo playerInfo;
 
     // current level of the player
     const string LEVEL = "level";
