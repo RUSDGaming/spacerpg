@@ -25,8 +25,6 @@ public class FollowTransform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(backGround)
-        backGround.position = followObject.position * backGroundParalaxRatio;
 
         if (transform1)
             transform1.position = followObject.position * transform1Paralax;
@@ -34,6 +32,9 @@ public class FollowTransform : MonoBehaviour {
 	}
     void LateUpdate()
     {
+        if(backGround)
+        backGround.position = followObject.position * backGroundParalaxRatio;
+
         Vector3 transformPosition = new Vector3( 
           followObject.position.x,
           followObject.position.y,

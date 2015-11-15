@@ -3,21 +3,6 @@ randomize what sectors are good to go to first.
 
 make each sector increase the difficulty when you complete it. 
 
-7 sectors
-
-fire
-
-ice
-
-acid
-
-electric
-
-dark
-
-light
-
-
 when you defeat one of the regions you unlock the ability to use that power. 
 these enemies will then show up in other regions. 
 
@@ -45,7 +30,13 @@ Harm: Health, armor
 Bonus: Damage, Firerate, speed, turnrate, projectile, laser, explosion
 Harm: Health, Sheild, Armor
 
-
+HUB WORLD{
+	in the hub world you can heal your ship, 
+	once you destroy a weapon you can pay scrap to buy it
+	once you find blue prints you can build the item, weapon , or ship. 
+	you can upgrade your weapon, ships , and items , not sure what this will do, 
+		prolly just inrcease ratios, final level will unlock the things special
+}
 
 Each world will have a few things.  
 
@@ -58,3 +49,106 @@ It will be filled with enimies most in groups.
 ai   
 
 tracking range increases dramatically when you hit enenmy. 
+
+
+done- camera needs to extend pass where you can actually go.... 
+
+
+
+worlds(8){	
+	fire, ice, acid, electric, dark, light, normal, boss
+}
+ships(22){
+	1 "final boss" // XL
+	7 "Boss Ships"  // large 
+	7 "Captian Ships" // medium  
+	7 "light Ships" // small
+}
+weapons(18){
+	6 "elemental Weapons" // get these from destorying bosses {
+		flame Thrower,
+		ice beam, 
+		acid bombs,
+		shocking thing,
+		gravity Gun, 
+		heal aura, 
+	}
+	4 exploding{ // takes ammo
+		tracking missile
+		cluster missiles
+		mines
+		dumb missiles
+	}
+	4 ballistic{ // takes ammo
+		junk cannon, // slow moving junk 
+		sniper cannon, // high damage , high reload time 
+		semi auto cannon, // fires as you click 
+		chain gun cannan, // fire really fast	
+	}
+	1 laser beams{ // takes energy
+		beam, // no travel time, 	
+	}
+	3 laser cannons{
+		basic laser, // small incr shots
+		chain laser, // low damage high volume gun, starts slow speeds up
+		charge laser, // long fire time high damage
+	}
+}
+items (5) {
+	3 armor{// slow ship increase deffense
+		light, 
+		med, 
+		heavy
+	}
+	1 sheild { // think border lands sheids
+		basic, // drains energy to recharge when low....
+	}
+	1 scrap{
+		scrap that you use to by weapons and upgrade
+	}	
+}
+
+
+Spawn Tiles
+
+	void {
+		// should be mostly empty mainly there so i can disable tiles
+	}
+
+	asteroid feild{		
+		// lots of ateriods 
+	}
+		
+	boss{
+		// has a boss that you need to kill to finish the level
+	} 
+
+	enemies {
+		// random fleet of enimes
+	}
+
+	player spawn{
+		// where the player starts
+	}
+
+	space station{
+		// spawns enemies
+	}
+
+	sun{
+		// giant ball of death
+		// black hole perhaps????
+	}
+
+
+
+	bad guys 
+	space crates / shoot them // pick them up to get items / scrap/  weapons
+
+	gas cloud / hazards
+	asterioids
+	dead ships / random debris
+
+
+
+

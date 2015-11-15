@@ -84,7 +84,7 @@ public class MapEdgeManager : MonoBehaviour {
         // the camp should be over the max tile
         // the tile should be out of bounds.. figure it out thrusday...
 
-        Debug.Log(minPosCam);
+        //Debug.Log(minPosCam);
         northCamera.init(trackingTarget, new Vector2(0, minPosCam.y), new Vector2(0, maxPosPlane.y), true,0,0);
         southCamera.init(trackingTarget, new Vector2(40, maxPosCam.y), new Vector2(0, minPosPlane.y), true,0,0);
         eastCamera.init(trackingTarget, new Vector2(minPosCam.x, 0), new Vector2(maxPosPlane.x, 0), false, 0, 0);

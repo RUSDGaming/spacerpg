@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa0e2810f2f4c94b80d8c26db062140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gl: {fileID: 0}
   id: -1
   levelInfo: {fileID: 11497448}
 --- !u!114 &11497448
@@ -184,6 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece822426c56ac740ae8c3fe8d6ad855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelType: 0
+  premadeTileMap: {fileID: 0}
+  bossPrefab: {fileID: 0}
+  enimies: []
   startX: 99
   startY: 0
   levelWidth: 100

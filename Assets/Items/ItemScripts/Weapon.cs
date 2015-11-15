@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
 public class Weapon :Item {
 
     
@@ -15,7 +14,7 @@ public class Weapon :Item {
 
     protected AudioManager audioManager;
 
-    public float damageRatio = 1;
+    public float damageRatio = .2f;
     public float explosionRatio = 0;
     public float laserRatio = 0;
     public float projectileRatio = 0;
@@ -86,7 +85,7 @@ public class Weapon :Item {
         float damage2 = 0f;
         if (stats)
         {
-            damage2 += damage;
+           damage2 += damage;
            damage2 += stats.statBook[PlayerStats.STATS.DAMAGE] * damageRatio;
            damage2 += stats.statBook[PlayerStats.STATS.LASER] * laserRatio;
            damage2 += stats.statBook[PlayerStats.STATS.EXPLOSION] * explosionRatio;

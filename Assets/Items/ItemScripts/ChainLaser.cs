@@ -24,10 +24,10 @@ public class ChainLaser : Weapon {
 
     public override bool TryToFire(ref float energy, bool isPlayer,PlayerStats stats)
     {
-        Debug.Log("Trying to fire miniGun");
+        //Debug.Log("Trying to fire miniGun");
         if(energy < energyCost)
         {
-            Debug.Log("energy was to lowe");
+            //Debug.Log("energy was to lowe");
             return false;
         }        
 

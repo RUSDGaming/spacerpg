@@ -1,40 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &156766
+--- !u!1 &151946
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 450206}
-  - 114: {fileID: 11494580}
-  - 61: {fileID: 6101870}
+  - 4: {fileID: 494760}
+  - 114: {fileID: 11495864}
+  - 61: {fileID: 6162312}
   m_Layer: 0
-  m_Name: AsteroidSpace
+  m_Name: PlayerSpawnSpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &450206
+--- !u!4 &494760
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156766}
+  m_GameObject: {fileID: 151946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6101870
+--- !u!61 &6162312
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156766}
+  m_GameObject: {fileID: 151946}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -42,23 +42,21 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 80, y: 80}
---- !u!114 &11494580
+--- !u!114 &11495864
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156766}
+  m_GameObject: {fileID: 151946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44492c43b28e8e847b2b214a3567af5c, type: 3}
+  m_Script: {fileID: 11500000, guid: cacfaad5501d113499b0187f46dbd8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   levelParent: {fileID: 0}
   height: 80
   width: 80
-  collider: {fileID: 6101870}
-  asteroid: {fileID: 173356, guid: d5b36c1596355464ba228cb844d59583, type: 2}
-  numAsteroids: 80
+  collider: {fileID: 6162312}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -67,14 +65,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: numAsteroids
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
       propertyPath: collider
       value: 
-      objectReference: {fileID: 6101870}
+      objectReference: {fileID: 6162312}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 156766}
+  m_RootGameObject: {fileID: 151946}
   m_IsPrefabParent: 1
