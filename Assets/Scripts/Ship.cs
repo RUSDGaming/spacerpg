@@ -58,6 +58,9 @@ public class Ship : MonoBehaviour ,iShip{
 
     public PlayerStats playerStats;
 
+    ShowThrust thrust;
+
+
     // Use this for initialization
     void Start () {
         //currentEnergy = maxEnergy;
@@ -66,6 +69,7 @@ public class Ship : MonoBehaviour ,iShip{
         switcher = GetComponentInParent<ControlSwitcher>();
         forceFeild = GetComponentInChildren<ShowForceFeild>();
         lastWeaponSoundPlayed = -weaponSoundRate;
+        thrust = GetComponentInChildren<ShowThrust>();
     }
 
 	public void SetActualStats(PlayerStats stats, bool heal)
@@ -192,21 +196,24 @@ public class Ship : MonoBehaviour ,iShip{
 
     
 
-    public void MoveUnit(Vector2 force,bool relativeInput)
+    public void MoveUnit(Vector2 moveDir,bool relativeInput)
     {
         if (relativeInput)
         {
-            body.AddRelativeForce(force * Time.fixedDeltaTime * moveForce);
+            body.AddRelativeForce(moveDir * Time.fixedDeltaTime * moveForce);
         }
         else
         {
-        body.AddForce(force * Time.fixedDeltaTime * moveForce);
+        body.AddForce(moveDir * Time.fixedDeltaTime * moveForce);
         }
 
         if (body.velocity.magnitude > maxSpeed)
         {
             body.velocity = body.velocity.normalized * maxSpeed;
         }
+
+        if (thrust)
+            thrust.thrust(moveDir.x,moveDir.y);
     }
 
     public void RotateUnit(float deg)

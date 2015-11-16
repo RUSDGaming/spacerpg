@@ -23,10 +23,11 @@ public class InfoBlurbManager : MonoBehaviour {
         {
         InfoBlurb blurb =  ((GameObject) Instantiate(instance.infoBlurb, pos, Quaternion.identity)).GetComponent<InfoBlurb>() ;
         blurb.init(pos, msg, color);
+            blurb.transform.SetParent(instance.transform);
         }
         else
         {
-            Debug.LogError("There aint no infoBlurb manarger Kappa KApp Kappa");
+            Debug.LogError("There aint no infoBlurb manager Kappa KApp Kappa");
         }
 
     }

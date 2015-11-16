@@ -12,6 +12,10 @@ public class levelGenScript2 : MonoBehaviour
     Transform levelParent;
 
 
+    public int maxAsteroids = 20;
+    public int maxEnemies = 10;
+
+
     public int width;
     public int height;
     float chunkSize = 80f;
@@ -19,25 +23,19 @@ public class levelGenScript2 : MonoBehaviour
 
     enum TileType
     {
-        VOID, ASTEROID, ENEMY, BOSS, PLAYER, SUN
+        VOID, ASTEROID, ENEMY, BOSS, PLAYER, SUN, STATION
     }
 
     TileType[,] tiles;
 
-    [SerializeField]
-    MapEdgeManager mapEdgeManager;
-    [SerializeField]
-    RandomTileScript voidSpace;
-    [SerializeField]
-    AsteroidTileScript asteroidSpaceTile;
-    [SerializeField]
-    EnemyTileScript enemySpaceTile;
-    [SerializeField]
-    BossTileScript bossSpaceTile;
-    [SerializeField]
-    PlayerSpawnTileScript playerSpawnTile;
-    [SerializeField]
-    SunTileScript sunSpawnTile;
+    [SerializeField]    MapEdgeManager mapEdgeManager;
+    [SerializeField]    RandomTileScript voidSpace;
+    [SerializeField]    AsteroidTileScript asteroidSpaceTile;
+    [SerializeField]    EnemyTileScript enemySpaceTile;
+    [SerializeField]    BossTileScript bossSpaceTile;
+    [SerializeField]    PlayerSpawnTileScript playerSpawnTile;
+    [SerializeField]    SunTileScript sunSpawnTile;
+    [SerializeField]    SpaceStationTileScript spaceStationTile;
 
     // Use this for initialization
     void Start()
@@ -46,7 +44,6 @@ public class levelGenScript2 : MonoBehaviour
         tiles = new TileType[width, height];
         // set cameras to track the player
         // set the cameras max, min, tracking axis, startPos
-
         mapEdgeManager.mapStart = new Vector2(0, 0);
         mapEdgeManager.mapWidth = width;
         mapEdgeManager.mapHeight = height;
@@ -102,23 +99,23 @@ public class levelGenScript2 : MonoBehaviour
                 if (tiles[x, y] != TileType.VOID)
                     continue;
 
-                int randomNum = Random.Range(0, 11);
-                if (randomNum > 9)
+                int randomNum = Random.Range(0, 101);
+                if (randomNum <= 100 && randomNum > 90)
                 {
+                    tiles[x, y] = TileType.STATION;
                     // 10 % 
+                }else if (randomNum <= 90 && randomNum > 70 )
+                {
+                    // 20%
                     tiles[x, y] = TileType.ENEMY;   
                 }
-                else if (randomNum > 5)
+                else if (randomNum <= 70 && randomNum > 30)
                 {
                     // 40 % 
                     tiles[x, y] = TileType.ASTEROID;
                 }
-
             }
         }
-
-
-
     }
 
     IEnumerator GenerateMap()
@@ -148,6 +145,9 @@ public class levelGenScript2 : MonoBehaviour
                     case TileType.SUN:
                         GenerateSunSpace(x, y);
                         break;
+                    case TileType.STATION:
+                        GenerateStationSpace(x, y);
+                        break;
                     default:
                         break;
                 }
@@ -175,6 +175,7 @@ public class levelGenScript2 : MonoBehaviour
         est.height = chunkSize;
         est.width = chunkSize;
         est.transform.SetParent(levelParent);
+        est.numEnemies = maxEnemies;
         est.init();
 
     }
@@ -186,6 +187,7 @@ public class levelGenScript2 : MonoBehaviour
         ast.width = chunkSize;
         ast.height = chunkSize;
         ast.transform.SetParent(levelParent);
+        ast.numAsteroids = maxAsteroids;
         ast.init();
     }
 
@@ -213,6 +215,16 @@ public class levelGenScript2 : MonoBehaviour
     void GenerateSunSpace(int x, int y)
     {
         SunTileScript ts = Instantiate(sunSpawnTile);
+        ts.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
+        ts.width = chunkSize;
+        ts.height = chunkSize;
+        ts.transform.SetParent(levelParent);
+        ts.init();
+    }
+
+    void GenerateStationSpace(int x, int y)
+    {
+        SpaceStationTileScript ts = Instantiate(spaceStationTile);
         ts.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
