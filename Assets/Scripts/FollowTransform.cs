@@ -35,10 +35,13 @@ public class FollowTransform : MonoBehaviour {
         if(backGround)
         backGround.position = followObject.position * backGroundParalaxRatio;
 
+        if (followObject)
+        {
         Vector3 transformPosition = new Vector3( 
           followObject.position.x,
           followObject.position.y,
             this.transform.position.z) ;
         this.transform.position = transformPosition;
+        }
     }
 }

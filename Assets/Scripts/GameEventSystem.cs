@@ -29,6 +29,10 @@ namespace Game.Events
         public static void PublishEvent(Type subscriberType,GameEventArgs args)
         {
             // selects all of the relavent types
+            if (subscribers == null)
+            {
+                return;
+            }
             var query = from sub in subscribers where  subscriberType.IsAssignableFrom(sub.GetType()) select sub;
             
             foreach(SubScriber sub in query)

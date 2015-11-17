@@ -57,6 +57,7 @@ public class Ship : MonoBehaviour ,iShip{
     #endregion
 
     public PlayerStats playerStats;
+    public bool playerControlled = false;
 
     ShowThrust thrust;
 
@@ -139,7 +140,7 @@ public class Ship : MonoBehaviour ,iShip{
         currentHealth -= damageToShip;
         if(currentHealth <= 0)
         {
-            Destroy();
+            KillShip();
         }
 
         PlayerHitEventArgs args = new PlayerHitEventArgs { playerId = 1, damageDelt = damageToShip };
@@ -165,6 +166,8 @@ public class Ship : MonoBehaviour ,iShip{
     float DamageSheild(float damage)
     {
         currentSheild -= damage;
+
+        if(forceFeild)
         forceFeild.ShowSheild(maxSheild, currentSheild);
         if(currentSheild >= 0)
         {
@@ -187,11 +190,17 @@ public class Ship : MonoBehaviour ,iShip{
     }
 
 
-    void Destroy()
+    void KillShip()
     {
-        Debug.Log("Player Should be Destroyed");
-        Debug.Log("Playe Should not control Core");
-        switcher.SwitchToShipCore();        
+       // Debug.Log("Player Should be Destroyed");
+       // Debug.Log("Playe Should not control Core");
+        if(playerControlled)
+        switcher.SwitchToShipCore();
+
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     

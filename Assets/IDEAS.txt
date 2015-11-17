@@ -109,38 +109,29 @@ items (5) {
 }
 
 
-Spawn Tiles
-
+Spawn Tiles{
 	void {
 		// should be mostly empty mainly there so i can disable tiles
 	}
-
 	asteroid feild{		
 		// lots of ateriods 
-	}
-		
+	}		
 	boss{
 		// has a boss that you need to kill to finish the level
 	} 
-
 	enemies {
 		// random fleet of enimes
 	}
-
 	player spawn{
 		// where the player starts
 	}
-
 	space station{
 		// spawns enemies
 	}
-
 	sun{
 		// giant ball of death
 		// black hole perhaps????
 	}
-
-
 
 	bad guys 
 	space crates / shoot them // pick them up to get items / scrap/  weapons
@@ -148,7 +139,10 @@ Spawn Tiles
 	gas cloud / hazards
 	asterioids
 	dead ships / random debris
+}
 
 
 
 
+make the ai learn by using this method, this will take a while. 
+https://github.com/lordjesus/UnityNEAT

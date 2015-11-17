@@ -22,17 +22,17 @@ public class EnemyShip : MonoBehaviour , iShip{
 
 
     #region Actual Stats
-    [SerializeField]    float maxHealth;
-    [SerializeField]    float currentHealth;
-    [SerializeField]    float armor;
-    [SerializeField]    float maxSheild;
-    [SerializeField]    float currentSheild;
-    [SerializeField]    float maxEnergy;
-    [SerializeField]    float currentEnergy;
-    [SerializeField]    float energyRegen;
-    [SerializeField]    float moveForce;
-    [SerializeField]    float maxSpeed;
-    [SerializeField]    float turnRate;
+    public    float maxHealth;
+    public    float currentHealth;
+    public    float armor;
+    public    float maxSheild;
+    public    float currentSheild;
+    public    float maxEnergy;
+    public    float currentEnergy;
+    public    float energyRegen;
+    public    float moveForce;
+    public    float maxSpeed;
+    public    float turnRate;
     #endregion
 
     float lastWeaponSoundPlayed;
@@ -90,9 +90,24 @@ public class EnemyShip : MonoBehaviour , iShip{
         GameObject.Destroy(this.gameObject);
     }
 
-    public void MoveUnit(Vector2 force, bool relativeInput)
+    public void MoveUnit(Vector2 moveDir, bool relativeInput)
     {
-        throw new NotImplementedException();
+        if (relativeInput)
+        {
+            body.AddRelativeForce(moveDir * Time.fixedDeltaTime * moveForce);
+        }
+        else
+        {
+            body.AddForce(moveDir * Time.fixedDeltaTime * moveForce);
+        }
+
+        if (body.velocity.magnitude > maxSpeed)
+        {
+            body.velocity = body.velocity.normalized * maxSpeed;
+        }
+
+        //if (thrust)
+        //    thrust.thrust(moveDir.x, moveDir.y);
     }
 
     public void RotateUnit(float deg)

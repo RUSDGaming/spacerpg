@@ -18,7 +18,8 @@ public class Inventory : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
        
-            items = new Item[inventorySize];       
+            items = new Item[inventorySize]; 
+        if(cargo)      
         for(int i = 0; i < cargo.childCount; i++)
         {
             items[i] = cargo.GetChild(i).GetComponent<Item>();

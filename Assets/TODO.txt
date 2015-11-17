@@ -1,0 +1,33 @@
+Create Classes
+
+Create hub world
+	create shop
+		upgrades items and ships
+
+fix thrust to work for all directions
+
+draw more of the sprites
+	ships
+	items
+	drops
+	weapons
+
+ai for the ships
+
+make the random spawning better
+
+item drops
+	stacking items
+	item upgrades
+
+
+rock paper scrissors
+	 for weapon types
+
+Cloacking
+Crit Chance
+
+elemental things 
+
+
+

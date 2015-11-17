@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &148294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 446490}
+  - 114: {fileID: 11469926}
+  m_Layer: 0
+  m_Name: GameLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &185942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 434446}
+  m_Layer: 0
+  m_Name: LevelParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &434446
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 446490}
+  m_RootOrder: 0
+--- !u!4 &446490
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 434446}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11469926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4b7e3dd4e0efa4985ac9a2bf5a3196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelParent: {fileID: 434446}
+  maxAsteroids: 20
+  maxEnemies: 10
+  width: 10
+  height: 10
+  mapEdgeManager: {fileID: 0}
+  voidSpace: {fileID: 11471918, guid: 1c0ec1b04f4218a4d9ac6223c354b472, type: 2}
+  asteroidSpaceTile: {fileID: 11494580, guid: abd28404886a1a945a452cfc9e8310df, type: 2}
+  enemySpaceTile: {fileID: 11470578, guid: 9e04984252ef26f40880e747e4e685fd, type: 2}
+  bossSpaceTile: {fileID: 11476682, guid: a7161cd861524a84690f49d3103a86ad, type: 2}
+  playerSpawnTile: {fileID: 11495864, guid: fe13954b29109b746ac3c4f910fe76cc, type: 2}
+  sunSpawnTile: {fileID: 11424012, guid: f2a093d0266e06f4292f8969ec68c09b, type: 2}
+  spaceStationTile: {fileID: 11422744, guid: 9323e21176384584886af69c3cf9eac6, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 148294}
+  m_IsPrefabParent: 1

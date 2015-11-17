@@ -21,11 +21,11 @@ TagManager:
   - playerProjectile
   - enemy
   - enemyProjectile
-  - Projectile Radar
+  - Player Radar
   - cam
   - Neutral
   - BackGround
-  - 
+  - Enemy Radar
   - 
   - 
   - 
