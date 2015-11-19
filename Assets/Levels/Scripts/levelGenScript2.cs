@@ -2,60 +2,23 @@
 using System.Collections;
 using SpriteTile;
 
-public class levelGenScript2 : MonoBehaviour
+public class levelGenScript2 : LevelGeneratorScript
 {
+    
 
 
-
-    Vector2 startPos;
-    [SerializeField]
-    Transform levelParent;
-
-
-    public int maxAsteroids = 20;
-    public int maxEnemies = 10;
-
-
-    public int width;
-    public int height;
-    float chunkSize = 80f;
-    float halfChunk = 40f;
-
-    enum TileType
+    public override void Init()
     {
-        VOID, ASTEROID, ENEMY, BOSS, PLAYER, SUN, STATION
-    }
+        base.Init();
 
-    TileType[,] tiles;
-
-    [SerializeField]    MapEdgeManager mapEdgeManager;
-    [SerializeField]    RandomTileScript voidSpace;
-    [SerializeField]    AsteroidTileScript asteroidSpaceTile;
-    [SerializeField]    EnemyTileScript enemySpaceTile;
-    [SerializeField]    BossTileScript bossSpaceTile;
-    [SerializeField]    PlayerSpawnTileScript playerSpawnTile;
-    [SerializeField]    SunTileScript sunSpawnTile;
-    [SerializeField]    SpaceStationTileScript spaceStationTile;
-
-    // Use this for initialization
-    void Start()
-    {
-        halfChunk = chunkSize / 2;
-        tiles = new TileType[width, height];
-        // set cameras to track the player
-        // set the cameras max, min, tracking axis, startPos
-        mapEdgeManager.mapStart = new Vector2(0, 0);
-        mapEdgeManager.mapWidth = width;
-        mapEdgeManager.mapHeight = height;
-        mapEdgeManager.orthographicCamSize = chunkSize / 2;
-        mapEdgeManager.SetUpCameras();
-        mapEdgeManager.SetUpBorders();
-
-        makeMap();
+        
+        
+        MakeMap();
         StartCoroutine(GenerateMap());
     }
 
-    public void makeMap()
+
+    public override void MakeMap()
     {
 
         TileType current = TileType.PLAYER;
@@ -73,17 +36,17 @@ public class levelGenScript2 : MonoBehaviour
                 case TileType.PLAYER:
                     tiles[randX, randY] = TileType.PLAYER;
                     current = TileType.BOSS;
-                    Debug.Log("Player Tile");
+                   // Debug.Log("Player Tile");
                     break;
                 case TileType.BOSS:
                     tiles[randX, randY] = TileType.BOSS;
                     current = TileType.SUN;
-                    Debug.Log("Boss Tile");
+                   // Debug.Log("Boss Tile");
                     break;
                 case TileType.SUN:
                     tiles[randX, randY] = TileType.SUN;
                     current = TileType.VOID;
-                    Debug.Log("Sun");
+                    //Debug.Log("Sun");
                     break;
                 default:
                     looping = false;
@@ -118,121 +81,8 @@ public class levelGenScript2 : MonoBehaviour
         }
     }
 
-    IEnumerator GenerateMap()
-    {
 
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                switch (tiles[x,y])
-                {
-                    case TileType.VOID:
-                        GenerateVoidSpace(x, y);
-                        break;
-                    case TileType.ASTEROID:
-                        GenerateAsteroidSpace(x, y);
-                        break;
-                    case TileType.ENEMY:
-                        GenerateEnemySpace(x, y);
-                        break;
-                    case TileType.BOSS:
-                        GenerateBossSpace(x, y);
-                        break;
-                    case TileType.PLAYER:
-                        GeneratePlayerSpawnSpace(x, y);
-                        break;
-                    case TileType.SUN:
-                        GenerateSunSpace(x, y);
-                        break;
-                    case TileType.STATION:
-                        GenerateStationSpace(x, y);
-                        break;
-                    default:
-                        break;
-                }
-                yield return new WaitForEndOfFrame();
-            }
-        } 
-    }
-
-    #region Tile Generatetors
-
-    void GenerateVoidSpace(int x, int y)
-    {
-        RandomTileScript rst = Instantiate(voidSpace);
-        rst.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
-        rst.width = chunkSize;
-        rst.height = chunkSize;
-        rst.transform.SetParent(levelParent);
-        rst.init();
-    }
-
-    void GenerateEnemySpace(int x, int y)
-    {
-        EnemyTileScript est = Instantiate(enemySpaceTile);
-        est.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
-        est.height = chunkSize;
-        est.width = chunkSize;
-        est.transform.SetParent(levelParent);
-        est.numEnemies = maxEnemies;
-        est.init();
-
-    }
-
-    void GenerateAsteroidSpace(int x, int y)
-    {
-        AsteroidTileScript ast = Instantiate(asteroidSpaceTile);
-        ast.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
-        ast.width = chunkSize;
-        ast.height = chunkSize;
-        ast.transform.SetParent(levelParent);
-        ast.numAsteroids = maxAsteroids;
-        ast.init();
-    }
-
-    void GenerateBossSpace(int x, int y)
-    {
-        BossTileScript ts = Instantiate(bossSpaceTile);
-        ts.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
-        ts.width = chunkSize;
-        ts.height = chunkSize;
-        ts.transform.SetParent(levelParent);
-        ts.init();
-
-    }
-
-    void GeneratePlayerSpawnSpace(int x, int y)
-    {
-        PlayerSpawnTileScript ts = Instantiate(playerSpawnTile);
-        ts.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
-        ts.width = chunkSize;
-        ts.height = chunkSize;
-        ts.transform.SetParent(levelParent);
-        ts.init();
-    }
-
-    void GenerateSunSpace(int x, int y)
-    {
-        SunTileScript ts = Instantiate(sunSpawnTile);
-        ts.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
-        ts.width = chunkSize;
-        ts.height = chunkSize;
-        ts.transform.SetParent(levelParent);
-        ts.init();
-    }
-
-    void GenerateStationSpace(int x, int y)
-    {
-        SpaceStationTileScript ts = Instantiate(spaceStationTile);
-        ts.transform.position = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
-        ts.width = chunkSize;
-        ts.height = chunkSize;
-        ts.transform.SetParent(levelParent);
-        ts.init();
-    }
-
-    #endregion
+   
 
 
 

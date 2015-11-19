@@ -53,10 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3899bc5a96a2e4482536dd431dd584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelParent: {fileID: 0}
+  asteroid: {fileID: 173356, guid: d5b36c1596355464ba228cb844d59583, type: 2}
   height: 0
   width: 0
   collider: {fileID: 6114972}
+  numAsteroids: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -68,6 +69,10 @@ Prefab:
       propertyPath: collider
       value: 
       objectReference: {fileID: 6114972}
+    - target: {fileID: 0}
+      propertyPath: asteroid
+      value: 
+      objectReference: {fileID: 173356, guid: d5b36c1596355464ba228cb844d59583, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162296}

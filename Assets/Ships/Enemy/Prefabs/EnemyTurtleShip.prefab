@@ -659,7 +659,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080aa49b33a0dca4794ed19153f30983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 1
+  minDist: 15
+  MaxDist: 30
   trackingObject: {fileID: 0}
+  bulletTransform: {fileID: 0}
+  maxIdleTime: 5
+  maxWanderDist: 35
 --- !u!114 &11429496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1120,6 +1126,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: exp
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: minDist
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxDist
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

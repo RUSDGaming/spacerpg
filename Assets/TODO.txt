@@ -1,3 +1,5 @@
+Make a mini Map
+
 Create Classes
 
 Create hub world
@@ -13,6 +15,10 @@ draw more of the sprites
 	weapons
 
 ai for the ships
+	patrol ai
+	flocking ai
+	set ai to alert mode, increase radar range and dodge incoming bullets
+	randomize the dodge direction, or possibly pick the best chance of doge and move that direciton. 
 
 make the random spawning better
 

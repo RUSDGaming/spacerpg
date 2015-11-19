@@ -12,6 +12,7 @@ namespace Game.Events
         public int portalId;
         public LevelGenInfo info;
         public int playerId;
+        public LevelGeneratorScript region;
     };
 
     public class LevelFinishedLoadingEventArgs : GameEventArgs

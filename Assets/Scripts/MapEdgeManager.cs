@@ -46,22 +46,22 @@ public class MapEdgeManager : MonoBehaviour {
         Vector2 maxPos = new Vector2(mapStart.x + mapWidth * orthographicCamSize*2, mapStart.y + mapHeight * orthographicCamSize*2);
         Vector2 minPos = new Vector2(mapStart.x , mapStart.y );
 
-        northBorder.transform.position =  new Vector3( mapWidth * orthographicCamSize, mapHeight * orthographicCamSize * 2 + orthographicCamSize/2);
+        northBorder.transform.position =  new Vector3( mapStart.x+ mapWidth * orthographicCamSize, mapStart.y + mapHeight * orthographicCamSize * 2 + orthographicCamSize/2);
         northBorder.transform.localScale = new Vector3(orthographicCamSize * mapWidth *2, orthographicCamSize);
         northBorder.maxPos = maxPos;
         northBorder.minPos = minPos;
 
-        southBorder.transform.position = new Vector3(mapWidth * orthographicCamSize, - orthographicCamSize /2);
+        southBorder.transform.position = new Vector3(mapStart.x + mapWidth * orthographicCamSize, mapStart.y + - orthographicCamSize /2);
         southBorder.transform.localScale = new Vector3(orthographicCamSize * mapWidth * 2, orthographicCamSize);
         southBorder.maxPos = maxPos;
         southBorder.minPos = minPos;
 
-        eastBorder.transform.position = new Vector3(mapWidth * orthographicCamSize * 2 + orthographicCamSize /2 , mapHeight * orthographicCamSize );
+        eastBorder.transform.position = new Vector3(mapStart.x + mapWidth * orthographicCamSize * 2 + orthographicCamSize /2 , mapStart.y + mapHeight * orthographicCamSize );
         eastBorder.transform.localScale = new Vector3( orthographicCamSize, mapHeight * orthographicCamSize * 2);
         eastBorder.maxPos = maxPos;
         eastBorder.minPos = minPos;
 
-        westBorder.transform.position = new Vector3(- orthographicCamSize / 2, mapHeight * orthographicCamSize);
+        westBorder.transform.position = new Vector3(mapStart.x + - orthographicCamSize / 2, mapStart.y + mapHeight * orthographicCamSize);
         westBorder.transform.localScale = new Vector3(orthographicCamSize, mapHeight * orthographicCamSize * 2);
         westBorder.maxPos = maxPos;
         westBorder.minPos = minPos;

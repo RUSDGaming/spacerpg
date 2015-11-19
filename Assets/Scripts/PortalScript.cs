@@ -7,7 +7,9 @@ using Game.Events;
 public class PortalScript : MonoBehaviour {
 
 
-   
+
+    [SerializeField]    LevelGeneratorScript levelRegion;
+
     public int id;
     /// <summary>
     /// This is what the portal tell s the level gen to make. 
@@ -16,7 +18,7 @@ public class PortalScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
+        levelRegion = RegionManager.instance.GetNextRegion(); 
         
     }
 
@@ -35,10 +37,9 @@ public class PortalScript : MonoBehaviour {
         {
         Debug.Log("A player Has entered The Portal");
 
-            PortalEventArgs args = new PortalEventArgs { info = this.levelInfo, portalId=this.id ,playerId = other.GetComponent<PlayerController>().id};
-            
+            PortalEventArgs args = new PortalEventArgs { info = this.levelInfo, portalId=this.id ,playerId = other.GetComponent<PlayerController>().id, region = levelRegion};            
             GameEventSystem.PublishEvent(typeof(PortalSubscriber),args); 
-           // ExecuteEvents.ExecuteHierarchy<PlayerEnteredPortal>(gameObject, null, (x, y) => x.);
+           
         }
     }
 }

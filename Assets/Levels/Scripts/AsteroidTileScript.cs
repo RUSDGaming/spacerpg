@@ -4,9 +4,9 @@ using System.Collections;
 public class AsteroidTileScript : RandomTileScript {
 
 
-    [SerializeField]    GameObject asteroid;
 
-    public int numAsteroids;
+
+    //public int numAsteroids;
 
 
     public override void init()
@@ -30,7 +30,7 @@ public class AsteroidTileScript : RandomTileScript {
         }
         
     }
-    public float func(float l)
+    public static float func(float l)
     {
         l = l + Mathf.Sqrt(l*2);
         return l;

@@ -11,17 +11,24 @@ using Game.Events;
 public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscriber, HomeSubscriber{
 
     public Transform playerRespawn;
-    [SerializeField]  Transform generatedLevel;
+    //[SerializeField]  Transform generatedLevel;
     public LevelGenScript levelGen;
 
-    public GameObject portal;
+   // public GameObject portal;
 
-    LevelGenInfo levelInfo;
+    //LevelGenInfo levelInfo;
 
     bool levelLoaded = false;
-	// Use this for initialization
+
+
+
+    [SerializeField]    LevelGeneratorScript region0;
+    [SerializeField]    LevelGeneratorScript region1;
+    LevelGeneratorScript currentlyLoadedRegion;
+
 	void Start () {
         GameEventSystem.RegisterSubScriber(this);
+        region0.Init();
 	}
 	
 	// Update is called once per frame
@@ -45,7 +52,7 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         }
         if(args.GetType() == typeof(PlayerHomeEventArgs))
         {
-            HandleHomeEVent(args);
+            HandleHomeEvent(args);
         }
         
     }
@@ -53,14 +60,16 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
     void HandleLevelLoadedEvent(GameEventArgs args) {
         LevelFinishedLoadingEventArgs argz = (LevelFinishedLoadingEventArgs)args;
 
+        // TODO load players into a global array so this is faster... 
         PlayerController[] players = FindObjectsOfType<PlayerController>();
 
-        GameObject portalInstance = (GameObject)Instantiate(portal, argz.endPos, Quaternion.identity);
+       // GameObject portalInstance = (GameObject)Instantiate(portal, argz.endPos, Quaternion.identity);
 
         foreach (PlayerController player in players)
         {
-            player.gameObject.transform.position = argz.startPos;
+            player.transform.position = argz.startPos;
         }
+        levelLoaded = true;
     }
 
     void HandlePortalEvent(GameEventArgs args)
@@ -69,26 +78,14 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
 
         PortalEventArgs argz = (PortalEventArgs)args;
 
-        if (argz.portalId == -1)
+        if (argz.region)
         {
-            foreach (PlayerController player in players)
-            {
-                player.gameObject.transform.position = playerRespawn.position;
-            }
-
-            levelLoaded = false;
-            Debug.Log("Destroy everything previously loadded in that other scene");
-            DestroyLevel();
-        }
-        else
-        {
-            levelInfo = argz.info;
-            levelGen.GenerateLevel(argz.info);
-            levelLoaded = true;
-        }
+            argz.region.Init();
+            currentlyLoadedRegion = argz.region;
+        }        
     }
 
-    void HandleHomeEVent(GameEventArgs args)
+    void HandleHomeEvent(GameEventArgs args)
     {
         if (!levelLoaded)
         {
@@ -97,35 +94,35 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         foreach (PlayerController player in players)
         {
-            player.gameObject.transform.position = playerRespawn.position;
+            player.gameObject.transform.position = region0.playerSpawnPosition;
         }
 
         levelLoaded = false;
         Debug.Log("Destroy everything previously loadded in that other scene");
-        DestroyLevel();
+        currentlyLoadedRegion.CleanRegion();
     }
 
 
-    private void DestroyLevel()
-    {
-        PortalScript[] portals = FindObjectsOfType<PortalScript>();
-        var query = from portal in portals where portal.id == -1 select portal;
+    //private void DestroyLevel()
+    //{
+    //    PortalScript[] portals = FindObjectsOfType<PortalScript>();
+    //    var query = from portal in portals where portal.id == -1 select portal;
         
-        foreach(PortalScript p in query)
-        {
-            GameObject.Destroy(p.gameObject);
-        }
+    //    foreach(PortalScript p in query)
+    //    {
+    //        GameObject.Destroy(p.gameObject);
+    //    }
 
 
         
         
-        Int2 corner1 = new Int2(levelInfo.startX, levelInfo.startY);
-        Int2 corner2 = new Int2(levelInfo.startX + levelInfo.levelWidth, levelInfo.startY + levelInfo.levelHeight);
-        Tile.DeleteTileBlock(corner1, corner2);
+    //    Int2 corner1 = new Int2(levelInfo.startX, levelInfo.startY);
+    //    Int2 corner2 = new Int2(levelInfo.startX + levelInfo.levelWidth, levelInfo.startY + levelInfo.levelHeight);
+    //    Tile.DeleteTileBlock(corner1, corner2);
         
-         foreach(Transform child in generatedLevel)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
-    }
+    //     foreach(Transform child in generatedLevel)
+    //    {
+    //        GameObject.Destroy(child.gameObject);
+    //    }
+    //}
 }
