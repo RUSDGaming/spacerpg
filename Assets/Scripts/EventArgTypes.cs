@@ -17,8 +17,9 @@ namespace Game.Events
 
     public class LevelFinishedLoadingEventArgs : GameEventArgs
     {
-       public Vector2 startPos;
+        public Vector2 startPos;
         public Vector2 endPos;
+        public LevelGeneratorScript region;
     }
 
     public class PlayerHitEventArgs : GameEventArgs

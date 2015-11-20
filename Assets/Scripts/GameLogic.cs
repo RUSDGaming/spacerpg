@@ -21,14 +21,18 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
     bool levelLoaded = false;
 
 
+    [SerializeField]    MiniMapScript miniMapScript;
 
     [SerializeField]    LevelGeneratorScript region0;
     [SerializeField]    LevelGeneratorScript region1;
+
+
     LevelGeneratorScript currentlyLoadedRegion;
 
 	void Start () {
         GameEventSystem.RegisterSubScriber(this);
         region0.Init();
+        
 	}
 	
 	// Update is called once per frame
@@ -63,7 +67,12 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         // TODO load players into a global array so this is faster... 
         PlayerController[] players = FindObjectsOfType<PlayerController>();
 
-       // GameObject portalInstance = (GameObject)Instantiate(portal, argz.endPos, Quaternion.identity);
+        MiniMapCameraScript mmcs = miniMapScript.gameObject.GetComponentInChildren<MiniMapCameraScript>();
+
+        mmcs.LevelOffset = argz.region.transform.position - miniMapScript.transform.position;
+        miniMapScript.InitMap(argz.region.width, argz.region.height, argz.region.tiles);
+
+        // GameObject portalInstance = (GameObject)Instantiate(portal, argz.endPos, Quaternion.identity);
 
         foreach (PlayerController player in players)
         {

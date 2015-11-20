@@ -11,7 +11,7 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         VOID, ASTEROID, ENEMY, BOSS, PLAYER, SUN, STATION, PLAYER_STATION, PORTAL
     }
 
-    protected TileType[,] tiles;
+    public TileType[,] tiles;
 
     // Vector2 startPos;
 
@@ -138,7 +138,8 @@ public abstract class LevelGeneratorScript : MonoBehaviour
     public void DoneLoadingMap()
     {
         LevelFinishedLoadingEventArgs args = new LevelFinishedLoadingEventArgs();        
-        args.startPos = playerSpawnPosition;        
+        args.startPos = playerSpawnPosition;
+        args.region = this;
 
         GameEventSystem.PublishEvent(typeof(LevelLoadedSubscriber), args);
 

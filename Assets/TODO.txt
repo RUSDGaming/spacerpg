@@ -1,4 +1,3 @@
-Make a mini Map
 
 Create Classes
 
@@ -32,8 +31,10 @@ rock paper scrissors
 
 Cloacking
 Crit Chance
+gravity on sun
 
 elemental things 
 
+Make a better mini Map
 
 
