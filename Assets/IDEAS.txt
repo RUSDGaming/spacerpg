@@ -63,6 +63,14 @@ ships(22){
 	7 "Boss Ships"  // large 
 	7 "Captian Ships" // medium  
 	7 "light Ships" // small
+
+	1 slot	64px	p1 sm
+	3 slot	128 px	p1 md | p2 sm | p3 sm 
+	5 slot	256 px	p1 lg | p1 md | p2 md | p2 sm | p3 sm 
+	8 slot	512 px	p1 lg | p1 lg | p1 md |	p2 lg | p2 md | p2 sm |  p3 md | p3 sm
+
+
+
 }
 weapons(18){
 	6 "elemental Weapons" // get these from destorying bosses {
