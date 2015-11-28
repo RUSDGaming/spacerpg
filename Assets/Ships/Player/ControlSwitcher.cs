@@ -15,27 +15,30 @@ public class ControlSwitcher : MonoBehaviour {
     [SerializeField]    ProgressBar shield;
     [SerializeField]    ProgressBar energy;
 
+    Ship ship;
+    GameLogic logic;
+
 	// Use this for initialization
 	void Start () {
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<GameLogic>();
+
         if (mainShip.activeInHierarchy)
         {
             SwitchToMainShip();
         } else if (shipCore.activeInHierarchy)
         {         
-            SwitchToShipCore();
-           
+            SwitchToShipCore();           
         }
-
-
 	}
-    Ship ship;
 	// Update is called once per frame
 	void Update () {
 
+        if (!ship)
+            return;
+
         health.setImage(ship.currentHealth, ship.maxHealth);
         energy.setImage(ship.currentEnergy, ship.maxEnergy);
-        shield.setImage(ship.currentSheild, ship.maxSheild);
-	
+        shield.setImage(ship.currentSheild, ship.maxSheild);	
 	}
 
     public void SwitchToShipCore()
@@ -44,7 +47,7 @@ public class ControlSwitcher : MonoBehaviour {
         shipCore.SetActive(true);
         shipCore.transform.position = mainShip.transform.position;
         mainShip.SetActive(false);
-        cameraFollower.followObject = shipCore.transform;
+        //cameraFollower.followObject = shipCore.transform;
         menu.SetShip(shipCore);
         shipCore.GetComponent<PlayerController>().disableInput = false;
         menu.playerController = shipCore.GetComponent<PlayerController>();
@@ -56,11 +59,12 @@ public class ControlSwitcher : MonoBehaviour {
         mainShip.SetActive(true);
         mainShip.transform.position = shipCore.transform.position;
         shipCore.SetActive(false);
-        cameraFollower.followObject = mainShip.transform;
+      //  cameraFollower.followObject = mainShip.transform;
         menu.playerController = mainShip.GetComponent<PlayerController>();
         menu.SetShip(mainShip);
         reloadShipStats(true);
         ship = mainShip.GetComponent<Ship>();
+        logic.TrackTarget(mainShip.transform);
     }
 
     public void reloadShipStats(bool heal)
@@ -75,8 +79,8 @@ public class ControlSwitcher : MonoBehaviour {
     public void SetMainShip(GameObject shipPrefab)
     {
         shipCore.transform.position = mainShip.transform.position;
-        GameObject newShip =  Instantiate(shipPrefab, mainShip.transform.position, Quaternion.identity) as GameObject;
-        
+        GameObject newShip = Instantiate(shipPrefab, mainShip.transform.position, Quaternion.identity) as GameObject;
+
         // set the parent to nulll so the menu doesnt think its an inventory it should read from
         mainShip.transform.SetParent(null);
         Destroy(mainShip.gameObject);
@@ -87,6 +91,41 @@ public class ControlSwitcher : MonoBehaviour {
         SwitchToMainShip();
         // this reloads all the invertorys of the new ship...
         menu.OpenMenu();
+        logic.TrackTarget(mainShip.transform);
+    }
+
+    public void UpgradeShip()
+    {
+        NextUpgrade nextShip =  ship.GetComponent<NextUpgrade>();
+        if (!nextShip.prefab)
+        {
+            return;
+        }
+        //GameObject next =  Instantiate(nextShip.prefab);
+        //if (!next)
+        //{
+        //    return;
+        //}
+        SetMainShip(nextShip.prefab);
+        //next.transform.SetParent(ship.transform.parent);
+        //next.transform.position = ship.transform.position;
+
+        //Destroy(mainShip.gameObject);
+        //mainShip = next;
+        //reloadShipStats(true);
+
+        //ship = next.GetComponent<Ship>();
+        //SetFollowers(mainShip);
+
+        //menu.OpenMenu();
+        
+    }
+
+    void SetFollowers(GameObject shipGO)
+    {
+        cameraFollower.followObject = shipGO.transform;
+        menu.playerController = shipGO.GetComponent<PlayerController>();
+        menu.SetShip(shipGO);
     }
 
 }

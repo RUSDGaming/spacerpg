@@ -146,9 +146,9 @@ GameObject:
   - 50: {fileID: 5006540}
   - 114: {fileID: 11424774}
   - 114: {fileID: 11463484}
-  - 114: {fileID: 11475598}
+  - 114: {fileID: 11491056}
   m_Layer: 8
-  m_Name: TurtleShip
+  m_Name: DeffenseShip5
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -449,7 +449,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 159, y: 18.0900002, z: 0}
+  m_LocalPosition: {x: -187.139999, y: 4.44000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 414944}
@@ -1770,6 +1770,7 @@ MonoBehaviour:
   turnRate: 0
   playerStats: {fileID: 0}
   playerControlled: 0
+  playerAtSpaceStation: 0
 --- !u!114 &11466608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1884,19 +1885,6 @@ MonoBehaviour:
   aftThrusters: []
   portThrusters: []
   starboardThrusters: []
---- !u!114 &11475598
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154114}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82613d8c3bd7a9e4b93799c1954503b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPos: {x: 40, y: 40}
-  minPos: {x: -40, y: -40}
 --- !u!114 &11476066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1951,6 +1939,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayRate: 1
+--- !u!114 &11491056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3c3cc32284abc49b8a0b935fc6e74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
 --- !u!114 &11492244
 MonoBehaviour:
   m_ObjectHideFlags: 1

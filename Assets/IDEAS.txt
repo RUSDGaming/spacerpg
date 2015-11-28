@@ -58,20 +58,63 @@ done- camera needs to extend pass where you can actually go....
 worlds(8){	
 	fire, ice, acid, electric, dark, light, normal, boss
 }
-ships(22){
+ships(17){
 	1 "final boss" // XL
-	7 "Boss Ships"  // large 
-	7 "Captian Ships" // medium  
-	7 "light Ships" // small
+	
 
-	1 slot	64px	p1 sm
-	3 slot	128 px	p1 md | p2 sm | p3 sm 
-	5 slot	256 px	p1 lg | p1 md | p2 md | p2 sm | p3 sm 
-	8 slot	512 px	p1 lg | p1 lg | p1 md |	p2 lg | p2 md | p2 sm |  p3 md | p3 sm
+	4	1 slot	64px	p1 sm
+	4	3 slot	128 px	p1 md | p2 sm | p3 sm 
+	4	5 slot	256 px	p1 lg | p1 md | p2 md | p2 sm | p3 sm 
+	4	8 slot	512 px	p1 lg | p1 lg | p1 md |	p2 lg | p2 md | p2 sm |  p3 md | p3 sm
+
+	bosses and enimies will be randomized based of of the 16 main ships
+}
+
+abilites(18){
+
+	attack{
+
+		your shots do 15% more damage
+		killing a unit restores energy equal to 50% their health
+
+		you ignore 10% of enemy armor
+		double your fire rate for 10 seconds (active)
+
+		all your weapon slots are 1 tier bigger
+		kiling a unit lowers your weapon energy cost by 25% stacking 5 times (lasts 10 seconds)
+	}
+
+	deffense{
+		
+		mitigate sheild damage by 10% of armor
+		10% of armor is added to cloaking (active)
+
+		double your sheild area (double your sheild cost)  (active toggle)
+		sheilds at full strength don't drain energy
+
+		attacks wich do no damage to the hull are bounced back 
+		increase armor by 1% of hull and increase hull by 10% of armor
+
+	}
+
+	utility{
+
+		10% increased energy regen
+		10% increased fire rate  (this also affects passive things)
+
+		heal allies for 1% of your health
+		regen allies for 1% of your energy
+
+		remove all status effects and heal ally by 25 % of their health (active)
+		regen your energy to full and close allies by 25 % (active)
+
+	}
 
 
 
 }
+
+
 weapons(18){
 	6 "elemental Weapons" // get these from destorying bosses {
 		flame Thrower,

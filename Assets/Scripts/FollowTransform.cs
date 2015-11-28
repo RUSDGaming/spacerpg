@@ -32,6 +32,25 @@ public class FollowTransform : MonoBehaviour {
 	}
     void LateUpdate()
     {
+
+        if (!followObject)
+        {
+            GameObject[] players =  GameObject.FindGameObjectsWithTag("Player");
+
+            
+            if(players.Length > 1)
+            {   
+                followObject = players[0].transform;
+            }
+            else
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");                
+                followObject = player.transform;
+            }
+
+            return;
+        }
+
         if(backGround)
         backGround.position = followObject.position * backGroundParalaxRatio;
 

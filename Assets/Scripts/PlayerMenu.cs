@@ -7,18 +7,22 @@ using System;
 
 public class PlayerMenu : MonoBehaviour
 {
-
+    
 
     public PlayerController playerController;
     public GameObject mainMenu;
     public PlayerStats playerStats;
 
-    [SerializeField]
-    Sprite defaultSprite;
-    [SerializeField]
-    ControlSwitcher switcher;
+
+    [SerializeField]    GameObject storage;
+    [SerializeField]    GameObject upgradeButton;
+
+    [SerializeField]    Sprite defaultSprite;
+    [SerializeField]    ControlSwitcher switcher;
 
     public GameObject ship;
+    Ship shipScript;
+
     public bool shipNearChest = false;
 
     [SerializeField]
@@ -52,6 +56,17 @@ public class PlayerMenu : MonoBehaviour
 
     public void OpenMenu()
     {
+
+        
+        if (shipScript)
+        {
+            if (shipScript.playerAtSpaceStation)
+            {
+                storage.SetActive(true);
+                upgradeButton.SetActive(true);
+
+            }
+        }
         LevelUpText.SetActive(false);
         playerController.disableInput = true;
         mainMenu.SetActive(true);
@@ -71,6 +86,8 @@ public class PlayerMenu : MonoBehaviour
         switcher.reloadShipStats(false);
         playerController.disableInput = false;
         mainMenu.SetActive(false);
+        storage.SetActive(false);
+        upgradeButton.SetActive(false);
         menuOpen = false;
     }
 
@@ -191,7 +208,7 @@ public class PlayerMenu : MonoBehaviour
     public void SetShip(GameObject shipObject)
     {
         this.ship = shipObject;
-        Ship shipScript = ship.GetComponent<Ship>();
+        shipScript = ship.GetComponent<Ship>();
         Sprite shipSprite = ship.GetComponent<SpriteRenderer>().sprite;
 
         shipImage.GetComponent<Image>().sprite = shipSprite;

@@ -9,10 +9,14 @@ using Game.Events;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(PlayerController))]
+[RequireComponent (typeof(BoxCollider2D))]
 public class Ship : MonoBehaviour ,iShip{
 
 
     
+
+
+
 
     #region equipment
     public WeaponInventory[] weaponSlots;
@@ -58,7 +62,7 @@ public class Ship : MonoBehaviour ,iShip{
 
     public PlayerStats playerStats;
     public bool playerControlled = false;
-
+    public bool playerAtSpaceStation = false;
     ShowThrust thrust;
 
 

@@ -22,6 +22,8 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
 
 
     [SerializeField]    MiniMapScript miniMapScript;
+    [SerializeField]    MiniMapCameraScript miniMapCameraScript;
+    [SerializeField]    MapEdgeManager mapEdgeManagerScript;
 
     [SerializeField]    LevelGeneratorScript region0;
     [SerializeField]    LevelGeneratorScript region1;
@@ -100,6 +102,13 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         {
             return;
         }
+
+
+        MiniMapCameraScript mmcs = miniMapScript.gameObject.GetComponentInChildren<MiniMapCameraScript>();
+
+        mmcs.LevelOffset = region0.transform.position - miniMapScript.transform.position;
+        miniMapScript.InitMap(region0.width, region0.height, region0.tiles);
+
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         foreach (PlayerController player in players)
         {
@@ -108,30 +117,20 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
 
         levelLoaded = false;
         Debug.Log("Destroy everything previously loadded in that other scene");
-        currentlyLoadedRegion.CleanRegion();
+        if(currentlyLoadedRegion)
+            currentlyLoadedRegion.CleanRegion();
+
+
+
+
     }
 
+    
+    public void TrackTarget(Transform transform)
+    {
+        miniMapCameraScript.tracking = transform;
+        mapEdgeManagerScript.trackingTarget = transform;
+        //Debug.Log("Tracking target");
 
-    //private void DestroyLevel()
-    //{
-    //    PortalScript[] portals = FindObjectsOfType<PortalScript>();
-    //    var query = from portal in portals where portal.id == -1 select portal;
-        
-    //    foreach(PortalScript p in query)
-    //    {
-    //        GameObject.Destroy(p.gameObject);
-    //    }
-
-
-        
-        
-    //    Int2 corner1 = new Int2(levelInfo.startX, levelInfo.startY);
-    //    Int2 corner2 = new Int2(levelInfo.startX + levelInfo.levelWidth, levelInfo.startY + levelInfo.levelHeight);
-    //    Tile.DeleteTileBlock(corner1, corner2);
-        
-    //     foreach(Transform child in generatedLevel)
-    //    {
-    //        GameObject.Destroy(child.gameObject);
-    //    }
-    //}
+    }
 }

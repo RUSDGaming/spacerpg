@@ -16,8 +16,11 @@ public class MiniMapCameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (!tracking)
+            return;
+
         Vector3 regionStart = LevelOffset + parent.position;
-        Debug.Log(regionStart);
+       // Debug.Log(regionStart);
         Vector3 offsetPos =  (tracking.position - regionStart) /20;
 
        // Debug.Log(offsetPos);
