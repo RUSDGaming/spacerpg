@@ -8,12 +8,15 @@ public class ControlSwitcher : MonoBehaviour {
     public    GameObject mainShip;
     [SerializeField]    FollowTransform cameraFollower;
     [SerializeField]    PlayerMenu menu;
-    [SerializeField]    PlayerStats playerStats;
+    [SerializeField]    StatHolderScript statHolderScript;
     [SerializeField]    PlayerDetails playerDetails;
 
+    [SerializeField]    PlayerEXPManager expManager;
     [SerializeField]    ProgressBar health;
     [SerializeField]    ProgressBar shield;
     [SerializeField]    ProgressBar energy;
+
+    public SaveGameInfo playerStats;
 
     Ship ship;
     GameLogic logic;
@@ -21,6 +24,16 @@ public class ControlSwitcher : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<GameLogic>();
+
+        expManager = GetComponent<PlayerEXPManager>();
+        // TODO set the player id correctly
+        string fileName = PlayerPrefs.GetString(LoadPannel.current);
+        playerStats = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
+        playerStats.playerId = 1;
+        Debug.Log(playerStats.primaryType);
+        statHolderScript.SaveGameInfo = playerStats;
+        expManager.saveGameInfo = playerStats;
+
 
         if (mainShip.activeInHierarchy)
         {

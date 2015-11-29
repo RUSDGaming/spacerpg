@@ -11,19 +11,24 @@ public class AbilitySelectorManager : MonoBehaviour {
 
     [SerializeField]    PriorityScript[] p;
 
-    [SerializeField]    PlayerClass playerClass;
+    [SerializeField]    MainMenuScript mainMenuScript;
+
+
+    //  [SerializeField]    PlayerClass playerClass;
+    public SaveGameInfo saveGameInfo;
     [SerializeField]    Button startGameButton;
     [SerializeField]    ShipDescriptionPanel shipDescriptionPanel;
 
+    [SerializeField]    Image shipImage;
 
     public int pointAvailable = 3;
-
+    public int saveGameNumber;
     //public string[] items;
 
     // Use this for initialization
     void Start () {
-    
-	}
+        saveGameInfo = new SaveGameInfo();
+    }
 	
 	
 
@@ -67,9 +72,6 @@ public class AbilitySelectorManager : MonoBehaviour {
             startGameButton.interactable = true;
             shipDescriptionPanel.SetClass(GetPrimaryType());
 
-
-
-
         }else
         {
             p[0].classType = PriortySelectorScript.ClassType.EMPTY;
@@ -80,54 +82,51 @@ public class AbilitySelectorManager : MonoBehaviour {
             p[2].setText();
             startGameButton.interactable = false;
         }
-
-       
-
     }
 
 
 
 
     public void CreateShip()
-    {     
-        
-        playerClass.primaryType = GetPrimaryType();
+    {
+        //int saveGameInfo;
+        saveGameInfo.primaryType = GetPrimaryType();
 
 
         bool[] attackAbilities = attack.getSeletectAbilities();
         bool[] utilAbilities = utility.getSeletectAbilities();
         bool[] defAbilities = deffense.getSeletectAbilities();
 
-        playerClass.a1 = attackAbilities[0];
-        playerClass.a2 = attackAbilities[1];
-        playerClass.a3 = attackAbilities[2];
-        playerClass.a4 = attackAbilities[3];
-        playerClass.a5 = attackAbilities[4];
-        playerClass.a6 = attackAbilities[5];
+        saveGameInfo.a1 = attackAbilities[0];
+        saveGameInfo.a2 = attackAbilities[1];
+        saveGameInfo.a3 = attackAbilities[2];
+        saveGameInfo.a4 = attackAbilities[3];
+        saveGameInfo.a5 = attackAbilities[4];
+        saveGameInfo.a6 = attackAbilities[5];
 
-        playerClass.u2 = utilAbilities[1];
-        playerClass.u1 = utilAbilities[0];
-        playerClass.u3 = utilAbilities[2];
-        playerClass.u4 = utilAbilities[3];
-        playerClass.u5 = utilAbilities[4];
-        playerClass.u6 = utilAbilities[5];
+        saveGameInfo.u2 = utilAbilities[1];
+        saveGameInfo.u1 = utilAbilities[0];
+        saveGameInfo.u3 = utilAbilities[2];
+        saveGameInfo.u4 = utilAbilities[3];
+        saveGameInfo.u5 = utilAbilities[4];
+        saveGameInfo.u6 = utilAbilities[5];
 
-        playerClass.d2 = defAbilities[1];
-        playerClass.d1 = defAbilities[0];
-        playerClass.d3 = defAbilities[2];
-        playerClass.d4 = defAbilities[3];
-        playerClass.d5 = defAbilities[4];
-        playerClass.d6 = defAbilities[5];
+        saveGameInfo.d2 = defAbilities[1];
+        saveGameInfo.d1 = defAbilities[0];
+        saveGameInfo.d3 = defAbilities[2];
+        saveGameInfo.d4 = defAbilities[3];
+        saveGameInfo.d5 = defAbilities[4];
+        saveGameInfo.d6 = defAbilities[5];
 
-        playerClass.p1 = p[0].classType;
-        playerClass.p2 = p[1].classType;
-        playerClass.p3 = p[2].classType;
+        saveGameInfo.p1 = p[0].classType;
+        saveGameInfo.p2 = p[1].classType;
+        saveGameInfo.p3 = p[2].classType;
 
 
         Debug.Log("Creating Ship with stats...");
-        Debug.Log(playerClass.ToString());
-
-
+        Debug.Log(saveGameInfo.ToString());
+        SaveGameSystem.SaveGame(saveGameInfo, LoadPannel.saveGame + saveGameNumber);
+        mainMenuScript.OpenLoad();
     }
 
     public PriortySelectorScript.ClassType GetPrimaryType()
@@ -139,7 +138,7 @@ public class AbilitySelectorManager : MonoBehaviour {
         if (numAttack > 1) return  PriortySelectorScript.ClassType.ATTACK;
         else if (numUtility > 1) return PriortySelectorScript.ClassType.UTILITY;
         else if (numDeffense > 1) return PriortySelectorScript.ClassType.DEFFENSE;
-        else return PriortySelectorScript.ClassType.EMPTY;
+        else return PriortySelectorScript.ClassType.BALANCED;
     }
 
 

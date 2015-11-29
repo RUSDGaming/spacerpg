@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
     [SerializeField]   GameObject levelUpText;
 
     public PlayerInfo playerInfo;
+    public GameObject statHolder;
 
     // current level of the player
     const string LEVEL = "level";
@@ -32,7 +33,6 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
     }
 
 
-    public GameObject statHolder;
 
 
     public float exp;
@@ -117,21 +117,21 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
     {
 
 
-        level = PlayerPrefs.GetInt(LEVEL);        
-        exp = PlayerPrefs.GetFloat(EXP);
-        points = PlayerPrefs.GetInt(POINTS);
+        //level = PlayerPrefs.GetInt(LEVEL);        
+        //exp = PlayerPrefs.GetFloat(EXP);
+        //points = PlayerPrefs.GetInt(POINTS);
 
-        int i = 0;
-        foreach (STATS stat in Enum.GetValues(typeof(STATS)))
-        {
-            int statLevel = PlayerPrefs.GetInt(stat.ToString());
-            statBook.Add(stat, statLevel);
-            StatMenuScript sms = statHolder.transform.GetChild(i).GetComponent<StatMenuScript>();
-            i++;
-            sms.Description = enumMethods.GetString(stat);
-            sms.Level = statLevel.ToString();
-            sms.setUpButton(stat, this);
-        }
+        //int i = 0;
+        //foreach (STATS stat in Enum.GetValues(typeof(STATS)))
+        //{
+        //    int statLevel = PlayerPrefs.GetInt(stat.ToString());
+        //    statBook.Add(stat, statLevel);
+        //    StatMenuScript sms = statHolder.transform.GetChild(i).GetComponent<StatMenuScript>();
+        //    i++;
+        //    sms.Description = enumMethods.GetString(stat);
+        //    sms.Level = statLevel.ToString();
+        //    sms.setUpButton(stat, this);
+        //}
         
 
     }
@@ -178,24 +178,24 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
     }
     
 
-    public void SetActualStat(PlayerStats.STATS stat, float baseValue, ref float actualValue)
+    public static  float  SetActualStat(PlayerStats.STATS stat, int level ,float baseValue)
     {
-        int level = 0;
-        if (statBook.TryGetValue(stat, out level))
-        {
+
+        float actualValue = 0;
+
             switch (stat)
             {
-                case STATS.HEALTH: actualValue = baseValue * (1 + .05f * level); return;
+                case STATS.HEALTH: actualValue = baseValue * (1 + .05f * level); break;
                 case STATS.ARMOR: goto case STATS.HEALTH;                    
                 case STATS.SHEILD: goto case STATS.HEALTH;                    
-                case STATS.TURN_RATE:  actualValue = baseValue * (1 + .1f * level); return;
+                case STATS.TURN_RATE:  actualValue = baseValue * (1 + .1f * level); break;
                 case STATS.MOVE_SPEED: goto case STATS.HEALTH;
                 case STATS.ENERGY_REGENERATION: goto case STATS.HEALTH;
                 case STATS.ENERGY_CAPACITY: goto case STATS.HEALTH;
                 default: actualValue = baseValue; break;
             }
-        }
-        actualValue = baseValue;
+
+        return actualValue;
 
     }
 

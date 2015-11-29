@@ -22,7 +22,7 @@ public class ChainLaser : Weapon {
 	}
 
 
-    public override bool TryToFire(ref float energy, bool isPlayer,PlayerStats stats)
+    public override bool TryToFire(ref float energy, bool isPlayer,SaveGameInfo stats)
     {
         //Debug.Log("Trying to fire miniGun");
         if(energy < energyCost)
@@ -55,8 +55,8 @@ public class ChainLaser : Weapon {
         projectileScript.IsPlayer(isPlayer);
         // could optimize code by saving damage values. 
         projectileScript.damage = getWeaponDamage(stats);
-        if(stats)
-        projectileScript.id = stats.playerInfo.playerId;
+        if(stats != null)
+        projectileScript.id = stats.playerId;
 
         lastShot = Time.time;
 

@@ -29,7 +29,7 @@ public class StatMenuScript : MonoBehaviour
         }
     }
 
-    public void setUpButton(PlayerStats.STATS stat, PlayerStats playerStats)
+    public void setUpButton(PlayerStats.STATS stat, StatHolderScript playerStats)
     {
         addLevelButton.onClick.AddListener(() => {
             if (playerStats.LevelUpStat(stat)) 

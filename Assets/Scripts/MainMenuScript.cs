@@ -11,10 +11,13 @@ public class MainMenuScript : MonoBehaviour {
     [SerializeField]    RectTransform options;
 
 
+
     public void OpenNewGame()
     {
         newGame.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(false);
+        load.gameObject.SetActive(false);
+        options.gameObject.SetActive(false);
     }
 
 
@@ -22,12 +25,18 @@ public class MainMenuScript : MonoBehaviour {
     {
         load.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(false);
+        options.gameObject.SetActive(false);
+        newGame.gameObject.SetActive(false);
     }
 
     public void OpenOptions()
     {
         options.gameObject.SetActive(true);
         mainMenu.gameObject.SetActive(false);
+        load.gameObject.SetActive(false);
+        newGame.gameObject.SetActive(false);
+
+        //options.gameObject.SetActive(false);
     }
 
     public void Back()
@@ -37,13 +46,7 @@ public class MainMenuScript : MonoBehaviour {
         options.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
     }
-
-
-   
-
-
-
-
+    
     public void QuitGame()
     {
         Application.Quit();
@@ -52,5 +55,6 @@ public class MainMenuScript : MonoBehaviour {
     {
         Application.LoadLevel(sceneName);
     }
+    
 
 }

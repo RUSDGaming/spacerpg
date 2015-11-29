@@ -79,6 +79,7 @@ public class EnemyShip : MonoBehaviour , iShip{
 
     public void DestroyShip(int killerdId)
     {
+       // Debug.Log("ship dide" + killerdId);
         // all the ai will have negative ids
         if(killerdId > 0)
         {
@@ -122,7 +123,7 @@ public class EnemyShip : MonoBehaviour , iShip{
         }        
     }
 
-    public void SetActualStats(PlayerStats stats, bool heal)
+    public void SetActualStats(SaveGameInfo stats, bool heal)
     {
         throw new NotImplementedException();
     }

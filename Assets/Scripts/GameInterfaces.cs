@@ -37,7 +37,7 @@ namespace Game.Interfaces
         int GetSlotCount();
     }
     public interface SetStats{
-        void SetActualStats(PlayerStats stats, bool heal);
+        void SetActualStats(SaveGameInfo stats, bool heal);
     }
 
     public interface iShip : DamageUnit , Shooter , Movable,Rotatable, SetStats { }

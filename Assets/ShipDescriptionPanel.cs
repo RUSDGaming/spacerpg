@@ -11,10 +11,13 @@ public class ShipDescriptionPanel : MonoBehaviour {
     [SerializeField]    Text classBonuses;
 
 
+    [SerializeField]    GameObject attackShip;
+    [SerializeField]    GameObject deffenseShip;
+    [SerializeField]    GameObject utilityShip;
+    [SerializeField]    GameObject balancedShip;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -30,15 +33,19 @@ public class ShipDescriptionPanel : MonoBehaviour {
         {
             case PriortySelectorScript.ClassType.ATTACK:
                 shipTypeTile.text = "Attack Class";
+                shipImage.sprite = attackShip.GetComponent<SpriteRenderer>().sprite;
                 break;
             case PriortySelectorScript.ClassType.UTILITY:
                 shipTypeTile.text = "Utility Class";
+                shipImage.sprite = utilityShip.GetComponent<SpriteRenderer>().sprite;
                 break;
             case PriortySelectorScript.ClassType.DEFFENSE:
                 shipTypeTile.text = "Deffense Class";
+                shipImage.sprite = deffenseShip.GetComponent<SpriteRenderer>().sprite;
                 break;
             case PriortySelectorScript.ClassType.EMPTY:
                 shipTypeTile.text = "Balanced Class";
+                shipImage.sprite = balancedShip.GetComponent<SpriteRenderer>().sprite;
                 break;
             default:
                 break;

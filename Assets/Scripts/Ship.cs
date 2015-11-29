@@ -60,7 +60,7 @@ public class Ship : MonoBehaviour ,iShip{
     public float turnRate;
     #endregion
 
-    public PlayerStats playerStats;
+    public SaveGameInfo playerStats;
     public bool playerControlled = false;
     public bool playerAtSpaceStation = false;
     ShowThrust thrust;
@@ -77,18 +77,19 @@ public class Ship : MonoBehaviour ,iShip{
         thrust = GetComponentInChildren<ShowThrust>();
     }
 
-	public void SetActualStats(PlayerStats stats, bool heal)
+	public void SetActualStats(SaveGameInfo stats, bool heal)
     {
+       // Debug.Log("setting actual stats, player id is : " + stats.playerId );
         playerStats = stats;
-        stats.SetActualStat(PlayerStats.STATS.HEALTH, baseHealth,ref maxHealth);        
-        stats.SetActualStat(PlayerStats.STATS.ARMOR, baseArmor, ref armor);
-        stats.SetActualStat(PlayerStats.STATS.SHEILD, baseMaxSheild, ref maxSheild);        
-        stats.SetActualStat(PlayerStats.STATS.ENERGY_REGENERATION, baseEnergyRegen, ref energyRegen);        
-        stats.SetActualStat(PlayerStats.STATS.ENERGY_CAPACITY, baseMaxEnergy, ref maxEnergy);
-
-        stats.SetActualStat(PlayerStats.STATS.MOVE_SPEED, baseMoveForce, ref moveForce);        
-        stats.SetActualStat(PlayerStats.STATS.MOVE_SPEED, baseMaxSpeed, ref maxSpeed);
-        stats.SetActualStat(PlayerStats.STATS.TURN_RATE, baseTurnRate, ref turnRate);
+        maxHealth =    PlayerStats.SetActualStat(PlayerStats.STATS.HEALTH, playerStats.HEALTH,baseHealth);        
+        armor   =    PlayerStats.SetActualStat(PlayerStats.STATS.ARMOR, playerStats.ARMOR, baseArmor);
+        maxSheild =     PlayerStats.SetActualStat(PlayerStats.STATS.SHEILD, playerStats.SHEILD, baseMaxSheild);        
+        energyRegen =    PlayerStats.SetActualStat(PlayerStats.STATS.ENERGY_REGENERATION, playerStats.ENERGY_REGENERATION, baseEnergyRegen);        
+        maxEnergy =  PlayerStats.SetActualStat(PlayerStats.STATS.ENERGY_CAPACITY, playerStats.ENERGY_CAPACITY, baseMaxEnergy);
+        
+        moveForce =     PlayerStats.SetActualStat(PlayerStats.STATS.MOVE_SPEED,playerStats.MOVE_SPEED, baseMoveForce);        
+        maxSpeed =    PlayerStats.SetActualStat(PlayerStats.STATS.MOVE_SPEED,playerStats.MOVE_SPEED ,baseMaxSpeed);
+        turnRate =     PlayerStats.SetActualStat(PlayerStats.STATS.TURN_RATE,playerStats.TURN_RATE ,baseTurnRate);
         if (heal)
         {
         currentHealth = maxHealth;        

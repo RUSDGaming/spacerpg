@@ -41,7 +41,7 @@ public class Weapon :Item {
         lastShot = -fireRate;
     }
 
-    public virtual bool TryToFire(ref float energy,bool isPlayer,PlayerStats stats)
+    public virtual bool TryToFire(ref float energy,bool isPlayer,SaveGameInfo stats)
     {
 
         //Debug.Log("trying to fire laser with energy : " + energy);
@@ -58,8 +58,12 @@ public class Weapon :Item {
                 projectileScript.IsPlayer(isPlayer);
                 // could optimize code by saving damage values. 
                 projectileScript.damage = getWeaponDamage(stats);
-                if(stats)
-                projectileScript.id = stats.playerInfo.playerId;
+                if(stats != null)
+                {
+
+                    projectileScript.id = stats.playerId;
+                    //Debug.Log("player id that was fired is : " + stats.playerId);
+                }
 
                 lastShot = Time.time;
 
@@ -69,27 +73,27 @@ public class Weapon :Item {
         return false;
 
     }
-    protected float getFireRate(PlayerStats stats)
+    protected float getFireRate(SaveGameInfo stats)
     {
-        if (stats)
+        if (stats != null)
         {
-        float rate = fireRate * (1 - stats.statBook[PlayerStats.STATS.FIRE_RATE] * .02f);
+        float rate = fireRate * (1 - stats.FIRE_RATE * .02f);
         return rate;
         }
         return fireRate;
 
     }
 
-    protected    float getWeaponDamage(PlayerStats stats) {
+    protected    float getWeaponDamage(SaveGameInfo stats) {
 
         float damage2 = 0f;
-        if (stats)
+        if (stats != null)
         {
            damage2 += damage;
-           damage2 += stats.statBook[PlayerStats.STATS.DAMAGE] * damageRatio;
-           damage2 += stats.statBook[PlayerStats.STATS.LASER] * laserRatio;
-           damage2 += stats.statBook[PlayerStats.STATS.EXPLOSION] * explosionRatio;
-           damage2 += stats.statBook[PlayerStats.STATS.PROJECTILE] * projectileRatio;
+           damage2 += stats.DAMAGE * damageRatio;
+           damage2 += stats.LASER * laserRatio;
+           damage2 += stats.EXPLOSION * explosionRatio;
+           damage2 += stats.PROJECTILE * projectileRatio;
             return damage2;
         }
 

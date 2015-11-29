@@ -5,14 +5,14 @@ using UnityEngine.UI;
 public class PriortySelectorScript : MonoBehaviour {
 
 
-    [SerializeField]    AbilitySelectorManager abilitySelectorManager;
+    //[SerializeField]    AbilitySelectorManager abilitySelectorManager;
 
 
     [SerializeField]    PriorityScript[] priorities;
 
     public enum ClassType
     {
-        ATTACK, UTILITY, DEFFENSE,EMPTY
+        EMPTY, ATTACK, UTILITY, DEFFENSE, BALANCED
     }
 
 
