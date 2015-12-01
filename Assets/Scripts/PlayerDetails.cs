@@ -15,6 +15,7 @@ public class PlayerDetails : MonoBehaviour {
     [SerializeField]    Text speedText;
     [SerializeField]    Text thrustText;
     [SerializeField]    Text turnRateText;
+    [SerializeField]    Text moneyText;
 
     public Ship ship;
 
@@ -35,9 +36,10 @@ public class PlayerDetails : MonoBehaviour {
         levelText.text = "Level : " + "<color=black>" + ship.playerStats.level + "</color>";
         expText.text = "EXP : " + "<color=black>" +   ship.playerStats.exp + "</color>";
         pointText.text = "Points : " + "<color=black>" + ship.playerStats.points + "</color>";
+        moneyText.text = "Materials : " + "<color=black>" + ship.playerStats.money + "</color>";
 
         healthText.text = "Health : " + "<color=black>" + ship.maxHealth + "</color>";
-        shieldText.text = "Shield : " + "<color=black>" + ship.maxSheild + "</color>";
+        shieldText.text = "Shield : " + "<color=black>" + ship.maxShield + "</color>";
         armorText.text = "Armor : " + "<color=black>" + ship.armor + "</color>";
         energyText.text = "Energy : " + "<color=black>" + ship.maxEnergy + "</color>";
         energyRegenText.text = "Energy Regen :  " + "<color=black>" + ship.energyRegen + "</color>";

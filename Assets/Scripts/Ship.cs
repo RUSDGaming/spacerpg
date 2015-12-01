@@ -13,9 +13,10 @@ using Game.Events;
 public class Ship : MonoBehaviour ,iShip{
 
 
-    
 
+    [SerializeField]    Sprite[] explosionSprites;
 
+    Sprite baseSprite;
 
 
     #region equipment
@@ -37,7 +38,7 @@ public class Ship : MonoBehaviour ,iShip{
     #region Ship Base Stats
     [SerializeField]   public float baseHealth;
     [SerializeField]   public float baseArmor;
-    [SerializeField]   public float baseMaxSheild;
+    [SerializeField]   public float baseMaxShield;
     [SerializeField]   public float baseMaxEnergy;
     [SerializeField]   public float baseEnergyRegen;
     [SerializeField]   public float baseMoveForce;
@@ -50,8 +51,8 @@ public class Ship : MonoBehaviour ,iShip{
     public float maxHealth;
     public float currentHealth;
     public float armor;
-    public float maxSheild;
-    public float currentSheild;
+    public float maxShield;
+    public float currentShield;
     public float maxEnergy;
     public float currentEnergy;
     public float energyRegen;
@@ -68,6 +69,8 @@ public class Ship : MonoBehaviour ,iShip{
 
     // Use this for initialization
     void Start () {
+
+        baseSprite = GetComponent<SpriteRenderer>().sprite;
         //currentEnergy = maxEnergy;
         //currentHealth = maxHealth;
         body = GetComponent<Rigidbody2D>();
@@ -83,7 +86,7 @@ public class Ship : MonoBehaviour ,iShip{
         playerStats = stats;
         maxHealth =    PlayerStats.SetActualStat(PlayerStats.STATS.HEALTH, playerStats.HEALTH,baseHealth);        
         armor   =    PlayerStats.SetActualStat(PlayerStats.STATS.ARMOR, playerStats.ARMOR, baseArmor);
-        maxSheild =     PlayerStats.SetActualStat(PlayerStats.STATS.SHEILD, playerStats.SHEILD, baseMaxSheild);        
+        maxShield =     PlayerStats.SetActualStat(PlayerStats.STATS.SHIELD, playerStats.SHIELD, baseMaxShield);        
         energyRegen =    PlayerStats.SetActualStat(PlayerStats.STATS.ENERGY_REGENERATION, playerStats.ENERGY_REGENERATION, baseEnergyRegen);        
         maxEnergy =  PlayerStats.SetActualStat(PlayerStats.STATS.ENERGY_CAPACITY, playerStats.ENERGY_CAPACITY, baseMaxEnergy);
         
@@ -93,7 +96,7 @@ public class Ship : MonoBehaviour ,iShip{
         if (heal)
         {
         currentHealth = maxHealth;        
-        currentSheild = maxSheild;        
+        currentShield = maxShield;        
         currentEnergy = maxEnergy;
 
         }
@@ -104,7 +107,7 @@ public class Ship : MonoBehaviour ,iShip{
     void FixedUpdate()
     {
         regenEnergy();
-        RegenSheild();
+        RegenShield();
     }
     float lastWeaponSoundPlayed ;
     float weaponSoundRate = .1f;
@@ -122,8 +125,9 @@ public class Ship : MonoBehaviour ,iShip{
                     {
                         lastWeaponSoundPlayed = Time.time;
                         weapon.PlaySound();
-
+                        
                     }
+                        body.AddForce(-weapon.transform.up* weapon.knockBackForce, ForceMode2D.Impulse);
                 }
 
             }
@@ -140,7 +144,7 @@ public class Ship : MonoBehaviour ,iShip{
     public void Damage(float damage, int damagerId)
     {
         float damageToShip = 0;
-        damageToShip = DamageSheild(damage);
+        damageToShip = DamageShield(damage);
         damageToShip = DamageArmor(damageToShip);
         currentHealth -= damageToShip;
         if(currentHealth <= 0)
@@ -168,20 +172,20 @@ public class Ship : MonoBehaviour ,iShip{
         }
     }
 
-    float DamageSheild(float damage)
+    float DamageShield(float damage)
     {
-        currentSheild -= damage;
+        currentShield -= damage;
 
         if(forceFeild)
-        forceFeild.ShowSheild(maxSheild, currentSheild);
-        if(currentSheild >= 0)
+        forceFeild.ShowShield(maxShield, currentShield);
+        if(currentShield >= 0)
         {
             return 0;
         }
         else
         {
-            float damageRemaing = -currentSheild;
-            currentSheild = 0;
+            float damageRemaing = -currentShield;
+            currentShield = 0;
             return damageRemaing;
         }
     }
@@ -254,22 +258,22 @@ public class Ship : MonoBehaviour ,iShip{
         }
     }
 
-    void RegenSheild()
+    void RegenShield()
     {
 
-        if(currentSheild >= maxSheild)
+        if(currentShield >= maxShield)
         {
-            currentSheild = maxSheild;
+            currentShield = maxShield;
             return;
         }
 
-        float sheildRegenAmount = maxSheild * .1f * Time.fixedDeltaTime;
+        float sheildRegenAmount = maxShield * .1f * Time.fixedDeltaTime;
 
         if (sheildRegenAmount * 10f > currentEnergy)
             return;
 
         currentEnergy -= sheildRegenAmount * 10f;
-        currentSheild += sheildRegenAmount;
+        currentShield += sheildRegenAmount;
     }
 
     

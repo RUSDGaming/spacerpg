@@ -196,6 +196,7 @@ MonoBehaviour:
   trackingObject: {fileID: 0}
   bulletTransform: {fileID: 0}
   maxIdleTime: 5
+  maxWanderDist: 35
 --- !u!114 &11410466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,8 +208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fa882aace1eba4b859dbfebbf8a8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 0
   stackSize: 0
   currentSize: 0
+  scrapValue: 1
+  buildCost: 1
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
   damageRatio: 1
@@ -218,6 +222,7 @@ MonoBehaviour:
   damage: 1
   fireRate: 1
   energyCost: 1
+  knockBackForce: 2
 --- !u!114 &11445658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,11 +251,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7016e158f1ac97c4598ed9dcf8969f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionSprites:
+  - {fileID: 21300000, guid: f8f55a912696314489d0f656a99b51d6, type: 3}
+  - {fileID: 21300000, guid: 9a707a6b3e696f8458e0edd6eff20bb9, type: 3}
+  - {fileID: 21300000, guid: 4b0abb93818a2f04cae4f4f68cae2e11, type: 3}
+  - {fileID: 21300000, guid: 474f23d4bb2166549a5b373136354c82, type: 3}
+  - {fileID: 21300000, guid: affe171dda853b6488dd7226ea92d15c, type: 3}
+  - {fileID: 21300000, guid: da23c9bae84fa3642b37a75b6d3f0251, type: 3}
+  - {fileID: 21300000, guid: 833566adcfc9c4f4fb1181005999bac5, type: 3}
+  - {fileID: 21300000, guid: e9690a11fadf1f34d82848d73b562208, type: 3}
+  - {fileID: 21300000, guid: 69e267788efe8db4bb1be8d5d5a87314, type: 3}
   weaponSlots:
   - {fileID: 11445658}
   baseHealth: 0
   baseArmor: 0
-  baseMaxSheild: 0
+  baseMaxShield: 0
   baseMaxEnergy: 0
   baseEnergyRegen: 0
   baseMoveForce: 0
@@ -259,8 +274,8 @@ MonoBehaviour:
   maxHealth: 1
   currentHealth: 1
   armor: .800000012
-  maxSheild: 0
-  currentSheild: 0
+  maxShield: 0
+  currentShield: 0
   maxEnergy: 100
   currentEnergy: 100
   energyRegen: 20
@@ -328,6 +343,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Volume
       value: .300000012
       objectReference: {fileID: 0}
@@ -351,6 +370,36 @@ Prefab:
       propertyPath: moveForce
       value: 4000
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: f8f55a912696314489d0f656a99b51d6,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a707a6b3e696f8458e0edd6eff20bb9,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: affe171dda853b6488dd7226ea92d15c,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: 833566adcfc9c4f4fb1181005999bac5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300000, guid: e9690a11fadf1f34d82848d73b562208,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300000, guid: 69e267788efe8db4bb1be8d5d5a87314,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 198652}

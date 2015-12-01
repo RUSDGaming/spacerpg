@@ -21,7 +21,8 @@ public class Weapon :Item {
 
     public float damage;
     public float fireRate;    
-    public float energyCost;    
+    public float energyCost;
+    public float knockBackForce = 2f;
     
 
     protected float lastShot = 0;
@@ -36,6 +37,8 @@ public class Weapon :Item {
 	}
 	public void Init(Transform parentTransform)
     {
+
+        if (GameObject.FindGameObjectWithTag("AudioManager"))
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         //this.parentTransform = parentTransform;
         lastShot = -fireRate;

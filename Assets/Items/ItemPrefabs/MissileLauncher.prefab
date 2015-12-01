@@ -40,8 +40,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794d23ff200dfbb4ab34d60ccd3aaf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 2
   stackSize: 1
   currentSize: 1
+  scrapValue: 1
+  buildCost: 1
   projectile: {fileID: 142028, guid: 1296de9c19de1344a96434b7271e1531, type: 2}
   weaponSound: {fileID: 0}
   damageRatio: .200000003

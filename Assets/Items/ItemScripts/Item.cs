@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(SpriteRenderer))]
 public class Item : MonoBehaviour
 {
 
-    public int stackSize;
-    public int currentSize;
+    public enum ItemType
+    {
+        NULL,BASIC,WEAPON,UTILITY,DEFENSE
+    }
+    public ItemType itemType;
 
+    public int stackSize = 1;
+    public int currentSize = 1;
+    public int scrapValue = 1;
+    public int buildCost = 1;
 
     // Use this for initialization
     void Start()
@@ -25,7 +33,7 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Inventory inv =  other.GetComponent<Inventory>();
-            if(inv.StoreItem(this))
+            if(inv.ItemSits(this))
                 gameObject.SetActive(false);
         }
     }

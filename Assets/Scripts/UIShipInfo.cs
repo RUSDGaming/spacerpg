@@ -11,7 +11,7 @@ public class UIShipInfo : MonoBehaviour {
     [SerializeField]    Image shipImage;
     [SerializeField]    Text healthText;
     [SerializeField]    Text armorText;
-    [SerializeField]    Text sheildText;
+    [SerializeField]    Text shieldText;
     [SerializeField]    Text energyText;
     [SerializeField]    Text energyRegenText;
     [SerializeField]    Text speedText;
@@ -39,10 +39,10 @@ public class UIShipInfo : MonoBehaviour {
         get { return armorText.text; }
         set { armorText.text = value; }
     }
-    public string SheildText
+    public string ShieldText
     {
-        get { return sheildText.text; }
-        set { sheildText.text = value; }
+        get { return shieldText.text; }
+        set { shieldText.text = value; }
     }
     public string EnergyText
     {

@@ -55,9 +55,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcf0c0f79387da40a1a5042915f1e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 1
   stackSize: 10
   currentSize: 1
-  moneyConversion: 10
+  scrapValue: 5
+  buildCost: 5
 --- !u!114 &11499822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,6 +110,14 @@ Prefab:
       propertyPath: itemInvetory
       value: 
       objectReference: {fileID: 157348, guid: 52e1cb5ae663d3b4a9f143689934f694, type: 2}
+    - target: {fileID: 0}
+      propertyPath: scrapValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buildCost
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174068}

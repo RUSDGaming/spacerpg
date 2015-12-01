@@ -31,8 +31,8 @@ public class PlayerEXPManager : MonoBehaviour, EnemyDiedSubscriber {
         if (e.exp <= 0)
             return;
 
-        Debug.Log(e.playerId);
-        Debug.Log(saveGameInfo.playerId);
+       // Debug.Log(e.playerId);
+       // Debug.Log(saveGameInfo.playerId);
 
         // only get half exp if you dont kill it. 
         if (e.playerId == saveGameInfo.playerId)

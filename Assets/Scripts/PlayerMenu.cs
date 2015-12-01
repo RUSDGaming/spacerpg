@@ -11,26 +11,26 @@ public class PlayerMenu : MonoBehaviour
 
     public PlayerController playerController;
     public GameObject mainMenu;
-    public PlayerStats playerStats;
+    //public PlayerStats playerStats;
 
-
+        
     [SerializeField]    GameObject storage;
     [SerializeField]    GameObject upgradeButton;
+    [SerializeField]    GameObject scrapper;
 
     [SerializeField]    Sprite defaultSprite;
     [SerializeField]    ControlSwitcher switcher;
+
+
 
     public GameObject ship;
     Ship shipScript;
 
     public bool shipNearChest = false;
 
-    [SerializeField]
-    GameObject slotHolder;
-    [SerializeField]
-    GameObject shipImage;
-    [SerializeField]
-    GameObject LevelUpText;
+    [SerializeField]    GameObject slotHolder;
+    [SerializeField]    GameObject shipImage;
+    [SerializeField]    GameObject LevelUpText;
 
     bool menuOpen = false;
 
@@ -64,6 +64,8 @@ public class PlayerMenu : MonoBehaviour
             {
                 storage.SetActive(true);
                 upgradeButton.SetActive(true);
+                scrapper.SetActive(true);
+
 
             }
         }
@@ -72,8 +74,8 @@ public class PlayerMenu : MonoBehaviour
         mainMenu.SetActive(true);
         menuOpen = true;
         switcher.reloadShipStats(false);
-        DeactivateInventorySlots();
-        OpenInventorySlots();
+       // DeactivateInventorySlots();
+      //  OpenInventorySlots();
     }
 
 
@@ -81,15 +83,27 @@ public class PlayerMenu : MonoBehaviour
     void CloseMenu()
     {
 
-        CloseInventorySlots();
-        playerStats.SavePlayerStats();
+       // CloseInventorySlots();
+       // playerStats.SavePlayerStats();
         switcher.reloadShipStats(false);
         playerController.disableInput = false;
         mainMenu.SetActive(false);
         storage.SetActive(false);
         upgradeButton.SetActive(false);
+        scrapper.SetActive(false);
         menuOpen = false;
     }
+
+
+
+    void FillUI()
+    {
+
+    }
+
+
+
+
 
     void OpenInventorySlots()
     {
@@ -180,12 +194,12 @@ public class PlayerMenu : MonoBehaviour
 
                 if (ids.realGamePrefab != null)
                 {
-                    inventory.StoreItem(ids.realGamePrefab.GetComponent<Item>(), i);
+                    inventory.ItemSits(ids.realGamePrefab.GetComponent<Item>(), i);
                     //inventory.items[i] = ids.realGamePrefab.GetComponent<Item>();
                 }
                 else
                 {
-                    inventory.StoreItem(null, i);
+                    inventory.ItemSits(null, i);
                 }
             }
             count += inventory.items.Length;

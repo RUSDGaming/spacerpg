@@ -33,7 +33,7 @@ public class ShowForceFeild : MonoBehaviour {
 	}
 
 
-    public void ShowSheild(float maxSheild, float currentSheild)
+    public void ShowShield(float maxSheild, float currentSheild)
     {
         this.gameObject.SetActive(true);
         float percent = currentSheild / maxSheild;

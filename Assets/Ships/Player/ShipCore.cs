@@ -125,6 +125,6 @@ public class ShipCore : MonoBehaviour , iShip {
 
     public void SetActualStats(SaveGameInfo stats, bool heal)
     {
-        Debug.Log("ship core not set up yet to load actual stats");
+        //Debug.Log("ship core not set up yet to load actual stats");
     }
 }

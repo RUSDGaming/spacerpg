@@ -6,4 +6,7 @@ sometimes objects can go out of bounds. I don't know why
 
 when player dies cameras stop tracking
 
-when you warp home minimap does not reset. 
+when you warp home minimap does not reset.  -- fixed
+
+wrap around stops working when you go back home. 
+

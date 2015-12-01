@@ -250,6 +250,8 @@ public class EnemyAI : MonoBehaviour
 
     void StateMachine()
     {
+        if (!ship.alive)
+            return;
 
         if (trackingObject != null)
         {           

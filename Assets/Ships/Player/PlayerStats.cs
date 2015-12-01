@@ -24,7 +24,7 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
 
     public enum STATS
     {
-        HEALTH, ARMOR, SHEILD,
+        HEALTH, ARMOR, SHIELD,
         TURN_RATE, MOVE_SPEED,
         DAMAGE, FIRE_RATE,
         LASER, PROJECTILE, EXPLOSION,
@@ -187,7 +187,7 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
             {
                 case STATS.HEALTH: actualValue = baseValue * (1 + .05f * level); break;
                 case STATS.ARMOR: goto case STATS.HEALTH;                    
-                case STATS.SHEILD: goto case STATS.HEALTH;                    
+                case STATS.SHIELD: goto case STATS.HEALTH;                    
                 case STATS.TURN_RATE:  actualValue = baseValue * (1 + .1f * level); break;
                 case STATS.MOVE_SPEED: goto case STATS.HEALTH;
                 case STATS.ENERGY_REGENERATION: goto case STATS.HEALTH;
@@ -245,7 +245,7 @@ static class enumMethods
         {
             case PlayerStats.STATS.HEALTH: return "Health";
             case PlayerStats.STATS.ARMOR: return "Armor";
-            case PlayerStats.STATS.SHEILD: return "Sheild";
+            case PlayerStats.STATS.SHIELD: return "Sheild";
             case PlayerStats.STATS.TURN_RATE: return "Turn rate";
             case PlayerStats.STATS.MOVE_SPEED: return "Move Speed";
             case PlayerStats.STATS.DAMAGE: return "Damage";

@@ -28,9 +28,10 @@ public class Inventory : MonoBehaviour {
 	}	
 
     
-
-    public virtual bool StoreItem(Item item , int index)
+    // i probbally shouldnt do this it just is funny... lol
+    public virtual bool ItemSits(Item item , int index)
     {
+        
         if (item)
         {
         item.transform.SetParent(cargo);
@@ -43,7 +44,7 @@ public class Inventory : MonoBehaviour {
         return false;
     }
 
-   public virtual bool StoreItem(Item item)
+   public virtual bool ItemSits(Item item)
     {
         item.transform.SetParent(cargo);
         item.transform.localPosition = Vector3.zero;
@@ -58,6 +59,28 @@ public class Inventory : MonoBehaviour {
         }
         return false;
              
+    }
+
+    public virtual bool ItemFits(Item item)
+    {
+
+        return true;
+    }
+
+    
+
+    public virtual void LoadItemsIntoUI(Transform ui)
+    {
+        //Debug.Log("starting the thing" +items.Length);
+
+        for (int i = 0; i < items.Length; i++)
+        {
+           // Debug.Log("aoeu");
+            UISlot2 slot = ui.GetChild(i).GetComponent<UISlot2>();
+            slot.inventory = this;
+            slot.gameObject.SetActive(true);
+            slot.SetUpItem(items[i], i);
+        }
     }
 
 }

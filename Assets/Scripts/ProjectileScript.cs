@@ -2,6 +2,7 @@
 using System.Collections;
 using Game.Interfaces;
 
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class ProjectileScript : MonoBehaviour {
@@ -34,8 +35,21 @@ public class ProjectileScript : MonoBehaviour {
     protected IEnumerator Destroy(float time)
     {
         yield return new WaitForSeconds(time);
+        iTween.Init(gameObject);
+
+        iTween.ScaleTo(gameObject,
+            iTween.Hash("y", 0,
+            "x", 0,
+            "easeType", iTween.EaseType.easeOutQuad,
+            "loopType", iTween.LoopType.none, "delay", 0,
+            "time", .5f));
+        yield return new WaitForSeconds(.6f);
+
         Destroy(this.gameObject);
     }
+
+    
+    
                 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -53,27 +67,45 @@ public class ProjectileScript : MonoBehaviour {
         if (playerBullet && other.CompareTag("Enemy"))
         {
             DamageUnit du = other.GetComponent<DamageUnit>();
-            du.Damage(damage, id);            
-            DestroyObject(this.gameObject);
+            du.Damage(damage, id);
+            StartCoroutine(BulletCollide());
         }
 
         if (!playerBullet && other.CompareTag("Player"))
         {
             DamageUnit du = other.GetComponent<DamageUnit>();
             du.Damage(damage, id);
-            DestroyObject(this.gameObject);
+            StartCoroutine(BulletCollide());
         }
 
         if (other.CompareTag("Neutral"))
         {
             DamageUnit du = other.GetComponent<DamageUnit>();
             du.Damage(damage, id);
-            DestroyObject(this.gameObject);
+            StartCoroutine(BulletCollide());
         }
 
         if (!other.isTrigger)
-            DestroyObject(this.gameObject);
+            StartCoroutine(BulletCollide());
 
+    }
+
+    protected IEnumerator BulletCollide()
+    {
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+        body.velocity = Vector3.zero;
+
+        iTween.Init(gameObject);
+        //todo show a different sprite here instead of tweening
+        iTween.ScaleTo(gameObject,
+          iTween.Hash("y", 0,
+          "x", 0,
+          "easeType", iTween.EaseType.easeOutQuad,
+          "loopType", iTween.LoopType.none, "delay", 0,
+          "time", .2f));
+        yield return new WaitForSeconds(.2f);
+        Destroy(gameObject); 
+        
     }
 
     public void IsPlayer(bool isPlayer)

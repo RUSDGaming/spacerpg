@@ -57,8 +57,8 @@ public class StatHolderScript : MonoBehaviour {
             case PlayerStats.STATS.ARMOR:
                 saveGameInfo.ARMOR++;
                 break;
-            case PlayerStats.STATS.SHEILD:
-                saveGameInfo.SHEILD++;
+            case PlayerStats.STATS.SHIELD:
+                saveGameInfo.SHIELD++;
                 break;
             case PlayerStats.STATS.TURN_RATE:
                 saveGameInfo.TURN_RATE++;
@@ -138,8 +138,8 @@ public class StatHolderScript : MonoBehaviour {
                 case PlayerStats.STATS.ARMOR:
                     statLevel = saveGameInfo.ARMOR;
                     break;
-                case PlayerStats.STATS.SHEILD:
-                    statLevel = saveGameInfo.SHEILD;
+                case PlayerStats.STATS.SHIELD:
+                    statLevel = saveGameInfo.SHIELD;
                     break;
                 case PlayerStats.STATS.TURN_RATE:
                     statLevel = saveGameInfo.TURN_RATE;

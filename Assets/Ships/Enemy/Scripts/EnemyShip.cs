@@ -7,12 +7,17 @@ using Game.Events;
 public class EnemyShip : MonoBehaviour , iShip{
 
 
+    [SerializeField]    Sprite[] explosionSprites;
+    Sprite baseSprite;
+    SpriteRenderer sr;
+    public bool alive = true;
+
     public WeaponInventory[] weaponSlots;
 
     #region Ship Base Stats ignored for now... 
     [SerializeField]    public float baseHealth;
     [SerializeField]    public float baseArmor;
-    [SerializeField]    public float baseMaxSheild;
+    [SerializeField]    public float baseMaxShield;
     [SerializeField]    public float baseMaxEnergy;
     [SerializeField]    public float baseEnergyRegen;
     [SerializeField]    public float baseMoveForce;
@@ -25,8 +30,8 @@ public class EnemyShip : MonoBehaviour , iShip{
     public    float maxHealth;
     public    float currentHealth;
     public    float armor;
-    public    float maxSheild;
-    public    float currentSheild;
+    public    float maxShield;
+    public    float currentShield;
     public    float maxEnergy;
     public    float currentEnergy;
     public    float energyRegen;
@@ -44,10 +49,12 @@ public class EnemyShip : MonoBehaviour , iShip{
     ShowForceFeild forceFeild;
 
     // Use this for initialization
-    void Start () {
-
-    body = GetComponent<Rigidbody2D>();
-    forceFeild = GetComponentInChildren<ShowForceFeild>();
+    protected void Start () {
+        Debug.Log(this);
+        sr = GetComponent<SpriteRenderer>();
+        baseSprite = GetComponent<SpriteRenderer>().sprite;
+        body = GetComponent<Rigidbody2D>();
+        forceFeild = GetComponentInChildren<ShowForceFeild>();
         lastWeaponSoundPlayed = -weaponSoundRate;
     }
 	
@@ -59,13 +66,13 @@ public class EnemyShip : MonoBehaviour , iShip{
     void FixedUpdate()
     {
         regenEnergy();
-        RegenSheild();
+        RegenShield();
     }
 
     public void Damage(float damageAmount, int damagerId)
     {
         float damageToShip = 0;
-        damageToShip = DamageSheild(damageAmount);
+        damageToShip = DamageShield(damageAmount);
         damageToShip = DamageArmor(damageToShip);
         currentHealth -= damageToShip;
         if (currentHealth <= 0)
@@ -74,8 +81,21 @@ public class EnemyShip : MonoBehaviour , iShip{
         }
 
         if (damageToShip > 0)
-            InfoBlurbManager.CreateInfoBlurb(this.transform.position, damageToShip.ToString(".0"), Color.red);
+        {
+
+            StartCoroutine(ShowDamage(damageToShip));
+
+        }
     }
+    private IEnumerator ShowDamage(float damageToShip)
+    {
+        InfoBlurbManager.CreateInfoBlurb(this.transform.position, damageToShip.ToString(".0"), Color.red);
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = new Color(1, .5f, .5f);
+        yield return new WaitForSeconds(.1f);
+        sr.color = new Color(1, 1, 1);
+    }
+
 
     public void DestroyShip(int killerdId)
     {
@@ -86,9 +106,31 @@ public class EnemyShip : MonoBehaviour , iShip{
         EnemyDiedEventArgs args = new EnemyDiedEventArgs { playerId = 1, exp = this.exp };
         GameEventSystem.PublishEvent(typeof(EnemyDiedSubscriber), args);
         }
-        
+        StartCoroutine(DeathAnim());
+
+    }
+
+    public IEnumerator DeathAnim()
+    {
+
+        alive = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+
+        for (int i = 0 ; i < explosionSprites.Length; i++)
+        {
+            if (sr== null)
+            {
+                Debug.Log("hate hate hate");
+            }
+            else
+            {
+                sr.sprite = explosionSprites[i];
+                yield return new WaitForSeconds(.1f);
+            }
+        }
 
         GameObject.Destroy(this.gameObject);
+
     }
 
     public void MoveUnit(Vector2 moveDir, bool relativeInput)
@@ -166,19 +208,19 @@ public class EnemyShip : MonoBehaviour , iShip{
         }
     }
 
-    float DamageSheild(float damage)
+    float DamageShield(float damage)
     {
-        currentSheild -= damage;
+        currentShield -= damage;
         if(forceFeild)
-        forceFeild.ShowSheild(maxSheild, currentSheild);
-        if (currentSheild >= 0)
+        forceFeild.ShowShield(maxShield, currentShield);
+        if (currentShield >= 0)
         {
             return 0;
         }
         else
         {
-            float damageRemaing = -currentSheild;
-            currentSheild = 0;
+            float damageRemaing = -currentShield;
+            currentShield = 0;
             return damageRemaing;
         }
     }
@@ -192,21 +234,21 @@ public class EnemyShip : MonoBehaviour , iShip{
         }
     }
 
-    void RegenSheild()
+    void RegenShield()
     {
 
-        if(currentSheild >= maxSheild)
+        if(currentShield >= maxShield)
         {
-            currentSheild = maxSheild;
+            currentShield = maxShield;
             return;
         }
 
-        float sheildRegenAmount = maxSheild * .1f * Time.fixedDeltaTime;
+        float sheildRegenAmount = maxShield * .1f * Time.fixedDeltaTime;
 
         if (sheildRegenAmount * 10f > currentEnergy)
             return;
 
         currentEnergy -= sheildRegenAmount * 10f;
-        currentSheild += sheildRegenAmount;
+        currentShield += sheildRegenAmount;
     }
 }

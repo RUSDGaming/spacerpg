@@ -192,6 +192,31 @@ Spawn Tiles{
 	dead ships / random debris
 }
 
+possibly hard code the levels with where the tiles should be, 
+asteroids should not all be the same size
+
+space stations should have weapon mounts and be able to move slowly. 
+
+groups of eniimes should alert others if they are being attacked...
+
+to fight the boss you need to unlock it first... 
+
+each region has a different way to unlock the boss{
+	
+	Basic- kill the 4 space stations
+
+	fire- turn off the sun
+	ice- collect the ice shards from the asteriods
+	electric - collect  energy packs
+	acid - destroy all the nuke plants
+
+	light - heal enemy ship
+	dark -- create a black hole
+
+
+
+}
+
 
 
 

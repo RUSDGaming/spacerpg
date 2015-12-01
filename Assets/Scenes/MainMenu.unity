@@ -8901,9 +8901,10 @@ MonoBehaviour:
     exp: 0
     level: 0
     points: 0
+    money: 0
     HEALTH: 0
     ARMOR: 0
-    SHEILD: 0
+    SHIELD: 0
     TURN_RATE: 0
     MOVE_SPEED: 0
     DAMAGE: 0

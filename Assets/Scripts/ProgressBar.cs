@@ -20,8 +20,17 @@ public class ProgressBar : MonoBehaviour {
 
     public void setImage(float currentValue, float maxValue)
     {
-        float percent = currentValue / maxValue;
-        percent = 1 - percent;    
+
+        float percent;
+        if(maxValue > 0)
+        {
+            percent = currentValue / maxValue;
+            percent = 1 - percent;       
+        }
+        else
+        {
+            percent = 1;
+        }
         imageTransform.localPosition = new Vector3( -imageTransform.rect.width * percent, 0, 0);     
     }
 }

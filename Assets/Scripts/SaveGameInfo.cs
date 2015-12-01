@@ -9,9 +9,11 @@ public class SaveGameInfo : SaveGame {
     public int level;  // used to calculate how much exp you will need for the next level as well as how many points you get on leveling up. 
     public int points;  // how many points you get to spend  
 
+    public int money;
+
     public int HEALTH;
     public int ARMOR;
-    public int SHEILD;
+    public int SHIELD;
     public int TURN_RATE;
     public int MOVE_SPEED;
     public int DAMAGE;

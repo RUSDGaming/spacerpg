@@ -26,7 +26,7 @@ public class ShipSelector : MonoBehaviour {
             info.ShipImage = ship.gameObject.GetComponent<SpriteRenderer>().sprite;
             info.HealthText = "Health: "+ ship.baseHealth;
             info.ArmorText = "Armor: " + ship.baseArmor;
-            info.SheildText = "Sheild: " + ship.baseMaxSheild;
+            info.ShieldText = "Sheild: " + ship.baseMaxShield;
             info.EnergyText = "Energy: " + ship.baseMaxEnergy;
             info.EnergyRegenText = "Energy Regen: " + ship.baseEnergyRegen;
             info.ThrustText = "Thrust :" + ship.baseMoveForce;

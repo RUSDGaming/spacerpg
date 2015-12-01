@@ -4,7 +4,7 @@ using System.Collections;
 public class Scrap : Item {
 
 
-    public float moneyConversion;
+    //public float moneyConversion;
 
   
 	// Use this for initialization

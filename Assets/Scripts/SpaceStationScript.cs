@@ -17,6 +17,7 @@ public class SpaceStationScript : EnemyShip{
 
     // Use this for initialization
     void Start () {
+        base.Start();
         ships = new List<EnemyShip>();
 	}
 	

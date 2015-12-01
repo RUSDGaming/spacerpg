@@ -25,6 +25,7 @@ item drops
 	stacking items
 	item upgrades
 
+Fix the ui system. It in unmainatianable
 
 rock paper scrissors
 	 for weapon types
@@ -39,3 +40,5 @@ Make a better mini Map
 
 
 add warp animation
+
+fix all the weapons on the ships to have the corect item type...

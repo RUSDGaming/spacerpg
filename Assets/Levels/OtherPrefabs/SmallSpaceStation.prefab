@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11432276}
   - 50: {fileID: 5071008}
   m_Layer: 10
-  m_Name: SmallSpaceDock
+  m_Name: SmallSpaceStation
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,10 +71,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd0b434e6dd5c64694af69214ca06ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionSprites:
+  - {fileID: 21300000, guid: f8f55a912696314489d0f656a99b51d6, type: 3}
+  - {fileID: 21300000, guid: 9a707a6b3e696f8458e0edd6eff20bb9, type: 3}
+  - {fileID: 21300000, guid: 4b0abb93818a2f04cae4f4f68cae2e11, type: 3}
+  - {fileID: 21300000, guid: 474f23d4bb2166549a5b373136354c82, type: 3}
+  - {fileID: 21300000, guid: affe171dda853b6488dd7226ea92d15c, type: 3}
+  - {fileID: 21300000, guid: da23c9bae84fa3642b37a75b6d3f0251, type: 3}
+  - {fileID: 21300000, guid: 833566adcfc9c4f4fb1181005999bac5, type: 3}
+  - {fileID: 21300000, guid: e9690a11fadf1f34d82848d73b562208, type: 3}
+  - {fileID: 21300000, guid: 69e267788efe8db4bb1be8d5d5a87314, type: 3}
+  alive: 1
   weaponSlots: []
   baseHealth: 0
   baseArmor: 0
-  baseMaxSheild: 0
+  baseMaxShield: 0
   baseMaxEnergy: 0
   baseEnergyRegen: 0
   baseMoveForce: 0
@@ -83,8 +94,8 @@ MonoBehaviour:
   maxHealth: 50
   currentHealth: 50
   armor: .5
-  maxSheild: 0
-  currentSheild: 0
+  maxShield: 0
+  currentShield: 0
   maxEnergy: 0
   currentEnergy: 0
   energyRegen: 0
@@ -128,6 +139,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: explosionSprites.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawnRate
       value: 15

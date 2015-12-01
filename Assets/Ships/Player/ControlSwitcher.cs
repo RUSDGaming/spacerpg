@@ -6,33 +6,46 @@ public class ControlSwitcher : MonoBehaviour {
 
     public    GameObject shipCore;
     public    GameObject mainShip;
-    [SerializeField]    FollowTransform cameraFollower;
+   // [SerializeField]    FollowTransform cameraFollower;
     [SerializeField]    PlayerMenu menu;
     [SerializeField]    StatHolderScript statHolderScript;
     [SerializeField]    PlayerDetails playerDetails;
 
-    [SerializeField]    PlayerEXPManager expManager;
     [SerializeField]    ProgressBar health;
     [SerializeField]    ProgressBar shield;
     [SerializeField]    ProgressBar energy;
 
+
     public SaveGameInfo playerStats;
 
+    PlayerEXPManager expManager;
+    ScrapperScript scrapperScript;
     Ship ship;
     GameLogic logic;
+    InventoryManager inventoryManager;
 
 	// Use this for initialization
 	void Start () {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<GameLogic>();
 
         expManager = GetComponent<PlayerEXPManager>();
+        scrapperScript = GetComponent<ScrapperScript>();
+        inventoryManager = GetComponent<InventoryManager>();
+
         // TODO set the player id correctly
         string fileName = PlayerPrefs.GetString(LoadPannel.current);
         playerStats = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
         playerStats.playerId = 1;
         Debug.Log(playerStats.primaryType);
+
         statHolderScript.SaveGameInfo = playerStats;
         expManager.saveGameInfo = playerStats;
+        scrapperScript.saveGameInfo = playerStats;
+        inventoryManager.ship = ship;
+        if(scrapperScript.saveGameInfo == null)
+        {
+            Debug.LogError("scrip wasnt set correctly");
+        }
 
 
         if (mainShip.activeInHierarchy)
@@ -49,9 +62,9 @@ public class ControlSwitcher : MonoBehaviour {
         if (!ship)
             return;
 
-        health.setImage(ship.currentHealth, ship.maxHealth);
-        energy.setImage(ship.currentEnergy, ship.maxEnergy);
-        shield.setImage(ship.currentSheild, ship.maxSheild);	
+       health.setImage(ship.currentHealth, ship.maxHealth);
+       energy.setImage(ship.currentEnergy, ship.maxEnergy);        
+       shield.setImage(ship.currentShield, ship.maxShield);	
 	}
 
     public void SwitchToShipCore()
@@ -65,6 +78,7 @@ public class ControlSwitcher : MonoBehaviour {
         shipCore.GetComponent<PlayerController>().disableInput = false;
         menu.playerController = shipCore.GetComponent<PlayerController>();
         shipCore.GetComponent<ShipCore>().SetActualStats(playerStats,true);
+        inventoryManager.ship = ship;
     }
 
     public void SwitchToMainShip()
@@ -78,6 +92,7 @@ public class ControlSwitcher : MonoBehaviour {
         reloadShipStats(true);
         ship = mainShip.GetComponent<Ship>();
         logic.TrackTarget(mainShip.transform);
+        inventoryManager.ship = ship;
     }
 
     public void reloadShipStats(bool heal)
@@ -105,6 +120,7 @@ public class ControlSwitcher : MonoBehaviour {
         // this reloads all the invertorys of the new ship...
         menu.OpenMenu();
         logic.TrackTarget(mainShip.transform);
+        inventoryManager.ship = ship;
     }
 
     public void UpgradeShip()
@@ -134,11 +150,11 @@ public class ControlSwitcher : MonoBehaviour {
         
     }
 
-    void SetFollowers(GameObject shipGO)
-    {
-        cameraFollower.followObject = shipGO.transform;
-        menu.playerController = shipGO.GetComponent<PlayerController>();
-        menu.SetShip(shipGO);
-    }
+    //void SetFollowers(GameObject shipGO)
+    //{
+    //    cameraFollower.followObject = shipGO.transform;
+    //    menu.playerController = shipGO.GetComponent<PlayerController>();
+    //    menu.SetShip(shipGO);
+    //}
 
 }
