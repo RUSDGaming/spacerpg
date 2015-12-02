@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Game.Interfaces;
 
@@ -33,8 +34,8 @@ public class ControlSwitcher : MonoBehaviour {
         inventoryManager = GetComponent<InventoryManager>();
 
         // TODO set the player id correctly
-        string fileName = PlayerPrefs.GetString(LoadPannel.current);
-        playerStats = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
+        LoadSavedShip();
+
         playerStats.playerId = 1;
         Debug.Log(playerStats.primaryType);
 
@@ -104,6 +105,22 @@ public class ControlSwitcher : MonoBehaviour {
         playerDetails.ReadPlayerStats();
     }
 
+    public void SetShip(Ship newShip)
+    {
+        if (mainShip)
+        {
+            mainShip.transform.SetParent(null);
+            Destroy(mainShip.gameObject);
+        }
+        mainShip = newShip.gameObject;
+        SwitchToMainShip();
+        
+        
+
+    }
+
+
+    [Obsolete("Use SetShip instead")]
     public void SetMainShip(GameObject shipPrefab)
     {
         shipCore.transform.position = mainShip.transform.position;
@@ -126,35 +143,44 @@ public class ControlSwitcher : MonoBehaviour {
     public void UpgradeShip()
     {
         NextUpgrade nextShip =  ship.GetComponent<NextUpgrade>();
+
+        if(playerStats.money < nextShip.upgradeCost)
+        {
+            return;
+        }
+
         if (!nextShip.prefab)
         {
             return;
         }
-        //GameObject next =  Instantiate(nextShip.prefab);
-        //if (!next)
-        //{
-        //    return;
-        //}
+
+        playerStats.money -= nextShip.upgradeCost;
+
+
+        
         SetMainShip(nextShip.prefab);
-        //next.transform.SetParent(ship.transform.parent);
-        //next.transform.position = ship.transform.position;
-
-        //Destroy(mainShip.gameObject);
-        //mainShip = next;
-        //reloadShipStats(true);
-
-        //ship = next.GetComponent<Ship>();
-        //SetFollowers(mainShip);
-
-        //menu.OpenMenu();
+        
         
     }
 
-    //void SetFollowers(GameObject shipGO)
-    //{
-    //    cameraFollower.followObject = shipGO.transform;
-    //    menu.playerController = shipGO.GetComponent<PlayerController>();
-    //    menu.SetShip(shipGO);
-    //}
+
+    public void LoadSavedShip()
+    {
+        string fileName = PlayerPrefs.GetString(LoadPannel.current);
+        playerStats = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
+        
+
+    }
+
+    public void SavePlayerGame()
+    {
+        // save player stats
+        // save player shipInfo
+            // save ship inventory
+            // save ship equiped weapons
+
+        //save stationary inventory
+        //save scrapper ineventory
+    }
 
 }

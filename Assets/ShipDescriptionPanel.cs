@@ -43,7 +43,7 @@ public class ShipDescriptionPanel : MonoBehaviour {
                 shipTypeTile.text = "Deffense Class";
                 shipImage.sprite = deffenseShip.GetComponent<SpriteRenderer>().sprite;
                 break;
-            case PriortySelectorScript.ClassType.EMPTY:
+            case PriortySelectorScript.ClassType.BALANCED:
                 shipTypeTile.text = "Balanced Class";
                 shipImage.sprite = balancedShip.GetComponent<SpriteRenderer>().sprite;
                 break;

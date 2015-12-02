@@ -31,7 +31,7 @@ public class Weapon :Item {
 
 	// Use this for initialization
 	void Start () {
-
+        itemType = ItemType.WEAPON;
         
         
 	}

@@ -19,6 +19,8 @@ public class Ship : MonoBehaviour ,iShip{
     Sprite baseSprite;
 
 
+    
+
     #region equipment
     public WeaponInventory[] weaponSlots;
     [SerializeField]    ItemScript[] capacitors;
@@ -61,6 +63,7 @@ public class Ship : MonoBehaviour ,iShip{
     public float turnRate;
     #endregion
 
+    public int id = -1;
     public SaveGameInfo playerStats;
     public bool playerControlled = false;
     public bool playerAtSpaceStation = false;

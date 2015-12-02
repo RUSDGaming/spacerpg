@@ -13,7 +13,7 @@ public class EnemyTileScript : RandomTileScript {
         for (int i = 0; i < numEnemies; i++)
         {
             //Debug.Log("Initing thingnn");
-            EnemyShip ship = Instantiate(enemy);
+            EnemyShip ship = EnemyGenerator.CreateRandomShip();
 
             ship.transform.SetParent(this.transform);
 

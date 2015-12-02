@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 
 [RequireComponent (typeof(SpriteRenderer))]
 public class Item : MonoBehaviour
@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
         NULL,BASIC,WEAPON,UTILITY,DEFENSE
     }
     public ItemType itemType;
+    public int id = -1;
 
     public int stackSize = 1;
     public int currentSize = 1;

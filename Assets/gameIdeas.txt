@@ -23,3 +23,5 @@ work on more ship equiptibles.
 fruityloops is for music stuff
 
 TSS zicman  Turtle Space Ship
+
+Raverrow445 Perk that prevents collision damage with  w/e

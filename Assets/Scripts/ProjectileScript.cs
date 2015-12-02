@@ -94,6 +94,7 @@ public class ProjectileScript : MonoBehaviour {
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
         body.velocity = Vector3.zero;
+        GetComponent<Collider2D>().enabled = false;
 
         iTween.Init(gameObject);
         //todo show a different sprite here instead of tweening

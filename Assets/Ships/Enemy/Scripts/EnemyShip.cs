@@ -50,7 +50,7 @@ public class EnemyShip : MonoBehaviour , iShip{
 
     // Use this for initialization
     protected void Start () {
-        Debug.Log(this);
+       // Debug.Log(this);
         sr = GetComponent<SpriteRenderer>();
         baseSprite = GetComponent<SpriteRenderer>().sprite;
         body = GetComponent<Rigidbody2D>();

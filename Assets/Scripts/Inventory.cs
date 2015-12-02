@@ -1,42 +1,77 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour
+{
 
     public enum InventoryType
     {
         SHIP_CORE, STATIONARY, SHIP, WEAPON_SLOT
     }
 
+    [SerializeField]
+    bool loadInventoryFromSave = false;
+    [SerializeField]
+    string inventoryName = "notSet";
     public int inventorySize = 10;
-    public Item[] items ;
+    public Item[] items;
 
     public InventoryType inventoryType;
     [SerializeField]
     protected Transform cargo;
 
-	// Use this for initialization
-	void Start () {
-       
-            items = new Item[inventorySize]; 
-        if(cargo)      
-        for(int i = 0; i < cargo.childCount; i++)
+    public void Update()
+    {
+        if (loadInventoryFromSave)
         {
-            items[i] = cargo.GetChild(i).GetComponent<Item>();
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SaveItems();
         }
 
-	}	
-
-    
-    // i probbally shouldnt do this it just is funny... lol
-    public virtual bool ItemSits(Item item , int index)
-    {
         
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            LoadSavedItems();
+        }
+        }
+
+    }
+
+
+
+
+    // Use this for initialization
+    void Start()
+    {
+
+            items = new Item[inventorySize];
+        if (loadInventoryFromSave)
+        {
+            LoadSavedItems();
+        }
+        else
+        {
+            if (cargo)
+                for (int i = 0; i < cargo.childCount; i++)
+                {
+                    items[i] = cargo.GetChild(i).GetComponent<Item>();
+                }
+        }
+
+    }
+
+
+    // i probbally shouldnt do this it just is funny... lol
+    public virtual bool ItemSits(Item item, int index)
+    {
+
         if (item)
         {
-        item.transform.SetParent(cargo);
-        item.transform.localPosition = Vector3.zero;
-        item.gameObject.SetActive(false);
+            item.transform.SetParent(cargo);
+            item.transform.localPosition = Vector3.zero;
+            item.gameObject.SetActive(false);
         }
 
         items[index] = item;
@@ -44,21 +79,22 @@ public class Inventory : MonoBehaviour {
         return false;
     }
 
-   public virtual bool ItemSits(Item item)
+    public virtual bool ItemSits(Item item)
     {
         item.transform.SetParent(cargo);
         item.transform.localPosition = Vector3.zero;
         item.gameObject.SetActive(false);
 
-        for(int i = 0; i < items.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            if (items[i] == null) {
+            if (items[i] == null)
+            {
                 items[i] = item;
                 return true;
             }
         }
         return false;
-             
+
     }
 
     public virtual bool ItemFits(Item item)
@@ -67,7 +103,28 @@ public class Inventory : MonoBehaviour {
         return true;
     }
 
-    
+    public void LoadSavedItems()
+    {
+        Debug.Log("loading inevtory from save");
+        string fileName = PlayerPrefs.GetString(LoadPannel.current);
+        SaveGameInventory sgi = SaveGameSystem.LoadGame(fileName + inventoryName) as SaveGameInventory;
+        if (sgi != null)
+        {
+                sgi.getItems(ref items);
+            
+            
+        }
+
+    }
+    public void SaveItems()
+    {
+        SaveGameInventory sgi = new SaveGameInventory();
+        sgi.SetItems(items);
+        string fileName = PlayerPrefs.GetString(LoadPannel.current);
+        SaveGameSystem.SaveGame(sgi, fileName + inventoryName);
+        Debug.Log("saved inventory: " + inventoryName);
+    }
+
 
     public virtual void LoadItemsIntoUI(Transform ui)
     {
@@ -75,7 +132,7 @@ public class Inventory : MonoBehaviour {
 
         for (int i = 0; i < items.Length; i++)
         {
-           // Debug.Log("aoeu");
+            // Debug.Log("aoeu");
             UISlot2 slot = ui.GetChild(i).GetComponent<UISlot2>();
             slot.inventory = this;
             slot.gameObject.SetActive(true);

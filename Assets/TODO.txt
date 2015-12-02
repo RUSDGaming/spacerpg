@@ -42,3 +42,19 @@ Make a better mini Map
 add warp animation
 
 fix all the weapons on the ships to have the corect item type...
+
+create deffense and utitly slot
+
+modify the ships weapon slot type based on the class selelected....
+
+
+add all items to item manager
+
+set the ship when you create a new save. 
+
+change order of operations on all of the player container things.
+
+saving ship weapon slots
+saving ship inventory
+
+saving items in ship ineventory when upgrading ship as well as the weapons.

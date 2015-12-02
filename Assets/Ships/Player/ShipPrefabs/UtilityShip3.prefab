@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 191294, guid: 426a06442d4ca044f8fc6b34d06c023d, type: 2}
+  upgradeCost: 100
 --- !u!114 &11433914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,6 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd4066bfb4909742ab1f3c56e8ae3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionSprites: []
   weaponSlots:
   - {fileID: 11481216}
   - {fileID: 11493158}
@@ -334,7 +336,7 @@ MonoBehaviour:
   switcher: {fileID: 0}
   baseHealth: 10
   baseArmor: 10
-  baseMaxSheild: 10
+  baseMaxShield: 0
   baseMaxEnergy: 100
   baseEnergyRegen: 100
   baseMoveForce: 8000
@@ -343,15 +345,60 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   armor: 0
-  maxSheild: 0
-  currentSheild: 0
+  maxShield: 0
+  currentShield: 0
   maxEnergy: 0
   currentEnergy: 0
   energyRegen: 0
   moveForce: 0
   maxSpeed: 0
   turnRate: 0
-  playerStats: {fileID: 0}
+  id: 10
+  playerStats:
+    exp: 0
+    level: 0
+    points: 0
+    money: 0
+    HEALTH: 0
+    ARMOR: 0
+    SHIELD: 0
+    TURN_RATE: 0
+    MOVE_SPEED: 0
+    DAMAGE: 0
+    FIRE_RATE: 0
+    LASER: 0
+    PROJECTILE: 0
+    EXPLOSION: 0
+    ENERGY_REGENERATION: 0
+    ENERGY_CAPACITY: 0
+    FIRE: 0
+    ELECTRIC: 0
+    ACID: 0
+    ICE: 0
+    LIGHT: 0
+    DARK: 0
+    primaryType: 0
+    p1: 0
+    p2: 0
+    p3: 0
+    a1: 0
+    a2: 0
+    a3: 0
+    a4: 0
+    a5: 0
+    a6: 0
+    u1: 0
+    u2: 0
+    u3: 0
+    u4: 0
+    u5: 0
+    u6: 0
+    d1: 0
+    d2: 0
+    d3: 0
+    d4: 0
+    d5: 0
+    d6: 0
   playerControlled: 0
   playerAtSpaceStation: 0
 --- !u!114 &11441716
@@ -395,8 +442,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fa882aace1eba4b859dbfebbf8a8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 0
+  id: -1
   stackSize: 0
   currentSize: 0
+  scrapValue: 1
+  buildCost: 1
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
   damageRatio: .200000003
@@ -406,6 +457,7 @@ MonoBehaviour:
   damage: 1
   fireRate: 1
   energyCost: 1
+  knockBackForce: 2
 --- !u!114 &11448502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,8 +469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fa882aace1eba4b859dbfebbf8a8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 0
+  id: -1
   stackSize: 0
   currentSize: 0
+  scrapValue: 1
+  buildCost: 1
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
   damageRatio: .200000003
@@ -428,6 +484,7 @@ MonoBehaviour:
   damage: 1
   fireRate: 1
   energyCost: 1
+  knockBackForce: 2
 --- !u!114 &11464960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,8 +496,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fa882aace1eba4b859dbfebbf8a8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 0
+  id: -1
   stackSize: 0
   currentSize: 0
+  scrapValue: 1
+  buildCost: 1
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
   damageRatio: .200000003
@@ -450,6 +511,7 @@ MonoBehaviour:
   damage: 1
   fireRate: 1
   energyCost: 1
+  knockBackForce: 2
 --- !u!114 &11471188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -461,6 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b1345795092d4ebcda6be2e0ac0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 1
   items:
   - {fileID: 11448502}
@@ -478,6 +542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4b07d8c08141140a5dd6ee0d00280f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 10
   items: []
   inventoryType: 2
@@ -493,6 +559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b1345795092d4ebcda6be2e0ac0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 1
   items:
   - {fileID: 11444072}
@@ -510,6 +578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b1345795092d4ebcda6be2e0ac0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 1
   items:
   - {fileID: 11464960}
@@ -631,6 +701,10 @@ Prefab:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 191294, guid: 426a06442d4ca044f8fc6b34d06c023d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: id
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 129348}
