@@ -94,12 +94,18 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
                 Item temp = item; // save this item
                 if(slot.inventory.ItemFits(item) && inventory.ItemFits(slot.GetItem()))
                 {
+                  //  Debug.Log("swapping items...");
+                   // Debug.Log("1 is " +slot.GetItem());
+                  //  Debug.Log("2 is " + item);
                     SetItem(slot.GetItem()); /// set me to other item
                     slot.SetItem(temp);
+
+                   // Debug.Log("1 is now" + slot.GetItem());
+                   // Debug.Log("2 is now" + item);
                 }
 
     
-                Debug.Log("ended over another slot");
+               // Debug.Log("ended over another slot");
 
             }
 

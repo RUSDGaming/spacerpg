@@ -40,14 +40,17 @@ public class Inventory : MonoBehaviour
     }
 
 
-
+    void Awake()
+    {
+        //Debug.Log("waking up....");
+        items = new Item[inventorySize];
+       
+    }
 
     // Use this for initialization
     void Start()
     {
-
-            items = new Item[inventorySize];
-        if (loadInventoryFromSave)
+     if (loadInventoryFromSave)
         {
             LoadSavedItems();
         }
@@ -67,6 +70,7 @@ public class Inventory : MonoBehaviour
     public virtual bool ItemSits(Item item, int index)
     {
 
+       // Debug.Log("setting an item with index: " + index+ " and this item is : " +item);
         if (item)
         {
             item.transform.SetParent(cargo);
@@ -81,9 +85,14 @@ public class Inventory : MonoBehaviour
 
     public virtual bool ItemSits(Item item)
     {
-        item.transform.SetParent(cargo);
-        item.transform.localPosition = Vector3.zero;
-        item.gameObject.SetActive(false);
+
+        Debug.Log("Setting an item without an index...");
+        if (item)
+        {
+            item.transform.SetParent(cargo);
+            item.transform.localPosition = Vector3.zero;
+            item.gameObject.SetActive(false);
+        }
 
         for (int i = 0; i < items.Length; i++)
         {
@@ -105,7 +114,7 @@ public class Inventory : MonoBehaviour
 
     public void LoadSavedItems()
     {
-        Debug.Log("loading inevtory from save");
+       // Debug.Log("loading inevtory from save");
         string fileName = PlayerPrefs.GetString(LoadPannel.current);
         SaveGameInventory sgi = SaveGameSystem.LoadGame(fileName + inventoryName) as SaveGameInventory;
         if (sgi != null)
@@ -122,7 +131,7 @@ public class Inventory : MonoBehaviour
         sgi.SetItems(items);
         string fileName = PlayerPrefs.GetString(LoadPannel.current);
         SaveGameSystem.SaveGame(sgi, fileName + inventoryName);
-        Debug.Log("saved inventory: " + inventoryName);
+        //Debug.Log("saved inventory: " + inventoryName);
     }
 
 

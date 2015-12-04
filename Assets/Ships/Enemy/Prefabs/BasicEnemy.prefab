@@ -63,6 +63,7 @@ GameObject:
   - 61: {fileID: 6107532}
   - 50: {fileID: 5020284}
   - 114: {fileID: 11460034}
+  - 114: {fileID: 11433890}
   m_Layer: 10
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -114,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 12, z: 0}
+  m_LocalPosition: {x: 200, y: 57.6900635, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 453882}
@@ -209,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
+  id: -1
   stackSize: 0
   currentSize: 0
   scrapValue: 1
@@ -223,6 +225,18 @@ MonoBehaviour:
   fireRate: 1
   energyCost: 1
   knockBackForce: 2
+--- !u!114 &11433890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a280ec1a62ed3d4a81ac9fcfaaf1364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: 00000000000000000000000000000000000000000000000000000000000000000000000001000000
 --- !u!114 &11445658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -234,6 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b1345795092d4ebcda6be2e0ac0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 1
   items:
   - {fileID: 11410466}
@@ -261,6 +277,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 833566adcfc9c4f4fb1181005999bac5, type: 3}
   - {fileID: 21300000, guid: e9690a11fadf1f34d82848d73b562208, type: 3}
   - {fileID: 21300000, guid: 69e267788efe8db4bb1be8d5d5a87314, type: 3}
+  alive: 1
   weaponSlots:
   - {fileID: 11445658}
   baseHealth: 0

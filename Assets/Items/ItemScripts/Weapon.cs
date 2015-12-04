@@ -12,7 +12,7 @@ public class Weapon :Item {
     [SerializeField]
     protected AudioClip weaponSound;
 
-    protected AudioManager audioManager;
+   // protected AudioManager audioManager;
 
     public float damageRatio = .2f;
     public float explosionRatio = 0;
@@ -38,8 +38,8 @@ public class Weapon :Item {
 	public void Init(Transform parentTransform)
     {
 
-        if (GameObject.FindGameObjectWithTag("AudioManager"))
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+       // if (GameObject.FindGameObjectWithTag("AudioManager"))
+       // audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         //this.parentTransform = parentTransform;
         lastShot = -fireRate;
     }
@@ -106,7 +106,7 @@ public class Weapon :Item {
     
     public void PlaySound()
     {
-        audioManager.playSound(weaponSound);
+        AudioManager.playSound(weaponSound);
     }
 
 

@@ -2,6 +2,7 @@
 using System.Collections;
 
 using Game.Events;
+using System;
 
 public abstract class LevelGeneratorScript : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public abstract class LevelGeneratorScript : MonoBehaviour
     }
 
     public TileType[,] tiles;
+    public GameObject[,] tileGameObjects;
 
     // Vector2 startPos;
 
@@ -50,6 +52,8 @@ public abstract class LevelGeneratorScript : MonoBehaviour
     public  int width = 5;
     public int height = 5;
 
+
+    
     // Use this for initialization
     void Start()
     {
@@ -78,6 +82,7 @@ public abstract class LevelGeneratorScript : MonoBehaviour
 
         halfChunk = chunkSize / 2;
         tiles = new TileType[width, height];
+        tileGameObjects = new GameObject[width, height];
 
         // set cameras to track the player
         // set the cameras max, min, tracking axis, startPos
@@ -132,6 +137,8 @@ public abstract class LevelGeneratorScript : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+
+        
         DoneLoadingMap();
     }
 
@@ -157,13 +164,13 @@ public abstract class LevelGeneratorScript : MonoBehaviour
             Debug.LogError("Your level is to small make the width or height > 3");
             return;
         }
-        int randX = Random.Range(1, width - 1);
-        int randY = Random.Range(1, height - 1);
+        int randX = UnityEngine.Random.Range(1, width - 1);
+        int randY = UnityEngine.Random.Range(1, height - 1);
         while (true)
         {
 
-            randX = Random.Range(1, width - 1);
-            randY = Random.Range(1, height - 1);
+            randX = UnityEngine.Random.Range(1, width - 1);
+            randY = UnityEngine.Random.Range(1, height - 1);
 
             if (tiles[randX, randY] == TileType.VOID)
                break;
@@ -182,7 +189,12 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.transform.localPosition = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
     }
 
     protected void GenerateEnemySpace(int x, int y, int maxEnemies)
@@ -193,7 +205,12 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.height = chunkSize;
         ts.width = chunkSize;
         ts.numEnemies = maxEnemies;
+        ts.x = x;
+        ts.y = y;
         ts.init();
+        ts.levelGeneratorScript = this;
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
 
     }
 
@@ -205,7 +222,12 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.width = chunkSize;
         ts.height = chunkSize;
         ts.numAsteroids = maxAsteroids;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
     }
 
     protected void GenerateBossSpace(int x, int y)
@@ -215,7 +237,12 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.transform.localPosition = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
 
     }
 
@@ -226,7 +253,11 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.transform.localPosition = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
     }
 
     protected void GenerateSunSpace(int x, int y)
@@ -236,7 +267,12 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.transform.localPosition = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
     }
 
     protected void GenerateStationSpace(int x, int y)
@@ -246,7 +282,12 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.transform.localPosition = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
     }
 
     protected void GeneratePlayerStationSpace(int x, int y)
@@ -256,7 +297,12 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.transform.localPosition = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
     }
 
     protected void GeneratePortalSpace(int x, int y)
@@ -266,9 +312,62 @@ public abstract class LevelGeneratorScript : MonoBehaviour
         ts.transform.localPosition = new Vector2(x * chunkSize + halfChunk, y * chunkSize + halfChunk);
         ts.width = chunkSize;
         ts.height = chunkSize;
+        ts.x = x;
+        ts.y = y;
+        ts.levelGeneratorScript = this;
         ts.init();
+        tileGameObjects[x, y] = ts.gameObject;
+        ts.gameObject.SetActive(false);
     }
 
     #endregion
 
+    public void PlayerEnteredTile(int x, int y)
+    {
+      //  Debug.Log("Player entered tile x: " + x + " y: " + y);
+        int xStart = x -3;
+        int yStart = y - 3;
+        int xEnd = x + 3;
+        int yEnd = y + 3;
+        for (int i = xStart; i <= xEnd; i++)
+        {
+            for (int j = yStart; j <= yEnd; j++)
+            {
+
+
+                        int tempI = i;
+                        int tempJ = j;
+                        if (i >= width)
+                            tempI = i - width;
+                        if (i < 0)
+                            tempI  = i + width;
+                        if (j >= height)
+                            tempJ = j - height;
+                        if (j < 0)
+                            tempJ = j + height;
+
+                try
+                {
+                    
+                    if(width > 5 && ( i == xStart || j == yStart || j == yEnd || i == xEnd))
+                    {
+                        
+                       // Debug.Log("xstart: " + xStart + " x:" + tempI + " ystart: " + yStart + " y: " + tempJ);
+                        tileGameObjects[tempI, tempJ].SetActive(false);
+
+                    }
+                    else
+                    {
+                        tileGameObjects[tempI, tempJ].SetActive(true);
+                    }
+                }catch(Exception e)
+                {
+                    
+                    Debug.LogError("temp I : "+tempI + " temp J : " + tempJ + " " + e);
+                }
+            }
+
+        }
+
+    }
 }

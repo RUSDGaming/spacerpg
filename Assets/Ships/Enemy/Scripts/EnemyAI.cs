@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 using Game.Interfaces;
 public class EnemyAI : MonoBehaviour
 {
@@ -24,8 +24,11 @@ public class EnemyAI : MonoBehaviour
 
     Vector3 startPos;
 
-    public Transform trackingObject;
-    public Transform bulletTransform;
+    //public Transform trackingObject;
+    //public Transform bulletTransform;
+    public List<Transform> playerShips = new List<Transform>(4);
+    public List<Transform> bullets = new List<Transform>(10);
+
     public float maxIdleTime = 5f;
     public float maxWanderDist = 35f;
 
@@ -58,34 +61,21 @@ public class EnemyAI : MonoBehaviour
     void FixedUpdate()
     {       
         
-        StateMachine();
+      StateMachine();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
-
-    public void OnTriggerStay2D(Collider2D other)
-    {
-
-        if(!bulletTransform)
-        if (other.gameObject.layer == LayerMask.NameToLayer("playerProjectile")){
-                bulletTransform = other.transform;
-        }
-
-        if (!trackingObject)
+        if (other.gameObject.layer == LayerMask.NameToLayer("playerProjectile"))
         {
-
-            if (other.CompareTag("Player"))
-            {
-               // Debug.Log("Player entered radar range");
-                trackingObject = other.transform;
-
-                SetTurretTracking(other.transform);
-            }
+            bullets.Add(other.transform);
+        }else if (other.CompareTag("Player"))
+        {
+            playerShips.Add(other.transform);
         }
+            
     }
+
 
     void SetTurretTracking(Transform target)
     {
@@ -104,18 +94,28 @@ public class EnemyAI : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        // when player leaves set the tracking object to null.
-        if(other.transform == trackingObject)
+        if (other.gameObject.layer == LayerMask.NameToLayer("playerProjectile"))
         {
-            trackingObject = null;
-            SetTurretTracking(null);
-            return;
+            bullets.Remove(other.transform);            
+        }
+        else if (other.CompareTag("Player"))
+        {
+            playerShips.Remove(other.transform);            
         }
 
-        if (other.transform == bulletTransform)
-        {
-            bulletTransform = null;
-        }
+
+        // when player leaves set the tracking object to null.
+        //if(other.transform == trackingObject)
+        //{
+        //    trackingObject = null;
+        //    SetTurretTracking(null);
+        //    return;
+        //}
+
+        //if (other.transform == bulletTransform)
+        //{
+        //    bulletTransform = null;
+        //}
         //state = State.IDLE;
     }
 
@@ -192,8 +192,12 @@ public class EnemyAI : MonoBehaviour
             //Vector3 cross = Vector3.Cross(enenmyToPlayer, transform.up);
             //if (cross.z > 0)
             //    angle = -angle;
-            angle = Util.AngleBetween(trackingObject.position, transform);
-            ship.RotateUnit(angle);
+            if(playerShips.Count > 0)
+            {
+                angle = Util.AngleBetween(playerShips[0].position, transform);
+                ship.RotateUnit(angle);
+            }
+
         }
         else
         {
@@ -224,15 +228,22 @@ public class EnemyAI : MonoBehaviour
         {
             if (Mathf.Abs(angle) < ship.turnRate)
             {
-                float dist = Vector3.Distance(trackingObject.transform.position, transform.position);
+
+                if(playerShips.Count > 0)
+                {
+
+
+                float dist = Vector3.Distance(playerShips[0].position, transform.position);
                 if (dist > MaxDist)
                     ship.MoveUnit(new Vector2(0, 1), true);
                 else if (dist < minDist)
                     ship.MoveUnit(new Vector2(0, -1), true);
                 //else
+                }
                 
             }
-            if (bulletTransform)
+            
+            if (bullets.Count > 0 )
             {   // if there is a bullet inside you will dodge.
                 ship.MoveUnit(new Vector2(1f, 0), true);
             }
@@ -253,7 +264,7 @@ public class EnemyAI : MonoBehaviour
         if (!ship.alive)
             return;
 
-        if (trackingObject != null)
+        if (playerShips.Count > 0)
         {           
             state = State.ATTACK;
 

@@ -106,6 +106,12 @@ public class EnemyShip : MonoBehaviour , iShip{
         EnemyDiedEventArgs args = new EnemyDiedEventArgs { playerId = 1, exp = this.exp };
         GameEventSystem.PublishEvent(typeof(EnemyDiedSubscriber), args);
         }
+
+        DropItem dropItem = GetComponent<DropItem>();
+        if (dropItem)
+        {
+            dropItem.SpawnItem();
+        }
         StartCoroutine(DeathAnim());
 
     }

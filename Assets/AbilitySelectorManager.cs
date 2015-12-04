@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class AbilitySelectorManager : MonoBehaviour {
 
+    [SerializeField]    LoadShipFromSave loadShipFromSave;
+
+
     [SerializeField]    AbilitySelectorScript attack;
     [SerializeField]    AbilitySelectorScript utility;
     [SerializeField]    AbilitySelectorScript deffense;
@@ -125,7 +128,36 @@ public class AbilitySelectorManager : MonoBehaviour {
 
         Debug.Log("Creating Ship with stats...");
         Debug.Log(saveGameInfo.ToString());
+
+
+        
+
         SaveGameSystem.SaveGame(saveGameInfo, LoadPannel.saveGame + saveGameNumber);
+        
+        int shipId = 0;
+        switch (saveGameInfo.primaryType)
+        {
+           
+            case PriortySelectorScript.ClassType.ATTACK:
+                shipId = 0;
+                break;
+            case PriortySelectorScript.ClassType.UTILITY:
+                shipId = 9;
+                break;
+            case PriortySelectorScript.ClassType.DEFFENSE:
+                shipId = 6;
+                break;
+            case PriortySelectorScript.ClassType.BALANCED:
+                shipId = 3;
+                break;
+            default:
+                Debug.LogError("Invalid ship type selected");
+                break;
+        }
+        Ship ship = ShipManager.GetNewShip(shipId);
+                
+        loadShipFromSave.Save(ship); 
+
         mainMenuScript.OpenLoad();
     }
 

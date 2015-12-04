@@ -28,19 +28,33 @@ public class WeaponInventory : Inventory
 
     }
 
-    public override bool ItemSits(Item item, int index)
+    public override bool ItemSits(Item item,int index)
     {
-        //Debug.Log("trying to store Item with index : " + index);
+
+       // Debug.Log("(weapon inv) setting an item with index: " + index + " and this item is : " + item);
         SetUpWeapon(item);
+      //  Debug.Log("Weapon was set up?:?:?");
         if (item)
         {
+           // Debug.Log("Items stist on weapon slot");
             item.transform.SetParent(cargo);
             item.transform.localPosition = Vector3.zero;
             item.transform.localRotation = Quaternion.identity;
             item.gameObject.SetActive(true);
         }
+        else
+        {
+            // if you are stetting an item to null there shouldnt be an item in the child...
+            // right now there will be a weapon just sitting there, idk how to remove it...
+            //if (transform.childCount > 0)
+            //{
+            //    Debug.Log("Destroing something...");
+            //    Destroy(transform.GetChild(0).gameObject);
+            //}
+            
+        }
 
-        items[index] = item;
+        items[0] = item;
 
         return false;
 
@@ -64,9 +78,15 @@ public class WeaponInventory : Inventory
 
         if (wep)
         {
+            //Debug.Log("Initing Weapon" + wep);
             wep.gameObject.SetActive(true);
             // tell s the stored prefab wher it is
             weaponScript = wep.GetComponent<Weapon>();
+            if (!weaponScript)
+            {
+                Debug.LogError("You are trying to set up an item that is not a weapon!");
+                return;
+            }
             weaponScript.Init(this.transform);
             // gets the sprite from the game object.            
             SpriteRenderer weaponSprite = wep.GetComponent<SpriteRenderer>();

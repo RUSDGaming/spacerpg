@@ -219,6 +219,9 @@ public class Ship : MonoBehaviour ,iShip{
 
     public void MoveUnit(Vector2 moveDir,bool relativeInput)
     {
+        if (!body)
+            return;
+
         if (relativeInput)
         {
             body.AddRelativeForce(moveDir * Time.fixedDeltaTime * moveForce);
@@ -239,7 +242,8 @@ public class Ship : MonoBehaviour ,iShip{
 
     public void RotateUnit(float deg)
     {
-
+        if (!body)
+            return;
         if (Mathf.Abs(deg) > turnRate * Time.fixedDeltaTime)
         {
             body.MoveRotation(body.rotation + (turnRate * Mathf.Sign(deg)) * Time.fixedDeltaTime);

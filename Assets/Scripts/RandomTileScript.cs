@@ -11,6 +11,9 @@ public class RandomTileScript : MonoBehaviour
     public float width = 80;
     public  BoxCollider2D collider;
 
+    public int x;
+    public int y;
+    public LevelGeneratorScript levelGeneratorScript;
     public int numAsteroids = 10;
 
     /// <summary>
@@ -25,7 +28,11 @@ public class RandomTileScript : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
+        {
+            levelGeneratorScript.PlayerEnteredTile(x, y);
             return;
+        }
+            
         if (other.isTrigger)
             return;
 

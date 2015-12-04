@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 447340}
   - 114: {fileID: 11495832}
   - 212: {fileID: 21205140}
+  - 61: {fileID: 6134506}
   m_Layer: 0
   m_Name: Small Laser
   m_TagString: Untagged
@@ -24,11 +25,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -193.130936, y: 47.1736031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6134506
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154508}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!114 &11495832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
+  id: 1
   stackSize: 0
   currentSize: 0
   scrapValue: 1
@@ -54,6 +69,7 @@ MonoBehaviour:
   damage: 1
   fireRate: 1
   energyCost: 1
+  knockBackForce: 2
 --- !u!212 &21205140
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -128,6 +144,10 @@ Prefab:
       propertyPath: weaponSound
       value: 
       objectReference: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
+    - target: {fileID: 0}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154508}

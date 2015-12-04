@@ -26,9 +26,9 @@ public class LoadPannel : MonoBehaviour
     void loadFile()
     {
         loadSaveGame();
-        text.text = "Save " + saveNumber + " - " + info.primaryType;
-        if(info.primaryType != PriortySelectorScript.ClassType.EMPTY )
-            text.text += " - lvl:" +info.level;
+        text.text = "Save " + saveNumber ;
+        if(info != null)
+            text.text += " - " + info.primaryType + " - lvl:" +info.level;
     }
     // Update is called once per frame
     void Update()
@@ -53,8 +53,8 @@ public class LoadPannel : MonoBehaviour
         if (info == null)
         {
             Debug.Log("object was null");
-            info = new SaveGameInfo();
-            SaveSaveGame();
+           // info = new SaveGameInfo();
+            //SaveSaveGame();
         }
 
       //  Debug.Log(info.primaryType);
@@ -62,21 +62,22 @@ public class LoadPannel : MonoBehaviour
 
     }
 
-    void SaveSaveGame()
-    {
-        SaveGameSystem.SaveGame(info, saveGame + saveNumber);
-    }
-
     public void deleteSaveGame()
     {
+
+        
         SaveGameSystem.DeleteSaveGame(saveGame + saveNumber);
+        SaveGameSystem.DeleteSaveGame(saveGame + saveNumber + "Scrap");
+        SaveGameSystem.DeleteSaveGame(saveGame + saveNumber + "Stationary");
+        //SaveGameSystem.DeleteSaveGame()
         loadFile();
     }
 
     public void StartSavedGame()
     {
 
-        if (info.primaryType == PriortySelectorScript.ClassType.EMPTY)
+        PlayerPrefs.SetString(current, saveGame + saveNumber);
+        if (info == null || info.primaryType == PriortySelectorScript.ClassType.EMPTY)
         {
             mms.OpenNewGame();
             abilitySelecetorManager.saveGameNumber = saveNumber;
@@ -84,7 +85,6 @@ public class LoadPannel : MonoBehaviour
         else
         {
            Debug.Log("Starting a game " + info.primaryType);
-            PlayerPrefs.SetString(current, saveGame + saveNumber);
             Application.LoadLevel("FunLevel");
         }
 

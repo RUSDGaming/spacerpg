@@ -54,7 +54,10 @@ set the ship when you create a new save.
 
 change order of operations on all of the player container things.
 
-saving ship weapon slots
-saving ship inventory
+saving ship weapon slots -done
+saving ship inventory -done
 
 saving items in ship ineventory when upgrading ship as well as the weapons.
+
+
+unify saving to be all in one thing..

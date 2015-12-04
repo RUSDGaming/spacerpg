@@ -9,12 +9,18 @@ public class ItemManager : MonoBehaviour {
     [SerializeField]    Item[] items;
 	// Use this for initialization
 	void Start () {
-        if (!instance)
-        {
-            instance = this;
-        }
 	}
 	
+    void Awake()
+    {
+        if (!instance)
+        {
+            Debug.Log("Setting up item manarger Instance");
+            instance = this;
+        }
+
+    }
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -29,7 +35,13 @@ public class ItemManager : MonoBehaviour {
             Debug.LogError("no Item Manager Found!!!");
             return null;
         }
-        //Debug.Log("Createted an item from the item manager");
+        
+       // Debug.Log("Createted an item from the item manager with id : " + i);
+       if(i < 0 || i >= instance.items.Length)
+        {
+            Debug.LogError("Item Manager : you gave me an invalid item id! " + i);
+            return null;
+        }
         Item item = Instantiate(instance.items[i]);
         return item;
     }

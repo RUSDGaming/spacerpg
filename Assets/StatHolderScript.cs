@@ -122,7 +122,7 @@ public class StatHolderScript : MonoBehaviour {
     private void LoadPlayerStats()
     {
 
-        Debug.Log("loading players statsss");
+        //Debug.Log("loading players statsss");
         
 
         int i = 0;

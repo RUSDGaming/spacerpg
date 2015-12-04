@@ -34,6 +34,7 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
 	void Start () {
         GameEventSystem.RegisterSubScriber(this);
         region0.Init();
+
         
 	}
 	

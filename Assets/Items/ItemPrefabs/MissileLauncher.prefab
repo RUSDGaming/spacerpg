@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 470020}
   - 212: {fileID: 21255720}
   - 114: {fileID: 11485350}
+  - 61: {fileID: 6176318}
   m_Layer: 0
   m_Name: MissileLauncher
   m_TagString: Untagged
@@ -24,11 +25,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -186.098541, y: 48.1782303, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6176318
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131716}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!114 &11485350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
+  id: 2
   stackSize: 1
   currentSize: 1
   scrapValue: 1
@@ -54,6 +69,7 @@ MonoBehaviour:
   damage: 2
   fireRate: 1
   energyCost: 0
+  knockBackForce: 2
   maxAmmo: 10
   currentAmmo: 100
 --- !u!212 &21255720
@@ -92,6 +108,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: id
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -9,7 +9,7 @@ public class LoadShipFromSave : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Load();
+     
 	}
 	
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class LoadShipFromSave : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.F6))
         {
             Debug.Log("saving Ship");
-            Save();
+            Save(null);
         }
 
         if (Input.GetKeyDown(KeyCode.F10))
@@ -30,29 +30,77 @@ public class LoadShipFromSave : MonoBehaviour {
     }
 
 
-    public void Save()
+    public  void Save(Ship ship)
     {
+        if(ship == null)
+        {
+            GameObject go = transform.GetChild(0).gameObject;
+            ship = go.GetComponent<Ship>();
+        }
 
-        GameObject go = transform.GetChild(0).gameObject;
-
-        Ship ship = go.GetComponent<Ship>();
         SaveGameShip ssg = new SaveGameShip();
         ssg.shipId = ship.id;
+        ssg.SetItems(ship.GetComponent<Inventory>().items);
 
-        SaveGameSystem.SaveGame(ssg,LoadPannel.current + shipSaveName);
+        // foreach weapon slot 
+        ssg.WeaponSlots = new SaveGameItem[ship.weaponSlots.Length];
+        for (int i = 0; i < ship.weaponSlots.Length; i++)
+        {
+            if(ship.weaponSlots[i].items[0] != null)
+            {
+                SaveGameItem weapon = new SaveGameItem();
+                weapon.id = ship.weaponSlots[i].items[0].id;
+                ssg.WeaponSlots[i]  = weapon;
+            }
+            else
+            {
+                ssg.WeaponSlots[i] = null;
+            }
+
+        }
+
+
+
+
+        string fileName = PlayerPrefs.GetString(LoadPannel.current);
+        SaveGameSystem.SaveGame(ssg,fileName + shipSaveName);
 
     }
 
 
     public void Load()
     {
-        SaveGameShip ssg = SaveGameSystem.LoadGame(LoadPannel.current + shipSaveName) as SaveGameShip;
+
+        string fileName = PlayerPrefs.GetString(LoadPannel.current);
+        SaveGameShip ssg = SaveGameSystem.LoadGame(fileName + shipSaveName) as SaveGameShip;
 
         Ship ship = ShipManager.GetNewShip(ssg.shipId);
 
         ship.transform.SetParent(transform);
+       // Debug.Log(ship.GetComponent<Inventory>().items.Length);
+        ssg.GetItems(ref ship.GetComponent<Inventory>().items);
 
-        switcher.SetShip(ship);
+        if(ssg.WeaponSlots != null)
+        for(int i = 0; i < ship.weaponSlots.Length; i++)
+        {
+
+            if(ssg.WeaponSlots[i] != null)
+            {
+                Item item = ItemManager.GetNewItem(ssg.WeaponSlots[i].id);
+                ship.weaponSlots[i].ItemSits(item,0);
+            }
+                else
+                {
+                    Debug.Log("weapon slot from saved game was null");
+                    ship.weaponSlots[i].ItemSits(null,0);
+                }
+            
+        }
+        if (switcher)
+            switcher.SetShip(ship);
+        else
+            Debug.LogError("Switcher not set!");
+
 
     }
 }

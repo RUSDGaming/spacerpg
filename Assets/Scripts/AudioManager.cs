@@ -5,17 +5,26 @@ using System.Linq;
 
 public class AudioManager: MonoBehaviour {
 
+
+
+    public static AudioManager instance;
+
+
     List<AudioSource> audioList;
     [SerializeField]    int numAudio = 16;
 
     // Use this for initialization
     void Start () {
+
+
         audioList = new List<AudioSource>(16);        
         
         for(int i = 0; i< numAudio; i++)
         {
             audioList.Add(gameObject.AddComponent<AudioSource>());
         }
+
+        instance = this;
 	}
 	
 	// Update is called once per frame
@@ -24,7 +33,7 @@ public class AudioManager: MonoBehaviour {
 	}
 
 
-    public void playSound(AudioClip clip)
+    public static void playSound(AudioClip clip)
     {
         //Debug.Log(audioList.Count);
         //Debug.Log(audioList[0]);
@@ -32,9 +41,9 @@ public class AudioManager: MonoBehaviour {
 
     }
 
-    public void playSound(AudioClip clip, float pitch, float volume)
+    public static void playSound(AudioClip clip, float pitch, float volume)
     {
-        var query = from src in audioList where !src.isPlaying select src;
+        var query = from src in instance.audioList where !src.isPlaying select src;
         AudioSource audioSource = query.FirstOrDefault();
         if (audioSource)
         {

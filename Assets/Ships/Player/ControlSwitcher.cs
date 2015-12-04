@@ -16,6 +16,7 @@ public class ControlSwitcher : MonoBehaviour {
     [SerializeField]    ProgressBar shield;
     [SerializeField]    ProgressBar energy;
 
+    [SerializeField]    LoadShipFromSave loadShipFromSave;
 
     public SaveGameInfo playerStats;
 
@@ -37,7 +38,7 @@ public class ControlSwitcher : MonoBehaviour {
         LoadSavedShip();
 
         playerStats.playerId = 1;
-        Debug.Log(playerStats.primaryType);
+       // Debug.Log(playerStats.primaryType);
 
         statHolderScript.SaveGameInfo = playerStats;
         expManager.saveGameInfo = playerStats;
@@ -92,7 +93,9 @@ public class ControlSwitcher : MonoBehaviour {
         menu.SetShip(mainShip);
         reloadShipStats(true);
         ship = mainShip.GetComponent<Ship>();
+        if(logic)
         logic.TrackTarget(mainShip.transform);
+        if(inventoryManager)
         inventoryManager.ship = ship;
     }
 
@@ -131,7 +134,9 @@ public class ControlSwitcher : MonoBehaviour {
         Destroy(mainShip.gameObject);
         mainShip = newShip;
 
-        newShip.transform.SetParent(this.transform);
+        LoadShipFromSave lsfs = GetComponentInChildren<LoadShipFromSave>();
+
+        newShip.transform.SetParent(lsfs.transform);
         newShip.GetComponent<PlayerController>().disableInput = true;
         SwitchToMainShip();
         // this reloads all the invertorys of the new ship...
@@ -168,7 +173,7 @@ public class ControlSwitcher : MonoBehaviour {
     {
         string fileName = PlayerPrefs.GetString(LoadPannel.current);
         playerStats = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
-        
+        loadShipFromSave.Load();
 
     }
 

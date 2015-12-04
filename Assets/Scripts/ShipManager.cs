@@ -11,11 +11,16 @@ public class ShipManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        
+    }
+
+    void Awake() {
         if (!instance)
         {
             instance = this;
         }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -29,10 +34,10 @@ public class ShipManager : MonoBehaviour {
 
         if (!instance)
         {
-            Debug.LogError("no Item Manager Found!!!");
+            Debug.LogError("No Ship Manager Manager Found!!!");
             return null;
         }
-        Debug.Log("Createted an item from the item manager");
+      //  Debug.Log("Createted a ship from the ship manager");
         Ship ship = Instantiate(instance.ships[i]);
         return ship;
     }
