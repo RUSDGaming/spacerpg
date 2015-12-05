@@ -78,8 +78,17 @@ public class WeaponInventory : Inventory
 
         if (wep)
         {
+            Collider2D col = wep.GetComponent<Collider2D>();
+            if (col)
+                col.enabled = false;
+            ItemJuice juice = wep.GetComponent<ItemJuice>();
+            if (juice)
+            {
+                juice.enabled = false;
+            }
             //Debug.Log("Initing Weapon" + wep);
             wep.gameObject.SetActive(true);
+
             // tell s the stored prefab wher it is
             weaponScript = wep.GetComponent<Weapon>();
             if (!weaponScript)

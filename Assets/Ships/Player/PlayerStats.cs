@@ -78,6 +78,11 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
         playerInfo = GetComponent<PlayerInfo>();
         switcher = GetComponent<ControlSwitcher>();
     }
+
+    public void OnDestroy()
+    {
+        GameEventSystem.UnRegisterSubscriber(this);
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))

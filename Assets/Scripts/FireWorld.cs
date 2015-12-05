@@ -3,17 +3,26 @@ using System.Collections;
 using Game.Events;
 using System;
 
-public class FireWorld : MonoBehaviour, PortalSubscriber {
+public class FireWorld : MonoBehaviour, PortalSubscriber
+{
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         GameEventSystem.RegisterSubScriber(this);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
+    public void OnDestroy()
+    {
+        GameEventSystem.UnRegisterSubscriber(this);
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void HandleEvent(GameEventArgs args)
     {
@@ -28,7 +37,7 @@ public class FireWorld : MonoBehaviour, PortalSubscriber {
     {
         PortalEventArgs argz = (PortalEventArgs)args;
 
-        
+
 
     }
 }

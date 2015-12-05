@@ -204,15 +204,13 @@ public class Ship : MonoBehaviour ,iShip{
 
     void KillShip()
     {
-       // Debug.Log("Player Should be Destroyed");
-       // Debug.Log("Playe Should not control Core");
-        if(playerControlled)
-        switcher.SwitchToShipCore();
+        // Debug.Log("Player Should be Destroyed");
+        // Debug.Log("Playe Should not control Core");
+        //if(playerControlled)
+        //    switcher.SwitchToShipCore();
 
-        else
-        {
-            Destroy(gameObject);
-        }
+        switcher.PlayerDeath();
+            //Destroy(gameObject);
     }
 
     

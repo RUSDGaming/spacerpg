@@ -31,6 +31,9 @@ public class DropItem : MonoBehaviour
         Item item = ItemManager.GetNewItem(items[i]);
 
         item.transform.position = this.transform.position;
+        ItemJuice juice = item.GetComponent<ItemJuice>();
+        if(juice)
+        juice.enabled = true;
 
     }
 }

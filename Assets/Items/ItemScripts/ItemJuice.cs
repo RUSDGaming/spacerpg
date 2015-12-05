@@ -4,9 +4,9 @@ using System.Collections;
 public class ItemJuice : MonoBehaviour {
 
     [SerializeField]
-    float rotationSpeed = 180;
+    float rotationSpeed = 90;
     [SerializeField]
-    float vertical = 1;
+    float vertical = 0;
 
     // Use this for initialization
     void Start () {

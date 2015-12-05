@@ -2,13 +2,13 @@ Enemies think player is still there when he dies due to the game object just bei
 
 Ships cant fire when sheilds are down because they take all the energy
 
-sometimes objects can go out of bounds. I don't know why
+sometimes objects can go out of bounds. I don't know why.  --not reporducable  // fixed
 
 when player dies cameras stop tracking
 
 when you warp home minimap does not reset.  -- fixed
 
-wrap around stops working when you go back home. 
+wrap around stops working when you go back home.  --fixed....
 
 When you die you dont switch to small ship.
 

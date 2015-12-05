@@ -25,6 +25,11 @@ public class ReturnHome : MonoBehaviour, PlayerDamagedSubscriber
         lastHitTime = -warpTime;
     }
 
+    public void OnDestroy()
+    {
+        GameEventSystem.UnRegisterSubscriber(this);
+    }
+
     // Update is called once per frame
     void Update()
     {

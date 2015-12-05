@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11495832}
   - 212: {fileID: 21205140}
   - 61: {fileID: 6134506}
+  - 114: {fileID: 11443434}
   m_Layer: 0
   m_Name: Small Laser
   m_TagString: Untagged
@@ -43,6 +44,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &11443434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154508}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09618db8101f483408f9c54ac731436b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 90
+  vertical: 0
 --- !u!114 &11495832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,6 +161,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: id
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: vertical
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rotationSpeed
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -8,72 +8,100 @@ using System.Linq;
 using SpriteTile;
 using Game.Events;
 
-public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscriber, HomeSubscriber{
+public class GameLogic : MonoBehaviour, PortalSubscriber, LevelLoadedSubscriber, HomeSubscriber
+{
 
     public Transform playerRespawn;
     //[SerializeField]  Transform generatedLevel;
     public LevelGenScript levelGen;
 
-   // public GameObject portal;
+    // public GameObject portal;
 
     //LevelGenInfo levelInfo;
 
     bool levelLoaded = false;
 
 
-    [SerializeField]    MiniMapScript miniMapScript;
-    [SerializeField]    MiniMapCameraScript miniMapCameraScript;
-    [SerializeField]    MapEdgeManager mapEdgeManagerScript;
+    [SerializeField]
+    MiniMapScript miniMapScript;
+    [SerializeField]
+    MiniMapCameraScript miniMapCameraScript;
+    [SerializeField]
+    MapEdgeManager mapEdgeManagerScript;
 
-    [SerializeField]    LevelGeneratorScript region0;
-    [SerializeField]    LevelGeneratorScript region1;
+    [SerializeField]
+    LevelGeneratorScript region0;
+    [SerializeField]
+    LevelGeneratorScript region1;
 
 
     LevelGeneratorScript currentlyLoadedRegion;
 
-	void Start () {
+    void Start()
+    {
         GameEventSystem.RegisterSubScriber(this);
         region0.Init();
+    }
 
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void OnDestroy()
+    {
+        GameEventSystem.UnRegisterSubscriber(this);
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
 
     public void HandleEvent(GameEventArgs args)
     {
-        if(args.GetType() == typeof( PortalEventArgs))
+        if (args.GetType() == typeof(PortalEventArgs))
         {
             HandlePortalEvent(args);
-           
+
         }
 
-        if(args.GetType() == typeof(LevelFinishedLoadingEventArgs))
+        if (args.GetType() == typeof(LevelFinishedLoadingEventArgs))
         {
             HandleLevelLoadedEvent(args);
 
         }
-        if(args.GetType() == typeof(PlayerHomeEventArgs))
+        if (args.GetType() == typeof(PlayerHomeEventArgs))
         {
             HandleHomeEvent(args);
         }
-        
+
     }
 
-    void HandleLevelLoadedEvent(GameEventArgs args) {
+    void HandleLevelLoadedEvent(GameEventArgs args)
+    {
         LevelFinishedLoadingEventArgs argz = (LevelFinishedLoadingEventArgs)args;
 
         // TODO load players into a global array so this is faster... 
         PlayerController[] players = FindObjectsOfType<PlayerController>();
 
-        MiniMapCameraScript mmcs = miniMapScript.gameObject.GetComponentInChildren<MiniMapCameraScript>();
+        //MiniMapCameraScript mmcs = miniMapScript.gameObject.GetComponentInChildren<MiniMapCameraScript>();
 
-        mmcs.LevelOffset = argz.region.transform.position - miniMapScript.transform.position;
-        miniMapScript.InitMap(argz.region.width, argz.region.height, argz.region.tiles);
+        if (miniMapCameraScript)
+        {
+            miniMapCameraScript.LevelOffset = argz.region.transform.position - miniMapScript.transform.position;
+        }
+        else
+        {
+            Debug.Log("wtf the camera script wasnt set yet or something....");
+        }
+
+        if (miniMapScript)
+        {
+            miniMapScript.InitMap(argz.region.width, argz.region.height, argz.region.tiles);
+        }
+        else
+        {
+            Debug.Log("Wtf the minimapScript wasnt set either.... something is wrong with te level");
+        }
 
         // GameObject portalInstance = (GameObject)Instantiate(portal, argz.endPos, Quaternion.identity);
 
@@ -94,7 +122,7 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         {
             argz.region.Init();
             currentlyLoadedRegion = argz.region;
-        }        
+        }
     }
 
     void HandleHomeEvent(GameEventArgs args)
@@ -110,6 +138,9 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
         mmcs.LevelOffset = region0.transform.position - miniMapScript.transform.position;
         miniMapScript.InitMap(region0.width, region0.height, region0.tiles);
 
+
+        region0.SoftInit();
+
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         foreach (PlayerController player in players)
         {
@@ -118,7 +149,7 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
 
         levelLoaded = false;
         Debug.Log("Destroy everything previously loadded in that other scene");
-        if(currentlyLoadedRegion)
+        if (currentlyLoadedRegion)
             currentlyLoadedRegion.CleanRegion();
 
 
@@ -126,7 +157,7 @@ public class GameLogic : MonoBehaviour ,  PortalSubscriber, LevelLoadedSubscribe
 
     }
 
-    
+
     public void TrackTarget(Transform transform)
     {
         miniMapCameraScript.tracking = transform;

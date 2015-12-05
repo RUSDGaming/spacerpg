@@ -11,6 +11,8 @@ public class ControlSwitcher : MonoBehaviour {
     [SerializeField]    PlayerMenu menu;
     [SerializeField]    StatHolderScript statHolderScript;
     [SerializeField]    PlayerDetails playerDetails;
+    [SerializeField]    GameObject gameOverHud;
+
 
     [SerializeField]    ProgressBar health;
     [SerializeField]    ProgressBar shield;
@@ -175,6 +177,15 @@ public class ControlSwitcher : MonoBehaviour {
         playerStats = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
         loadShipFromSave.Load();
 
+    }
+
+    public void PlayerDeath()
+    {
+       // Debug.Log("player dided you need to show game over screen");
+        // show game over screen
+        gameOverHud.SetActive(true);
+        ship.gameObject.SetActive(false);
+        
     }
 
     public void SavePlayerGame()

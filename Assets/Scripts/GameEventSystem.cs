@@ -7,37 +7,51 @@ using System.Linq;
 namespace Game.Events
 {
 
-    public class GameEventSystem  {
+    public class GameEventSystem : MonoBehaviour
+    {
+        public void Awake()
+        {
+            if (!instance)
+            {
+                Debug.Log("Setting up item manarger Instance");
+                instance = this;
+            }
+        }
 
+        public static GameEventSystem instance;
 
-       static List<SubScriber> subscribers;
+        List<SubScriber> subscribers;
 
         public static void RegisterSubScriber(SubScriber sub)
         {
-            if(subscribers == null)
+            if (instance.subscribers == null)
             {
-                subscribers = new List<SubScriber>();
+                instance.subscribers = new List<SubScriber>();
             }
-
-            subscribers.Add(sub);
-           // Debug.Log("added a subscriber");
-           // Debug.Log(sub.GetType().ToString());
-           // Debug.Log(sub is PortalSubscriber);
+            instance.subscribers.Add(sub);
         }
 
-        
-        public static void PublishEvent(Type subscriberType,GameEventArgs args)
+        public static void UnRegisterSubscriber(SubScriber sub)
+        {
+            if (instance.subscribers != null)
+            {
+                instance.subscribers.Remove(sub);
+            }
+        }
+
+
+        public static void PublishEvent(Type subscriberType, GameEventArgs args)
         {
             // selects all of the relavent types
-            if (subscribers == null)
+            if (instance.subscribers == null)
             {
                 return;
             }
-            var query = from sub in subscribers where  subscriberType.IsAssignableFrom(sub.GetType()) select sub;
-            
-            foreach(SubScriber sub in query)
+            var query = from sub in instance.subscribers where subscriberType.IsAssignableFrom(sub.GetType()) select sub;
+
+            foreach (SubScriber sub in query)
             {
-              //  Debug.Log("sending info to thing");
+                //  Debug.Log("sending info to thing");
                 sub.HandleEvent(args);
             }
 

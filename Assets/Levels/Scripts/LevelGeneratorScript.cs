@@ -86,14 +86,20 @@ public abstract class LevelGeneratorScript : MonoBehaviour
 
         // set cameras to track the player
         // set the cameras max, min, tracking axis, startPos
+        SoftInit();
+
+    }
+
+    public void SoftInit()
+    {
         mapEdgeManager.mapStart = transform.position;
         mapEdgeManager.mapWidth = width;
         mapEdgeManager.mapHeight = height;
         mapEdgeManager.orthographicCamSize = chunkSize / 2;
         mapEdgeManager.SetUpCameras();
         mapEdgeManager.SetUpBorders();
-
     }
+
     public abstract void MakeMap();
 
     protected IEnumerator GenerateMap()
