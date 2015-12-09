@@ -13,22 +13,25 @@ public class WeaponInventory : Inventory
 
     [SerializeField]
     bool aboveShip = false;
-
-
-    void Start()
+    // dont delete
+    void Start() {
+        if (items == null) {
+            items = new Item[inventorySize];
+        }
+    }
+    
+    void Awake()
     {
+        
         inventoryType = InventoryType.WEAPON_SLOT;
-
-
         if (items[0] != null)
         {
-            SetUpWeapon(items[0]);
+            SetItemWithIndex(items[0], 0);
         }
-
-
+        
     }
 
-    public override bool ItemSits(Item item,int index)
+    public override bool SetItemWithIndex(Item item,int index)
     {
 
        // Debug.Log("(weapon inv) setting an item with index: " + index + " and this item is : " + item);
@@ -53,7 +56,7 @@ public class WeaponInventory : Inventory
             //}
             
         }
-
+        
         items[0] = item;
 
         return false;
@@ -74,7 +77,7 @@ public class WeaponInventory : Inventory
 
     public void SetUpWeapon(Item wep)
     {
-
+        //Debug.Log("setting up item");
 
         if (wep)
         {

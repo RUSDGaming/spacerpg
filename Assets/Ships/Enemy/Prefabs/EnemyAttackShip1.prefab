@@ -29,6 +29,7 @@ GameObject:
   - 61: {fileID: 6132538}
   - 114: {fileID: 11453012}
   - 114: {fileID: 11426444}
+  - 114: {fileID: 11401216}
   m_Layer: 10
   m_Name: EnemyAttackShip1
   m_TagString: Enemy
@@ -295,6 +296,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
+--- !u!114 &11401216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a280ec1a62ed3d4a81ac9fcfaaf1364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: 00000000000000000000000000000000000000000000000000000000010000000100000001000000
 --- !u!114 &11405924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,6 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b1345795092d4ebcda6be2e0ac0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 1
   items:
   - {fileID: 11478792}
@@ -353,7 +368,7 @@ MonoBehaviour:
   weaponSlots:
   - {fileID: 11424714}
   baseHealth: 10
-  baseArmor: .5
+  baseArmor: 0
   baseMaxShield: 0
   baseMaxEnergy: 0
   baseEnergyRegen: 0
@@ -362,7 +377,7 @@ MonoBehaviour:
   baseTurnRate: 0
   maxHealth: 10
   currentHealth: 10
-  armor: 1
+  armor: 0
   maxShield: 0
   currentShield: 0
   maxEnergy: 100
@@ -386,8 +401,8 @@ MonoBehaviour:
   state: 1
   minDist: 8
   MaxDist: 12
-  trackingObject: {fileID: 0}
-  bulletTransform: {fileID: 0}
+  playerShips: []
+  bullets: []
   maxIdleTime: 5
   maxWanderDist: 35
 --- !u!114 &11453012
@@ -401,6 +416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4b07d8c08141140a5dd6ee0d00280f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 10
   items: []
   inventoryType: 2
@@ -417,6 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
+  id: -1
   stackSize: 0
   currentSize: 0
   scrapValue: 1

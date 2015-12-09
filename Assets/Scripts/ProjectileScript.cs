@@ -12,6 +12,7 @@ public class ProjectileScript : MonoBehaviour {
     public float damage;
     public bool playerBullet;
     protected Rigidbody2D body;
+    public bool timeDestroy = true;
 
     // Use this for initialization
     void Start () {
@@ -25,7 +26,10 @@ public class ProjectileScript : MonoBehaviour {
     {
 
         body.AddRelativeForce(Vector2.up * speed);
-        StartCoroutine(Destroy(5f));
+        if (timeDestroy)
+        {
+            StartCoroutine(Destroy(5f));
+        }
     }
 	// Update is called once per frame
 	void Update () {

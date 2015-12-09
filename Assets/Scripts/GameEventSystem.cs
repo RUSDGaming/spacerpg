@@ -13,9 +13,15 @@ namespace Game.Events
         {
             if (!instance)
             {
-                Debug.Log("Setting up item manarger Instance");
+                //Debug.Log("Setting up GameEventSystem Instance");
                 instance = this;
             }
+
+
+            Debug.Log(Util.RotateVector(new Vector2(1, 0), 0));
+            Debug.Log(Util.RotateVector(new Vector2(1, 0), 90));
+            Debug.Log(Util.RotateVector(new Vector2(1, 0), 180));
+            Debug.Log(Util.RotateVector(new Vector2(1, 0), 270));
         }
 
         public static GameEventSystem instance;

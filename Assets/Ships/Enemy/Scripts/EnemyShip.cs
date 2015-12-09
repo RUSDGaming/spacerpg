@@ -180,8 +180,10 @@ public class EnemyShip : MonoBehaviour , iShip{
     {
         foreach (WeaponInventory weaponSlot in weaponSlots)
         {
+            //Debug.Log("grrrrrrr");
             if (weaponSlot.items[0] != null)
             {
+                //Debug.Log("grrr");
                 Weapon weapon = weaponSlot.items[0].GetComponent<Weapon>();                
                 if (weapon.TryToFire(ref currentEnergy, false, null))
                 {
@@ -193,6 +195,10 @@ public class EnemyShip : MonoBehaviour , iShip{
 
                     }
                 }
+            }
+            else
+            {
+                Debug.Log("Wepon slots was null");
             }
 
         }

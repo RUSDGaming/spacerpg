@@ -217,7 +217,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135224}
-  m_Mass: 3
+  m_Mass: 5
   m_LinearDrag: 3
   m_AngularDrag: .0500000007
   m_GravityScale: 1
@@ -407,13 +407,13 @@ MonoBehaviour:
   armors: []
   switcher: {fileID: 0}
   baseHealth: 10
-  baseArmor: 10
+  baseArmor: 0
   baseMaxShield: 0
-  baseMaxEnergy: 100
+  baseMaxEnergy: 250
   baseEnergyRegen: 100
-  baseMoveForce: 8000
+  baseMoveForce: 10000
   baseMaxSpeed: 20
-  baseTurnRate: 180
+  baseTurnRate: 340
   maxHealth: 0
   currentHealth: 0
   armor: 0
@@ -555,6 +555,26 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: id
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseArmor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseMaxEnergy
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseMoveForce
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseTurnRate
+      value: 340
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

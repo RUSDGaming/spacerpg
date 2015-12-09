@@ -43,7 +43,7 @@ GameObject:
   - 4: {fileID: 446010}
   - 58: {fileID: 5894840}
   - 50: {fileID: 5091010}
-  - 114: {fileID: 11407416}
+  - 114: {fileID: 11483230}
   m_Layer: 16
   m_Name: Radar
   m_TagString: Radar
@@ -180,24 +180,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
---- !u!114 &11407416
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 080aa49b33a0dca4794ed19153f30983, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 1
-  minDist: 8
-  MaxDist: 12
-  trackingObject: {fileID: 0}
-  bulletTransform: {fileID: 0}
-  maxIdleTime: 5
-  maxWanderDist: 35
 --- !u!114 &11410466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,8 +191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fa882aace1eba4b859dbfebbf8a8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 0
-  id: -1
+  itemType: 2
+  id: 1
   stackSize: 0
   currentSize: 0
   scrapValue: 1
@@ -249,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadInventoryFromSave: 0
-  inventoryName: notSet
+  inventoryName: FrontRightTurret
   inventorySize: 1
   items:
   - {fileID: 11410466}
@@ -290,7 +272,7 @@ MonoBehaviour:
   baseTurnRate: 0
   maxHealth: 1
   currentHealth: 1
-  armor: .800000012
+  armor: .100000001
   maxShield: 0
   currentShield: 0
   maxEnergy: 100
@@ -300,6 +282,24 @@ MonoBehaviour:
   maxSpeed: 15
   turnRate: 720
   exp: 20
+--- !u!114 &11483230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075a171164773ba4b901a33a14e1c4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  minDist: 10
+  MaxDist: 200
+  playerShips: []
+  bullets: []
+  maxIdleTime: 5
+  maxWanderDist: 35
 --- !u!212 &21211096
 SpriteRenderer:
   m_ObjectHideFlags: 1

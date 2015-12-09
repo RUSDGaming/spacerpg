@@ -81,6 +81,7 @@ GameObject:
   - 61: {fileID: 6109546}
   - 114: {fileID: 11457376}
   - 114: {fileID: 11421924}
+  - 114: {fileID: 11428530}
   m_Layer: 10
   m_Name: EnemyDeffenseShip1
   m_TagString: Enemy
@@ -224,8 +225,8 @@ MonoBehaviour:
   state: 1
   minDist: 8
   MaxDist: 12
-  trackingObject: {fileID: 0}
-  bulletTransform: {fileID: 0}
+  playerShips: []
+  bullets: []
   maxIdleTime: 5
   maxWanderDist: 35
 --- !u!114 &11406786
@@ -287,6 +288,18 @@ MonoBehaviour:
   maxSpeed: 20
   turnRate: 320
   exp: 20
+--- !u!114 &11428530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a280ec1a62ed3d4a81ac9fcfaaf1364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: 00000000000000000000000000000000000000000000000000000000010000000100000001000000
 --- !u!114 &11445670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -298,6 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b1345795092d4ebcda6be2e0ac0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 1
   items:
   - {fileID: 11492800}
@@ -315,6 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4b07d8c08141140a5dd6ee0d00280f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadInventoryFromSave: 0
+  inventoryName: notSet
   inventorySize: 10
   items: []
   inventoryType: 2
@@ -346,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
+  id: -1
   stackSize: 0
   currentSize: 0
   scrapValue: 1

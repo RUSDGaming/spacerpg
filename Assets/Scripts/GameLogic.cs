@@ -45,7 +45,7 @@ public class GameLogic : MonoBehaviour, PortalSubscriber, LevelLoadedSubscriber,
 
     public void OnDestroy()
     {
-        GameEventSystem.UnRegisterSubscriber(this);
+        //GameEventSystem.UnRegisterSubscriber(this);
     }
 
 

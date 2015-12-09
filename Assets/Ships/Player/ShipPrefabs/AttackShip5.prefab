@@ -446,7 +446,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156706}
-  m_Mass: 3
+  m_Mass: 10
   m_LinearDrag: 3
   m_AngularDrag: .0500000007
   m_GravityScale: 1
@@ -580,14 +580,14 @@ MonoBehaviour:
   thrusters: []
   armors: []
   switcher: {fileID: 0}
-  baseHealth: 10
-  baseArmor: 10
+  baseHealth: 15
+  baseArmor: .200000003
   baseMaxShield: 0
-  baseMaxEnergy: 100
+  baseMaxEnergy: 500
   baseEnergyRegen: 100
-  baseMoveForce: 8000
+  baseMoveForce: 14000
   baseMaxSpeed: 20
-  baseTurnRate: 180
+  baseTurnRate: 200
   maxHealth: 0
   currentHealth: 0
   armor: 0
@@ -877,6 +877,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: id
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseArmor
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseHealth
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseMaxEnergy
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseMoveForce
+      value: 14000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseTurnRate
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

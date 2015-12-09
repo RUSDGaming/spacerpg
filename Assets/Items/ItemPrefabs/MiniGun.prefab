@@ -55,9 +55,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   id: 3
-  stackSize: 0
-  currentSize: 0
-  scrapValue: 1
+  stackSize: 1
+  currentSize: 1
+  scrapValue: 40
   buildCost: 1
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
@@ -136,6 +136,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: id
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stackSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: currentSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: scrapValue
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

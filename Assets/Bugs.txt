@@ -1,15 +1,17 @@
-Enemies think player is still there when he dies due to the game object just being disabled... 
+Enemies think player is still there when he dies due to the game object just being disabled...  -- fixed
 
 Ships cant fire when sheilds are down because they take all the energy
 
 sometimes objects can go out of bounds. I don't know why.  --not reporducable  // fixed
 
-when player dies cameras stop tracking
+when player dies cameras stop tracking -- not relevant
 
 when you warp home minimap does not reset.  -- fixed
 
 wrap around stops working when you go back home.  --fixed....
 
-When you die you dont switch to small ship.
+When you die you dont switch to small ship. -- possibly taking out of game
 
-bullets don't stop working when they should cause of the death animation. they keep trynig to damage things...
+bullets don't stop working when they should cause of the death animation. they keep trynig to damage things -- fixed
+
+The starter ships dont have the weapons attacched...

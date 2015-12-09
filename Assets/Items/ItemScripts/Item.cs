@@ -34,7 +34,7 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Inventory inv =  other.GetComponent<Inventory>();
-            if(inv.ItemSits(this))
+            if(inv.SetItem(this))
                 gameObject.SetActive(false);
         }
     }

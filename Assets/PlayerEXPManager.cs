@@ -23,7 +23,7 @@ public class PlayerEXPManager : MonoBehaviour, EnemyDiedSubscriber
 
     public void OnDestroy()
     {
-        GameEventSystem.UnRegisterSubscriber(this);
+       // GameEventSystem.UnRegisterSubscriber(this);
     }
 
 

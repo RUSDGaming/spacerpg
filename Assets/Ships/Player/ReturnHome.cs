@@ -27,7 +27,7 @@ public class ReturnHome : MonoBehaviour, PlayerDamagedSubscriber
 
     public void OnDestroy()
     {
-        GameEventSystem.UnRegisterSubscriber(this);
+        //GameEventSystem.UnRegisterSubscriber(this);
     }
 
     // Update is called once per frame

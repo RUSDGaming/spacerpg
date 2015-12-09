@@ -34,7 +34,7 @@ public class PlayerHomeLevelGen : LevelGeneratorScript {
             {
                 if(tiles[x,y] == TileType.VOID)
                 {
-                    tiles[x, y] = TileType.ASTEROID;
+                    tiles[x, y] = TileType.ENEMY;
                 }
             }
         }

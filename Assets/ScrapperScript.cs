@@ -25,7 +25,7 @@ public class ScrapperScript : MonoBehaviour {
         Item i = scrapSlot.GetItem();
         if (i)
         {
-            saveGameInfo.money += i.scrapValue;
+            saveGameInfo.money += i.scrapValue * i.currentSize;
             scrapSlot.SetItem(null);
             Destroy(i);
             switcher.reloadShipStats(false);

@@ -87,12 +87,12 @@ public class LoadShipFromSave : MonoBehaviour {
             if(ssg.WeaponSlots[i] != null)
             {
                 Item item = ItemManager.GetNewItem(ssg.WeaponSlots[i].id);
-                ship.weaponSlots[i].ItemSits(item,0);
+                ship.weaponSlots[i].SetItemWithIndex(item,0);
             }
                 else
                 {
                     Debug.Log("weapon slot from saved game was null");
-                    ship.weaponSlots[i].ItemSits(null,0);
+                    ship.weaponSlots[i].SetItemWithIndex(null,0);
                 }
             
         }

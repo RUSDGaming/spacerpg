@@ -1,5 +1,5 @@
 
-Create Classes
+Create Classes -done
 
 Create hub world
 	create shop
@@ -22,7 +22,7 @@ ai for the ships
 make the random spawning better
 
 item drops
-	stacking items
+	stacking items 
 	item upgrades
 
 Fix the ui system. It in unmainatianable

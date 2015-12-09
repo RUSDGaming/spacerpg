@@ -12,7 +12,10 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
 
     Image image;
     Sprite startSprite;
-    Item item;
+    [SerializeField]    Item item;
+    [SerializeField]    GameObject counterPanel;
+    [SerializeField]    Text counterText;
+
     int inventoryIndex;
     public Inventory inventory;
     bool inited = false;
@@ -47,15 +50,29 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
 
         item = i;
         inventoryIndex = index;
-        inventory.ItemSits(i, index);        
+        inventory.SetItemWithIndex(i, index);        
 
         
 
         if (item)
+        {
             image.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+            if(item.currentSize > 1)
+            {
+                counterPanel.SetActive(true);
+                counterText.text = item.currentSize.ToString();
+            }
+            else
+            {
+                if (counterPanel)
+                    counterPanel.SetActive(false);
+
+            }
+        }
         else
         {
-
+            if(counterPanel)
+            counterPanel.SetActive(false);
             image.sprite = startSprite;
         }
     }
@@ -84,6 +101,7 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
 
         var ray = eventData.pointerCurrentRaycast;
 
+        //Debug.Log("Ended over :" + ray.gameObject);
         // this is when you drag over empty screen
         if (ray.gameObject != null)
         {
@@ -94,14 +112,10 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
                 Item temp = item; // save this item
                 if(slot.inventory.ItemFits(item) && inventory.ItemFits(slot.GetItem()))
                 {
-                  //  Debug.Log("swapping items...");
-                   // Debug.Log("1 is " +slot.GetItem());
-                  //  Debug.Log("2 is " + item);
+                 
                     SetItem(slot.GetItem()); /// set me to other item
                     slot.SetItem(temp);
-
-                   // Debug.Log("1 is now" + slot.GetItem());
-                   // Debug.Log("2 is now" + item);
+                    
                 }
 
     
@@ -109,6 +123,25 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
 
             }
 
+        }else 
+        {
+            Vector3 dropPos = Camera.main.ScreenToWorldPoint(eventData.position);
+            dropPos.z = 0;
+            item.transform.parent = null;
+            item.gameObject.transform.position = dropPos;
+            item.gameObject.SetActive(true);
+
+            Collider2D col = item.GetComponent<Collider2D>();
+            if (col)
+                col.enabled = true;
+
+            ItemJuice juice = item.GetComponent<ItemJuice>();
+            if (juice)
+                juice.enabled = true;
+
+            SetItem(null);
+            //item = null;
+            //image.sprite = startSprite;
         }
 
        

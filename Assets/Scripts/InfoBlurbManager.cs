@@ -14,7 +14,7 @@ public class InfoBlurbManager : MonoBehaviour {
     void Awake() {
         if (!instance)
         {
-            Debug.Log("Setting up info blurb manager Instance");
+            //Debug.Log("Setting up info blurb manager Instance");
             instance = this;
         }
     }
@@ -30,9 +30,9 @@ public class InfoBlurbManager : MonoBehaviour {
     {
         if (instance)
         {
-            Debug.Log("Creating info thisg");
-        InfoBlurb blurb =  ((GameObject) Instantiate(instance.infoBlurb, pos, Quaternion.identity)).GetComponent<InfoBlurb>() ;
-        blurb.init(pos, msg, color);
+            //Debug.Log("Creating info thisg");
+            InfoBlurb blurb =  ((GameObject) Instantiate(instance.infoBlurb, pos, Quaternion.identity)).GetComponent<InfoBlurb>() ;
+            blurb.init(pos, msg, color);
             blurb.transform.SetParent(instance.transform);
         }
         else

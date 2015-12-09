@@ -25,16 +25,16 @@ public class Inventory : MonoBehaviour
         if (loadInventoryFromSave)
         {
 
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            SaveItems();
-        }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                SaveItems();
+            }
 
-        
-        if (Input.GetKeyDown(KeyCode.F9))
-        {
-            LoadSavedItems();
-        }
+
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                LoadSavedItems();
+            }
         }
 
     }
@@ -44,13 +44,13 @@ public class Inventory : MonoBehaviour
     {
         //Debug.Log("waking up....");
         items = new Item[inventorySize];
-       
+
     }
 
     // Use this for initialization
     void Start()
     {
-     if (loadInventoryFromSave)
+        if (loadInventoryFromSave)
         {
             LoadSavedItems();
         }
@@ -66,11 +66,11 @@ public class Inventory : MonoBehaviour
     }
 
 
-    // i probbally shouldnt do this it just is funny... lol
-    public virtual bool ItemSits(Item item, int index)
+
+    public virtual bool SetItemWithIndex(Item item, int index)
     {
 
-       // Debug.Log("setting an item with index: " + index+ " and this item is : " +item);
+        // Debug.Log("setting an item with index: " + index+ " and this item is : " +item);
         if (item)
         {
             item.transform.SetParent(cargo);
@@ -83,25 +83,53 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public virtual bool ItemSits(Item item)
+    public virtual bool SetItem(Item item)
     {
 
-        Debug.Log("Setting an item without an index...");
-        if (item)
+        //Debug.Log("Setting an item without an index...");
+
+
+
+        for (int i = 0; i < items.Length; i++)
         {
-            item.transform.SetParent(cargo);
-            item.transform.localPosition = Vector3.zero;
-            item.gameObject.SetActive(false);
+            // make sure the items are not null and the item idds are the same...
+            if (item && items[i] != null && item.id == items[i].id)
+            {
+                items[i].currentSize += item.currentSize;
+
+                // if the items can all fit in the 1 stack
+                if(items[i].currentSize <= items[i].stackSize)
+                {
+                    Destroy(item.gameObject);
+                    return true;
+                }
+                item.currentSize = items[i].currentSize - items[i].stackSize;
+                items[i].currentSize = items[i].stackSize;
+                    
+
+
+            }
+
         }
+
+
 
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] == null)
             {
-                items[i] = item;
-                return true;
+                if (item)
+                {
+                    item.transform.SetParent(cargo);
+                    item.transform.localPosition = Vector3.zero;
+                    item.gameObject.SetActive(false);
+                    items[i] = item;
+                    return true;
+                }
             }
         }
+
+
         return false;
 
     }
@@ -114,14 +142,14 @@ public class Inventory : MonoBehaviour
 
     public void LoadSavedItems()
     {
-       // Debug.Log("loading inevtory from save");
+        // Debug.Log("loading inevtory from save");
         string fileName = PlayerPrefs.GetString(LoadPannel.current);
         SaveGameInventory sgi = SaveGameSystem.LoadGame(fileName + inventoryName) as SaveGameInventory;
         if (sgi != null)
         {
-                sgi.getItems(ref items);
-            
-            
+            sgi.getItems(ref items);
+
+
         }
 
     }

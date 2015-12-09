@@ -81,7 +81,7 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
 
     public void OnDestroy()
     {
-        GameEventSystem.UnRegisterSubscriber(this);
+       // GameEventSystem.UnRegisterSubscriber(this);
     }
     void Update()
     {
@@ -250,7 +250,7 @@ static class enumMethods
         {
             case PlayerStats.STATS.HEALTH: return "Health";
             case PlayerStats.STATS.ARMOR: return "Armor";
-            case PlayerStats.STATS.SHIELD: return "Sheild";
+            case PlayerStats.STATS.SHIELD: return "Shield";
             case PlayerStats.STATS.TURN_RATE: return "Turn rate";
             case PlayerStats.STATS.MOVE_SPEED: return "Move Speed";
             case PlayerStats.STATS.DAMAGE: return "Damage";

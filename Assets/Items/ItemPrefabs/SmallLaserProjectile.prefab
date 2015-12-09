@@ -71,9 +71,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d188e063f61f69e4096a6c7bd3b6969e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: -1
   speed: 2000
   damage: 1
   playerBullet: 0
+  timeDestroy: 1
 --- !u!212 &21211364
 SpriteRenderer:
   m_ObjectHideFlags: 1

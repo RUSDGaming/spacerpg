@@ -14,7 +14,7 @@ public class FireWorld : MonoBehaviour, PortalSubscriber
 
     public void OnDestroy()
     {
-        GameEventSystem.UnRegisterSubscriber(this);
+        //GameEventSystem.UnRegisterSubscriber(this);
     }
 
 

@@ -14,4 +14,18 @@ public class Util : MonoBehaviour {
         return angle;
     }
 
+
+    public static Vector2 RotateVector(Vector2 v, float deg)
+    {
+        deg *= Mathf.Deg2Rad;
+        float sin = Mathf.Sin(deg);
+        float cos = Mathf.Cos(deg);
+
+        float tx = v.x;
+        float ty = v.y;
+        v.x = (cos * tx) - (sin * ty);
+        v.y = (cos * ty) + (sin * tx);
+        return v;
+    }
+
 }
