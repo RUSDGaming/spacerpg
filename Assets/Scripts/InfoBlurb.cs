@@ -10,17 +10,7 @@ public class InfoBlurb : MonoBehaviour {
     [SerializeField]    float fadeTime;
 	// Use this for initialization
 	void Start () {
-
-
-
         iTween.Init(gameObject);
-        //iTween.MoveTo(gameObject,new Vector3(900,900,0),3);
-        
-
-        StartCoroutine(StartFade());
-
-
-
     }
 	
 	// Update is called once per frame
@@ -59,8 +49,17 @@ public class InfoBlurb : MonoBehaviour {
     }
     public void init(Vector2 pos, string msg, Color color)
     {
+
+
         text.text = msg;
         text.color = color;
+
+
+        
+        //iTween.MoveTo(gameObject,new Vector3(900,900,0),3);
+
+
+        StartCoroutine(StartFade());
     }
 
 }

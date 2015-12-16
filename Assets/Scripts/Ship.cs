@@ -137,6 +137,20 @@ public class Ship : MonoBehaviour ,iShip{
             
         }
         return false;
+    }
+
+    public void MouseUp()
+    {
+        foreach (WeaponInventory weaponSlot in weaponSlots)
+        {
+            if (weaponSlot.items[0] != null)
+            {
+                Weapon weapon = weaponSlot.items[0].GetComponent<Weapon>();
+                weapon.MouseUp();
+
+            }
+
+        }
 
     }
 

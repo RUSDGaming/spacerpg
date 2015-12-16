@@ -21,12 +21,13 @@ public class PlayerController : MonoBehaviour {
     Vector2 bodyToMouse;
     float angleBetween;
     bool fireDown;
-    public iShip ship;
+    bool mouseUp;
+    public Ship ship;
 
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody2D>();
-        ship = GetComponent<iShip>();
+        ship = GetComponent<Ship>();
 	}
 
 
@@ -59,6 +60,11 @@ public class PlayerController : MonoBehaviour {
             ship.TryToFire(0,true);
             fireDown = false;
         }
+        if (mouseUp)
+        {
+            ship.MouseUp();
+            mouseUp = false;
+        }
         
 
     }
@@ -72,6 +78,10 @@ public class PlayerController : MonoBehaviour {
         if ( Input.GetMouseButton(0))
         {
         fireDown = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            mouseUp = true;
         }
     }
 

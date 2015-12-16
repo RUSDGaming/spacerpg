@@ -120,7 +120,7 @@ public class EnemyShip : MonoBehaviour , iShip{
     {
 
         alive = false;
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
 
         for (int i = 0 ; i < explosionSprites.Length; i++)
         {

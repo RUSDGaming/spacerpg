@@ -25,7 +25,7 @@ GameObject:
   - 4: {fileID: 439398}
   - 58: {fileID: 5837546}
   - 50: {fileID: 5031468}
-  - 114: {fileID: 11405698}
+  - 114: {fileID: 11455946}
   m_Layer: 16
   m_Name: Radar
   m_TagString: Radar
@@ -145,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: 50.6177788, z: 0}
+  m_LocalPosition: {x: -7.244583, y: -93.573715, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 411106}
@@ -160,9 +160,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114516}
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 1
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -176,9 +177,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170772}
+  m_UseAutoMass: 0
   m_Mass: 3
   m_LinearDrag: 3
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -192,6 +194,7 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114516}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
@@ -205,30 +208,13 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170772}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
---- !u!114 &11405698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 114516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 080aa49b33a0dca4794ed19153f30983, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 1
-  minDist: 8
-  MaxDist: 12
-  playerShips: []
-  bullets: []
-  maxIdleTime: 5
-  maxWanderDist: 35
 --- !u!114 &11406786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,7 +255,7 @@ MonoBehaviour:
   weaponSlots:
   - {fileID: 11445670}
   baseHealth: 10
-  baseArmor: .5
+  baseArmor: 0.5
   baseMaxShield: 0
   baseMaxEnergy: 0
   baseEnergyRegen: 0
@@ -319,6 +305,24 @@ MonoBehaviour:
   inventoryType: 3
   cargo: {fileID: 411106}
   aboveShip: 1
+--- !u!114 &11455946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075a171164773ba4b901a33a14e1c4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  minDist: 4
+  MaxDist: 8
+  playerShips: []
+  bullets: []
+  maxIdleTime: 5
+  maxWanderDist: 35
 --- !u!114 &11457376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,7 +374,7 @@ MonoBehaviour:
   buildCost: 1
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
-  damageRatio: .200000003
+  damageRatio: 0.2
   explosionRatio: 0
   laserRatio: 0
   projectileRatio: 0
@@ -396,14 +400,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b5927166899907d428798bd0d8ba7504, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!212 &21245446
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -422,14 +430,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0502118c4b2b8af4e85e0300fb6193b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -34,7 +34,7 @@ public class MissileScript : ProjectileScript
 
     protected override void init()
     {
-        StartCoroutine(Destroy(10));
+        StartCoroutine(StartDestroy(10));
 
     }
 }

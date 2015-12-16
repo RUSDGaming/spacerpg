@@ -18,10 +18,10 @@ namespace Game.Events
             }
 
 
-            Debug.Log(Util.RotateVector(new Vector2(1, 0), 0));
-            Debug.Log(Util.RotateVector(new Vector2(1, 0), 90));
-            Debug.Log(Util.RotateVector(new Vector2(1, 0), 180));
-            Debug.Log(Util.RotateVector(new Vector2(1, 0), 270));
+            //Debug.Log(Util.RotateVector(new Vector2(1, 0), 0));
+            //Debug.Log(Util.RotateVector(new Vector2(1, 0), 90));
+            //Debug.Log(Util.RotateVector(new Vector2(1, 0), 180));
+            //Debug.Log(Util.RotateVector(new Vector2(1, 0), 270));
         }
 
         public static GameEventSystem instance;
@@ -49,7 +49,7 @@ namespace Game.Events
         public static void PublishEvent(Type subscriberType, GameEventArgs args)
         {
             // selects all of the relavent types
-            if (instance.subscribers == null)
+            if (instance == null ||  instance.subscribers == null)
             {
                 return;
             }

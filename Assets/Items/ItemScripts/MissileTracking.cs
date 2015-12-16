@@ -60,10 +60,15 @@ public class MissileTracking : MonoBehaviour {
     {
         if (other.CompareTag("Enemy"))
         {
-            if(other.transform == trackingTarget.transform)
-            {
-                trackingTarget = null;
-            }
+                if(trackingTarget != null)
+                if( other.transform == trackingTarget.transform)
+                {
+                    trackingTarget = null;
+                }
+           
+            
+
+
         }
     }
 }

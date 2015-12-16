@@ -23,7 +23,7 @@ public class SunScript : MonoBehaviour
         if (other.isTrigger)
             return;
 
-        DamageUnit du = other.GetComponent<DamageUnit>();
+        iDamage du = other.GetComponent<iDamage>();
         if(du != null)
         {
             float dist = Vector3.Distance(other.transform.position, transform.position);

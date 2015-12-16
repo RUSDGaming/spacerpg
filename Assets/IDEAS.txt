@@ -222,3 +222,7 @@ each region has a different way to unlock the boss{
 
 make the ai learn by using this method, this will take a while. 
 https://github.com/lordjesus/UnityNEAT
+
+just make more enmies.
+make them all kinda stupid
+

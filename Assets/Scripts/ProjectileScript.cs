@@ -10,6 +10,7 @@ public class ProjectileScript : MonoBehaviour {
     public int id = -1;
     public float speed;
     public float damage;
+    public float aliveTime = 5;
     public bool playerBullet;
     protected Rigidbody2D body;
     public bool timeDestroy = true;
@@ -24,11 +25,11 @@ public class ProjectileScript : MonoBehaviour {
 	
     protected virtual void init()
     {
-
+        iTween.Init(gameObject);
         body.AddRelativeForce(Vector2.up * speed);
         if (timeDestroy)
         {
-            StartCoroutine(Destroy(5f));
+            StartCoroutine(StartDestroy(aliveTime));
         }
     }
 	// Update is called once per frame
@@ -36,10 +37,53 @@ public class ProjectileScript : MonoBehaviour {
 	
 	}
 
-    protected IEnumerator Destroy(float time)
+   
+
+    
+    
+                
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+       // Debug.Log("tag hit is: " + other.tag);
+       // Debug.Log(other.gameObject.layer.ToString());
+
+        if (other.isTrigger)
+            return;
+        if (playerBullet && other.CompareTag("Player"))
+            return;
+        if (!playerBullet && other.CompareTag("Enemy"))
+            return;
+
+        if (playerBullet && other.CompareTag("Enemy"))
+        {
+            iDamage du = other.GetComponent<iDamage>();
+            du.Damage(damage, id);
+            StartCoroutine(BulletCollide());
+        }
+        else if (!playerBullet && other.CompareTag("Player"))
+        {
+            iDamage du = other.GetComponent<iDamage>();
+            du.Damage(damage, id);
+            StartCoroutine(BulletCollide());
+        }
+        else if (other.CompareTag("Neutral"))
+        {
+            iDamage du = other.GetComponent<iDamage>();
+            du.Damage(damage, id);
+            StartCoroutine(BulletCollide());
+        }
+        else if (!other.isTrigger)
+        {
+            StartCoroutine(BulletCollide());
+        }
+
+    }
+
+    protected IEnumerator StartDestroy(float time)
     {
         yield return new WaitForSeconds(time);
-        iTween.Init(gameObject);
+
 
         iTween.ScaleTo(gameObject,
             iTween.Hash("y", 0,
@@ -52,55 +96,11 @@ public class ProjectileScript : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    
-    
-                
-    void OnTriggerEnter2D(Collider2D other)
-    {
-
-        //Debug.Log("tag hit is: " + other.tag);
-       // Debug.Log(other.gameObject.layer.ToString());
-
-        if (other.isTrigger)
-            return;
-        if (playerBullet && other.CompareTag("Player"))
-            return;
-        if (!playerBullet && other.CompareTag("Enemy"))
-            return;
-
-        if (playerBullet && other.CompareTag("Enemy"))
-        {
-            DamageUnit du = other.GetComponent<DamageUnit>();
-            du.Damage(damage, id);
-            StartCoroutine(BulletCollide());
-        }
-
-        if (!playerBullet && other.CompareTag("Player"))
-        {
-            DamageUnit du = other.GetComponent<DamageUnit>();
-            du.Damage(damage, id);
-            StartCoroutine(BulletCollide());
-        }
-
-        if (other.CompareTag("Neutral"))
-        {
-            DamageUnit du = other.GetComponent<DamageUnit>();
-            du.Damage(damage, id);
-            StartCoroutine(BulletCollide());
-        }
-
-        if (!other.isTrigger)
-            StartCoroutine(BulletCollide());
-
-    }
-
     protected IEnumerator BulletCollide()
     {
         Rigidbody2D body = GetComponent<Rigidbody2D>();
         body.velocity = Vector3.zero;
-        GetComponent<Collider2D>().enabled = false;
-
-        iTween.Init(gameObject);
+        GetComponent<Collider2D>().enabled = false;        
         //todo show a different sprite here instead of tweening
         iTween.ScaleTo(gameObject,
           iTween.Hash("y", 0,

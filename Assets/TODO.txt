@@ -61,3 +61,9 @@ saving items in ship ineventory when upgrading ship as well as the weapons.
 
 
 unify saving to be all in one thing..
+
+allow users to put more than one point into the game
+
+muilti thread the ai
+
+add object pools for everything...

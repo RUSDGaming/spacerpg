@@ -5,22 +5,34 @@ public class RandomTileScript : MonoBehaviour
 {
 
 
-    [SerializeField]  protected  GameObject asteroid;
+    [SerializeField]
+    protected GameObject asteroid;
     //public Transform levelParent;
     public float height = 80;
     public float width = 80;
-    public  BoxCollider2D collider;
+    public BoxCollider2D collider;
 
     public int x;
     public int y;
     public LevelGeneratorScript levelGeneratorScript;
     public int numAsteroids = 10;
 
+    public bool autoInit = false;
+
+    public void Start()
+    {
+        if (autoInit)
+        {
+            init();
+        }
+    }
+
     /// <summary>
     /// call this to set up the tile, each extension if the till will handle the rest  bababababy
     /// </summary>
     public virtual void init()
     {
+
 
         collider.size = new Vector2(width, height);
     }
@@ -29,10 +41,11 @@ public class RandomTileScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            levelGeneratorScript.PlayerEnteredTile(x, y);
+            if (levelGeneratorScript)
+                levelGeneratorScript.PlayerEnteredTile(x, y);
             return;
         }
-            
+
         if (other.isTrigger)
             return;
 

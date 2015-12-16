@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-
+[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent (typeof(SpriteRenderer))]
 public class Item : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class Item : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+      //  Debug.Log("item");
         if (other.CompareTag("Player"))
         {
             Inventory inv =  other.GetComponent<Inventory>();

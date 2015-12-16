@@ -12,9 +12,13 @@ public class EnemyGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+	}
+
+    void Awake()
+    {
         if (!instance)
             instance = this;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -28,13 +28,13 @@ public class PlayerHomeLevelGen : LevelGeneratorScript {
         LoadTileInUniqueSpace(TileType.PLAYER_STATION);
         LoadTileInUniqueSpace(TileType.PLAYER);
         LoadTileInUniqueSpace(TileType.PORTAL);
-        for (int x = 1; x < width - 1; x++)
+        for (int x = 0; x < width ; x++)
         {
-            for (int y = 1; y < height - 1; y++)
+            for (int y = 0; y < height ; y++)
             {
                 if(tiles[x,y] == TileType.VOID)
                 {
-                    tiles[x, y] = TileType.ENEMY;
+                    tiles[x, y] = TileType.ASTEROID;
                 }
             }
         }

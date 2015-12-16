@@ -20,7 +20,7 @@ public class Weapon :Item {
     public float projectileRatio = 0;
 
     public float damage;
-    public float fireRate;    
+    public float fireRate = 1f;    
     public float energyCost;
     public float knockBackForce = 2f;
     
@@ -43,27 +43,45 @@ public class Weapon :Item {
         //this.parentTransform = parentTransform;
         lastShot = -fireRate;
     }
+    protected virtual bool CanFire(float energy,SaveGameInfo stats)
+    {
+        if(energy >= energyCost)
+        {
+
+            if (Time.time - lastShot > 1 / shotsPerSecond(stats))
+            {
+                
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+   
+    public virtual void MouseUp()
+    {
+
+    }
 
     public virtual bool TryToFire(ref float energy,bool isPlayer,SaveGameInfo stats)
     {
 
-        //Debug.Log("trying to fire laser with energy : " + energy);
-       
-        if(Time.time - lastShot  >= getFireRate(stats) )
-        {
-            if(energy >= energyCost)
+        
+            if(CanFire(energy,stats))
             {       
               //  Debug.Log("fired a bullet");
-                 energy -= energyCost;
+                energy -= energyCost;
                 GameObject projectileInstance = (GameObject) Instantiate(projectile,transform.position,transform.rotation);
                 
                 ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
                 projectileScript.IsPlayer(isPlayer);
                 // could optimize code by saving damage values. 
                 projectileScript.damage = getWeaponDamage(stats);
+
+
                 if(stats != null)
                 {
-
                     projectileScript.id = stats.playerId;
                     //Debug.Log("player id that was fired is : " + stats.playerId);
                 }
@@ -72,16 +90,16 @@ public class Weapon :Item {
 
                 return true;
             }
-        }
+        
         return false;
 
     }
-    protected float getFireRate(SaveGameInfo stats)
+    protected float shotsPerSecond(SaveGameInfo stats)
     {
         if (stats != null)
         {
-        float rate = fireRate * (1 - stats.FIRE_RATE * .02f);
-        return rate;
+            float rate = fireRate * (1+ stats.FIRE_RATE * .1f);
+            return rate;
         }
         return fireRate;
 

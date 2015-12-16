@@ -10,16 +10,16 @@ public class BurnScript : MonoBehaviour
     public float damage = 1;
     public int burnerId = -1;
 
-    DamageUnit du;
+    iDamage du;
     // Use this for initialization
     void Start()
     {
-        du = GetComponent<DamageUnit>();
+        du = GetComponent<iDamage>();
     }
 
     public void init(float burnDurration, float burnRate, float damage, int id)
     {
-        du = GetComponent<DamageUnit>();
+        du = GetComponent<iDamage>();
         burnTime = burnDurration;
         burnerId = -1;
         this.damage = damage;

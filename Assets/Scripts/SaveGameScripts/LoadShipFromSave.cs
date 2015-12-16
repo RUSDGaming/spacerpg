@@ -83,7 +83,7 @@ public class LoadShipFromSave : MonoBehaviour {
         if(ssg.WeaponSlots != null)
         for(int i = 0; i < ship.weaponSlots.Length; i++)
         {
-
+            if(i < ssg.WeaponSlots.Length)
             if(ssg.WeaponSlots[i] != null)
             {
                 Item item = ItemManager.GetNewItem(ssg.WeaponSlots[i].id);

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+// prevents on triggerenter from working.....
 public class ItemJuice : MonoBehaviour {
 
     [SerializeField]
@@ -13,6 +15,8 @@ public class ItemJuice : MonoBehaviour {
 	
 	}
 	
+
+    
 	// Update is called once per frame
 	void Update () {
         transform.position = new Vector3(transform.position.x, transform.position.y +  Mathf.Sin(Time.time) * vertical, transform.position.z);

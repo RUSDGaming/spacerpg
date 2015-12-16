@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Game.Interfaces;
-public class EnenyScript : MonoBehaviour , DamageUnit {
+public class EnenyScript : MonoBehaviour , iDamage {
 
 
 

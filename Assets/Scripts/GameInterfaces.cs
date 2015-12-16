@@ -12,7 +12,7 @@ namespace Game.Interfaces
     //}
 
 
-    public interface DamageUnit
+    public interface iDamage
     {
         void Damage(float damageAmount, int damagerId);
     }
@@ -40,5 +40,5 @@ namespace Game.Interfaces
         void SetActualStats(SaveGameInfo stats, bool heal);
     }
 
-    public interface iShip : DamageUnit , Shooter , Movable,Rotatable, SetStats { }
+    public interface iShip : iDamage , Shooter , Movable,Rotatable, SetStats { }
 }
