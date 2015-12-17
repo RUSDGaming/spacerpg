@@ -12,21 +12,23 @@ public class ProjectileScript : MonoBehaviour {
     public float damage;
     public float aliveTime = 5;
     public bool playerBullet;
-    protected Rigidbody2D body;
+    [SerializeField] protected Rigidbody2D body;
     public bool timeDestroy = true;
 
     // Use this for initialization
     void Start () {
         body = GetComponent<Rigidbody2D>();
 
-        init();
+        //init();
         
 	}
 	
-    protected virtual void init()
+    public virtual void Init()
     {
         iTween.Init(gameObject);
+        
         body.AddRelativeForce(Vector2.up * speed);
+        
         if (timeDestroy)
         {
             StartCoroutine(StartDestroy(aliveTime));

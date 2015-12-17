@@ -32,7 +32,7 @@ public class Weapon :Item {
 	// Use this for initialization
 	void Start () {
         itemType = ItemType.WEAPON;
-        
+        //TODO set the players id when you set the weapon
         
 	}
 	public void Init(Transform parentTransform)
@@ -75,17 +75,17 @@ public class Weapon :Item {
                 GameObject projectileInstance = (GameObject) Instantiate(projectile,transform.position,transform.rotation);
                 
                 ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
+                projectileScript.Init();
                 projectileScript.IsPlayer(isPlayer);
                 // could optimize code by saving damage values. 
                 projectileScript.damage = getWeaponDamage(stats);
-
+                
 
                 if(stats != null)
                 {
                     projectileScript.id = stats.playerId;
                     //Debug.Log("player id that was fired is : " + stats.playerId);
                 }
-
                 lastShot = Time.time;
 
                 return true;

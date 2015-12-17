@@ -13,7 +13,7 @@ public class MissileScript : ProjectileScript
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        init();
+        Init();
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class MissileScript : ProjectileScript
         }
     }
 
-    protected override void init()
+    public override void Init()
     {
         StartCoroutine(StartDestroy(10));
 

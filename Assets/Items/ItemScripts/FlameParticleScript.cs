@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FlameDamageScript : ProjectileScript
+public class FlameParticleScript : MonoBehaviour
 {
 
 
     [SerializeField]
     float flameTime = 1f;
     bool firstFrame = true;
+    Rigidbody2D body;
+    [SerializeField]
+    float speed = 100;
     // Use this for initialization
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        
+
         init();
 
     }
-    
 
-    protected override void init()
+
+    protected void init()
     {
-        iTween.Init(gameObject);
+        //iTween.Init(gameObject);
         body.AddRelativeForce(Vector2.up * speed);
 
         //iTween.ScaleTo(gameObject,
@@ -45,10 +48,18 @@ public class FlameDamageScript : ProjectileScript
             firstFrame = false;
             return;
         }
-        if(Mathf.Abs(body.velocity.x) < 5f && Mathf.Abs( body.velocity.y) < 5f)
+        if (Mathf.Abs(body.velocity.x) < 5f && Mathf.Abs(body.velocity.y) < 5f)
         {
             //Debug.Log(body.velocity);
             Destroy(gameObject);
         }
     }
+
+    //public void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.isTrigger)
+    //        return;
+    //    else
+    //        Destroy(this.gameObject);
+    //}
 }

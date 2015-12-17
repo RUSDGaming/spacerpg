@@ -5,6 +5,8 @@ public class FlameThrowerWeaponScript : Weapon {
 
 
     [SerializeField]    float flameAngle = 10f;
+    [SerializeField]    GameObject flameCone;
+    
 	// Use this for initialization
 	void Start () {
         itemType = ItemType.WEAPON;
@@ -13,14 +15,26 @@ public class FlameThrowerWeaponScript : Weapon {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetMouseButton(0)) {
-            float blah = 999f;
-            TryToFire(ref blah, true, null);
-        }
+        //if (Input.GetMouseButton(0)) {
+        //    float blah = 999f;
+        //    TryToFire(ref blah, true, null);
+        //}
             
 
 	}
 
+    protected override bool CanFire(float energy, SaveGameInfo stats)
+    {
+        if(energy > energyCost * Time.fixedDeltaTime)
+        {
+            return true;
+        }
+        return false;
+    }
+    public override void MouseUp()
+    {
+        flameCone.SetActive(false);
+    }
 
     public override bool TryToFire(ref float energy, bool isPlayer, SaveGameInfo stats)
     {
@@ -28,27 +42,32 @@ public class FlameThrowerWeaponScript : Weapon {
 
         if (CanFire(energy, stats))
         {
+            flameCone.SetActive(true);
             //  Debug.Log("fired a bullet");
-            energy -= energyCost;
+            energy -= energyCost * Time.fixedDeltaTime;
             GameObject projectileInstance = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
 
             float randomRot = Random.Range(-flameAngle, flameAngle);
             projectileInstance.transform.localRotation =   Quaternion.Euler(new Vector3(0, 0, projectileInstance.transform.localEulerAngles.z + randomRot));
-            ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
-            projectileScript.IsPlayer(isPlayer);
+           // ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
+            //projectileScript.IsPlayer(isPlayer);
             // could optimize code by saving damage values. 
-            projectileScript.damage = getWeaponDamage(stats);
+            //projectileScript.damage = getWeaponDamage(stats);
 
 
             if (stats != null)
             {
-                projectileScript.id = stats.playerId;
+                //projectileScript.id = stats.playerId;
                 //Debug.Log("player id that was fired is : " + stats.playerId);
             }
 
             lastShot = Time.time;
 
             return true;
+        }
+        else
+        {
+            flameCone.SetActive(false);
         }
 
         return false;
