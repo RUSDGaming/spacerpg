@@ -11,7 +11,7 @@ public class PlayerAI : MonoBehaviour {
 
     public State state = State.START_IDLE;
 
-    Ship ship;
+    PlayerShip ship;
     Rigidbody2D body;
     float angle;
 
@@ -27,11 +27,11 @@ public class PlayerAI : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        ship = GetComponent<Ship>();
+        ship = GetComponent<PlayerShip>();
         if (ship == null)
         {
             body = GetComponentInParent<Rigidbody2D>();
-            ship = GetComponentInParent<Ship>();
+            ship = GetComponentInParent<PlayerShip>();
         }
         startPos = transform.position;
     }

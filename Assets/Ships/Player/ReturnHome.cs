@@ -15,11 +15,16 @@ public class ReturnHome : MonoBehaviour, PlayerDamagedSubscriber
     float remainingWarpTime;
     bool warping = false;
 
+    void Awake()
+    {
+        switcher = gameObject.GetComponent<ControlSwitcher>();
+
+    }
+
     // Use this for initialization
     void Start()
     {
-        switcher = gameObject.GetComponent<ControlSwitcher>();
-        iTween.Init(switcher.mainShip);
+        //iTween.Init(switcher.mainShip);
 
         GameEventSystem.RegisterSubScriber(this);
         lastHitTime = -warpTime;

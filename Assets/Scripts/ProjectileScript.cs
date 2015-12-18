@@ -52,33 +52,46 @@ public class ProjectileScript : MonoBehaviour {
 
         if (other.isTrigger)
             return;
-        if (playerBullet && other.CompareTag("Player"))
-            return;
-        if (!playerBullet && other.CompareTag("Enemy"))
-            return;
 
-        if (playerBullet && other.CompareTag("Enemy"))
+        iDamage idamage = other.GetComponent<iDamage>();
+        if(idamage != null)
         {
-            iDamage du = other.GetComponent<iDamage>();
-            du.Damage(damage, id);
-            StartCoroutine(BulletCollide());
-        }
-        else if (!playerBullet && other.CompareTag("Player"))
-        {
-            iDamage du = other.GetComponent<iDamage>();
-            du.Damage(damage, id);
-            StartCoroutine(BulletCollide());
-        }
-        else if (other.CompareTag("Neutral"))
-        {
-            iDamage du = other.GetComponent<iDamage>();
-            du.Damage(damage, id);
-            StartCoroutine(BulletCollide());
+            if (idamage.CanDamage(playerBullet))
+            {
+                idamage.Damage(damage, id);
+                StartCoroutine(BulletCollide());
+            }
+
         }
         else if (!other.isTrigger)
         {
             StartCoroutine(BulletCollide());
         }
+
+        //if (playerBullet && other.CompareTag("Player"))
+        //    return;
+        //if (!playerBullet && other.CompareTag("Enemy"))
+        //    return;
+
+        //if (playerBullet && other.CompareTag("Enemy"))
+        //{
+        //    iDamage du = other.GetComponent<iDamage>();
+        //    du.Damage(damage, id);
+        //    StartCoroutine(BulletCollide());
+        //}
+        //else if (!playerBullet && other.CompareTag("Player"))
+        //{
+        //    iDamage du = other.GetComponent<iDamage>();
+        //    du.Damage(damage, id);
+        //    StartCoroutine(BulletCollide());
+        //}
+        //else if (other.CompareTag("Neutral"))
+        //{
+        //    iDamage du = other.GetComponent<iDamage>();
+        //    du.Damage(damage, id);
+        //    StartCoroutine(BulletCollide());
+        //}
+
 
     }
 

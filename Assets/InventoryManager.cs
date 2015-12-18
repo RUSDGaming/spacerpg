@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InventoryManager : MonoBehaviour {
 
-    public Ship ship;
+    public PlayerShip ship;
 
    
 

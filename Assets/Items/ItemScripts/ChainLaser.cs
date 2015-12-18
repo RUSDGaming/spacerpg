@@ -22,7 +22,7 @@ public class ChainLaser : Weapon {
 	}
 
 
-    public override bool TryToFire(ref float energy, bool isPlayer,SaveGameInfo stats)
+    public override bool TryToFire(ref float energy)
     {
         //Debug.Log("Trying to fire miniGun");
         if(energy < energyCost)
@@ -52,12 +52,13 @@ public class ChainLaser : Weapon {
         GameObject projectileInstance = (GameObject)Instantiate(projectile, spawnPos, transform.rotation);
 
         ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
-        projectileScript.IsPlayer(isPlayer);
+        projectileScript.IsPlayer(playerOwned);
         // could optimize code by saving damage values. 
         projectileScript.damage = getWeaponDamage(stats);
         if(stats != null)
         projectileScript.id = stats.playerId;
 
+        projectileScript.Init();
         lastShot = Time.time;
 
         fireRate -= fireRateDecrease;

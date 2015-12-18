@@ -7,7 +7,7 @@ public class ShipManager : MonoBehaviour {
 
     public static ShipManager instance;
 
-    [SerializeField]    Ship[] ships;
+    [SerializeField]    PlayerShip[] ships;
     // Use this for initialization
     void Start()
     {
@@ -29,7 +29,7 @@ public class ShipManager : MonoBehaviour {
     }
 
 
-    public static Ship GetNewShip(int i)
+    public static PlayerShip GetNewShip(int i)
     {
 
         if (!instance)
@@ -38,7 +38,7 @@ public class ShipManager : MonoBehaviour {
             return null;
         }
       //  Debug.Log("Createted a ship from the ship manager");
-        Ship ship = Instantiate(instance.ships[i]);
+        PlayerShip ship = Instantiate(instance.ships[i]);
         return ship;
     }
 }

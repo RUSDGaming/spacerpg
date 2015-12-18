@@ -17,7 +17,7 @@ public class WeaponTester : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
             float energy = 999;
-            wep.TryToFire( ref energy, true, null);
+            wep.TryToFire( ref energy);
         }
         if (Input.GetMouseButtonUp(0))
         {

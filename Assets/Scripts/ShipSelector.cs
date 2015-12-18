@@ -4,7 +4,7 @@ using Game.Interfaces;
 
 public class ShipSelector : MonoBehaviour {
 
-    [SerializeField]    Ship[] ships;
+    [SerializeField]    PlayerShip[] ships;
     [SerializeField]    RectTransform shipInfoPanel;
     [SerializeField]    GameObject[] shipInfos;
     [SerializeField] ControlSwitcher switcher;
@@ -20,7 +20,7 @@ public class ShipSelector : MonoBehaviour {
 
         for(int i = 0; i < ships.Length; i++)
         {
-            Ship ship = ships[i];
+            PlayerShip ship = ships[i];
             shipInfos[i].SetActive(true);
             UIShipInfo info = shipInfos[i].GetComponent<UIShipInfo>();
             info.ShipImage = ship.gameObject.GetComponent<SpriteRenderer>().sprite;

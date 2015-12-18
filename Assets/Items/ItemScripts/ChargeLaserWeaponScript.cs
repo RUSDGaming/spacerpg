@@ -41,9 +41,9 @@ public class ChargeLaserWeaponScript : Weapon
     }
 
 
-    public override bool TryToFire(ref float energy, bool isPlayer, SaveGameInfo stats)
+    public override bool TryToFire(ref float energy)
     {
-        playerOwned = isPlayer;
+        
         chargeTimer -= Time.fixedDeltaTime;
         if(chargeTimer <= 0)
         {

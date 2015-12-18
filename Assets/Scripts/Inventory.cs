@@ -9,10 +9,8 @@ public class Inventory : MonoBehaviour
         SHIP_CORE, STATIONARY, SHIP, WEAPON_SLOT
     }
 
-    [SerializeField]
-    bool loadInventoryFromSave = false;
-    [SerializeField]
-    string inventoryName = "notSet";
+    [SerializeField]    bool loadInventoryFromSave = false;
+    [SerializeField]    string inventoryName = "notSet";
     public int inventorySize = 10;
     public Item[] items;
 

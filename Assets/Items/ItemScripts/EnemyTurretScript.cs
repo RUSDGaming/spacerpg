@@ -7,7 +7,7 @@ public class EnemyTurretScript : MonoBehaviour {
     public Transform trackingTarget;
 
     [SerializeField]    float maxRotation = 90f;
-    [SerializeField]    float turnRate = 10f;
+    [SerializeField]    float turnRate = 100f;
     
     // Use this for initialization
     void Start()

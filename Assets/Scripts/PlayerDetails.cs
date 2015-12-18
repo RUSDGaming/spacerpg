@@ -17,7 +17,7 @@ public class PlayerDetails : MonoBehaviour {
     [SerializeField]    Text turnRateText;
     [SerializeField]    Text moneyText;
 
-    public Ship ship;
+    public PlayerShip ship;
 
 
     // Use this for initialization

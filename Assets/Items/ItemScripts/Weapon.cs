@@ -27,6 +27,9 @@ public class Weapon :Item {
 
     protected float lastShot = 0;
 
+    protected SaveGameInfo stats;
+
+    [SerializeField] protected bool playerOwned;
  
 
 	// Use this for initialization
@@ -35,15 +38,13 @@ public class Weapon :Item {
         //TODO set the players id when you set the weapon
         
 	}
-	public void Init(Transform parentTransform)
+	public virtual void Init(SaveGameInfo sgi,bool playerOwned)
     {
-
-       // if (GameObject.FindGameObjectWithTag("AudioManager"))
-       // audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        //this.parentTransform = parentTransform;
+        stats = sgi;
         lastShot = -fireRate;
+        this.playerOwned = playerOwned;
     }
-    protected virtual bool CanFire(float energy,SaveGameInfo stats)
+    protected virtual bool CanFire(float energy)
     {
         if(energy >= energyCost)
         {
@@ -64,11 +65,10 @@ public class Weapon :Item {
 
     }
 
-    public virtual bool TryToFire(ref float energy,bool isPlayer,SaveGameInfo stats)
+    public virtual bool TryToFire(ref float energy)
     {
-
         
-            if(CanFire(energy,stats))
+            if(CanFire(energy))
             {       
               //  Debug.Log("fired a bullet");
                 energy -= energyCost;
@@ -76,10 +76,10 @@ public class Weapon :Item {
                 
                 ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
                 projectileScript.Init();
-                projectileScript.IsPlayer(isPlayer);
+                projectileScript.IsPlayer(playerOwned);
                 // could optimize code by saving damage values. 
                 projectileScript.damage = getWeaponDamage(stats);
-                
+                projectileScript.Init();
 
                 if(stats != null)
                 {

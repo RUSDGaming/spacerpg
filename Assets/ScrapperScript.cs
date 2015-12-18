@@ -5,8 +5,6 @@ public class ScrapperScript : MonoBehaviour {
 
     [SerializeField]    UISlot2 scrapSlot;
 
-    [HideInInspector]    public SaveGameInfo saveGameInfo;
-
     ControlSwitcher switcher;
 	// Use this for initialization
 	void Start () {
@@ -25,7 +23,7 @@ public class ScrapperScript : MonoBehaviour {
         Item i = scrapSlot.GetItem();
         if (i)
         {
-            saveGameInfo.money += i.scrapValue * i.currentSize;
+            switcher.saveGameInfo.money += i.scrapValue * i.currentSize;
             scrapSlot.SetItem(null);
             Destroy(i);
             switcher.reloadShipStats(false);

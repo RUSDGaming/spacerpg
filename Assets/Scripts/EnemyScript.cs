@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Game.Interfaces;
-public class EnenyScript : MonoBehaviour , iDamage {
+using System;
+
+public class EnemyScript : MonoBehaviour , iDamage {
 
 
 
@@ -47,7 +49,7 @@ public class EnenyScript : MonoBehaviour , iDamage {
     {
         if(Time.time - lastFire  >= fireRate)
         {
-            audioSorce.pitch = Random.Range(.8f, 1.2f);
+            audioSorce.pitch = UnityEngine.Random.Range(.8f, 1.2f);
             audioSorce.PlayOneShot(laserSound);
             lastFire = Time.time;
             GameObject go = (GameObject) Instantiate(projectile, this.transform.position,this.transform.rotation );
@@ -55,5 +57,8 @@ public class EnenyScript : MonoBehaviour , iDamage {
         }
     }
 
-
+    public bool CanDamage(bool playerProjectile)
+    {
+        throw new NotImplementedException();
+    }
 }

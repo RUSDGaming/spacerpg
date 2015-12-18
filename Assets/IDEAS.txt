@@ -6,7 +6,7 @@ make each sector increase the difficulty when you complete it.
 when you defeat one of the regions you unlock the ability to use that power. 
 these enemies will then show up in other regions. 
 
-
+have a high score and timer
 
 final boss
 

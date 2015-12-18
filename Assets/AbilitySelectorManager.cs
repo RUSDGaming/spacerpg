@@ -154,7 +154,7 @@ public class AbilitySelectorManager : MonoBehaviour {
                 Debug.LogError("Invalid ship type selected");
                 break;
         }
-        Ship ship = ShipManager.GetNewShip(shipId);
+        PlayerShip ship = ShipManager.GetNewShip(shipId);
                 
         loadShipFromSave.Save(ship); 
 

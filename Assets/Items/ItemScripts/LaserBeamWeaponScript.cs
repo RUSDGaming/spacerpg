@@ -24,7 +24,7 @@ public class LaserBeamWeaponScript : Weapon
     }
 
 
-    protected override bool CanFire(float energy, SaveGameInfo stats)
+    protected override bool CanFire(float energy)
     {
        if(energy >= energyCost * Time.fixedDeltaTime)
         {
@@ -33,9 +33,9 @@ public class LaserBeamWeaponScript : Weapon
         return false;
     }
 
-    public override bool TryToFire(ref float energy, bool isPlayer, SaveGameInfo stats)
+    public override bool TryToFire(ref float energy)
     {
-        if (CanFire(energy, stats))
+        if (CanFire(energy))
         {
             laserGameObject.SetActive(true);
             createLaser();

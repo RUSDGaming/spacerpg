@@ -7,7 +7,7 @@ public class PlayerSense : MonoBehaviour {
     public Transform parentTransform;
     public Rigidbody2D body;
     
-    [SerializeField] EnenyScript enemyScript;
+    [SerializeField] EnemyScript enemyScript;
     public float maxTurnRate = 10f;
 
 

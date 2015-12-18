@@ -7,11 +7,20 @@ public class PlayerEXPManager : MonoBehaviour, EnemyDiedSubscriber
 {
 
 
-    public SaveGameInfo saveGameInfo;
+    //public SaveGameInfo saveGameInfo;
     [SerializeField]
-    GameObject levelUpText;
-    [SerializeField]
+    GameObject levelUpText;    
     ControlSwitcher switcher;
+
+
+    void Awake()
+    {
+        switcher = GetComponent<ControlSwitcher>();
+        if(switcher == null)
+        {
+            Debug.LogError("Could not Find Switcher");
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -38,7 +47,7 @@ public class PlayerEXPManager : MonoBehaviour, EnemyDiedSubscriber
     {
         EnemyDiedEventArgs e = (EnemyDiedEventArgs)args;
 
-        e.exp -= saveGameInfo.level;
+        e.exp -= switcher.saveGameInfo.level;
         if (e.exp <= 0)
             return;
 
@@ -46,22 +55,22 @@ public class PlayerEXPManager : MonoBehaviour, EnemyDiedSubscriber
         // Debug.Log(saveGameInfo.playerId);
 
         // only get half exp if you dont kill it. 
-        if (e.playerId == saveGameInfo.playerId)
+        if (e.playerId == switcher.saveGameInfo.playerId)
         {
-            saveGameInfo.exp += e.exp;
+            switcher.saveGameInfo.exp += e.exp;
             InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp, Color.green);
         }
         else
         {
-            saveGameInfo.exp += e.exp / 2f;
+            switcher.saveGameInfo.exp += e.exp / 2f;
             InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp / 2f, Color.green);
         }
         // if you level up you get points;
-        int tempLevel = saveGameInfo.level;
-        saveGameInfo.level = Mathf.FloorToInt(saveGameInfo.exp / 100);
-        if (saveGameInfo.level - tempLevel > 0)
+        int tempLevel = switcher.saveGameInfo.level;
+        switcher.saveGameInfo.level = Mathf.FloorToInt(switcher.saveGameInfo.exp / 100);
+        if (switcher.saveGameInfo.level - tempLevel > 0)
         {
-            saveGameInfo.points += (saveGameInfo.level - tempLevel) * 2;
+            switcher.saveGameInfo.points += (switcher.saveGameInfo.level - tempLevel) * 2;
 
             levelUpText.SetActive(true);
 

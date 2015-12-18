@@ -22,12 +22,12 @@ public class PlayerController : MonoBehaviour {
     float angleBetween;
     bool fireDown;
     bool mouseUp;
-    public Ship ship;
+    public PlayerShip ship;
 
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody2D>();
-        ship = GetComponent<Ship>();
+        ship = GetComponent<PlayerShip>();
 	}
 
 

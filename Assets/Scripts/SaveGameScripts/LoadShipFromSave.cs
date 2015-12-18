@@ -30,12 +30,12 @@ public class LoadShipFromSave : MonoBehaviour {
     }
 
 
-    public  void Save(Ship ship)
+    public  void Save(PlayerShip ship)
     {
         if(ship == null)
         {
             GameObject go = transform.GetChild(0).gameObject;
-            ship = go.GetComponent<Ship>();
+            ship = go.GetComponent<PlayerShip>();
         }
 
         SaveGameShip ssg = new SaveGameShip();
@@ -74,7 +74,7 @@ public class LoadShipFromSave : MonoBehaviour {
         string fileName = PlayerPrefs.GetString(LoadPannel.current);
         SaveGameShip ssg = SaveGameSystem.LoadGame(fileName + shipSaveName) as SaveGameShip;
 
-        Ship ship = ShipManager.GetNewShip(ssg.shipId);
+        PlayerShip ship = ShipManager.GetNewShip(ssg.shipId);
 
         ship.transform.SetParent(transform);
        // Debug.Log(ship.GetComponent<Inventory>().items.Length);

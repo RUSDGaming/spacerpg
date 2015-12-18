@@ -9,7 +9,7 @@ public class PlayerSpaceStation : MonoBehaviour
         if (!collision.CompareTag("Player"))
             return;
 
-        Ship ship = collision.GetComponent<Ship>();
+        PlayerShip ship = collision.GetComponent<PlayerShip>();
         if (ship)
         {
             ship.playerAtSpaceStation = true;
@@ -22,7 +22,7 @@ public class PlayerSpaceStation : MonoBehaviour
         if (!collision.CompareTag("Player"))
             return;
 
-        Ship ship = collision.GetComponent<Ship>();
+        PlayerShip ship = collision.GetComponent<PlayerShip>();
         if (ship)
         {
             ship.playerAtSpaceStation = false;

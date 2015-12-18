@@ -101,6 +101,10 @@ public class EnemyAI2 : MonoBehaviour
                     {
                         ship.MoveUnit(Vector2.up, true);
                     }
+                    else
+                    {
+                        ship.MoveUnit(Vector2.zero, true);
+                    }
                 }
             }
            

@@ -15,6 +15,7 @@ namespace Game.Interfaces
     public interface iDamage
     {
         void Damage(float damageAmount, int damagerId);
+        bool CanDamage(bool playerProjectile);
     }
 
     public interface Shooter

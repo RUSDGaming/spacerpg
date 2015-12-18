@@ -21503,53 +21503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da7036b8a4214740b701e1e99427110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveGameInfo:
-    exp: 0
-    level: 0
-    points: 0
-    money: 0
-    HEALTH: 0
-    ARMOR: 0
-    SHIELD: 0
-    TURN_RATE: 0
-    MOVE_SPEED: 0
-    DAMAGE: 0
-    FIRE_RATE: 0
-    LASER: 0
-    PROJECTILE: 0
-    EXPLOSION: 0
-    ENERGY_REGENERATION: 0
-    ENERGY_CAPACITY: 0
-    FIRE: 0
-    ELECTRIC: 0
-    ACID: 0
-    ICE: 0
-    LIGHT: 0
-    DARK: 0
-    primaryType: 0
-    p1: 0
-    p2: 0
-    p3: 0
-    a1: 0
-    a2: 0
-    a3: 0
-    a4: 0
-    a5: 0
-    a6: 0
-    u1: 0
-    u2: 0
-    u3: 0
-    u4: 0
-    u5: 0
-    u6: 0
-    d1: 0
-    d2: 0
-    d3: 0
-    d4: 0
-    d5: 0
-    d6: 0
   levelUpText: {fileID: 874319183}
-  switcher: {fileID: 1230899583}
 --- !u!114 &1230899585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21608,51 +21562,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrapSlot: {fileID: 6629934}
-  saveGameInfo:
-    exp: 0
-    level: 0
-    points: 0
-    money: 0
-    HEALTH: 0
-    ARMOR: 0
-    SHIELD: 0
-    TURN_RATE: 0
-    MOVE_SPEED: 0
-    DAMAGE: 0
-    FIRE_RATE: 0
-    LASER: 0
-    PROJECTILE: 0
-    EXPLOSION: 0
-    ENERGY_REGENERATION: 0
-    ENERGY_CAPACITY: 0
-    FIRE: 0
-    ELECTRIC: 0
-    ACID: 0
-    ICE: 0
-    LIGHT: 0
-    DARK: 0
-    primaryType: 0
-    p1: 0
-    p2: 0
-    p3: 0
-    a1: 0
-    a2: 0
-    a3: 0
-    a4: 0
-    a5: 0
-    a6: 0
-    u1: 0
-    u2: 0
-    u3: 0
-    u4: 0
-    u5: 0
-    u6: 0
-    d1: 0
-    d2: 0
-    d3: 0
-    d4: 0
-    d5: 0
-    d6: 0
 --- !u!114 &1230899589
 MonoBehaviour:
   m_ObjectHideFlags: 0

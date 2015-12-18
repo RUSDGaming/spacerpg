@@ -127,4 +127,9 @@ public class ShipCore : MonoBehaviour , iShip {
     {
         //Debug.Log("ship core not set up yet to load actual stats");
     }
+
+    public bool CanDamage(bool playerProjectile)
+    {
+        throw new NotImplementedException();
+    }
 }

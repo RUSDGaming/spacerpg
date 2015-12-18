@@ -44,7 +44,8 @@ public class FollowTransform : MonoBehaviour {
             }
             else
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");                
+                GameObject player = GameObject.FindGameObjectWithTag("Player");      
+                if(player)          
                 followObject = player.transform;
             }
 

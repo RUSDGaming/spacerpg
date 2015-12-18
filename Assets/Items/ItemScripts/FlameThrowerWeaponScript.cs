@@ -23,7 +23,7 @@ public class FlameThrowerWeaponScript : Weapon {
 
 	}
 
-    protected override bool CanFire(float energy, SaveGameInfo stats)
+    protected override bool CanFire(float energy)
     {
         if(energy > energyCost * Time.fixedDeltaTime)
         {
@@ -36,11 +36,11 @@ public class FlameThrowerWeaponScript : Weapon {
         flameCone.SetActive(false);
     }
 
-    public override bool TryToFire(ref float energy, bool isPlayer, SaveGameInfo stats)
+    public override bool TryToFire(ref float energy)
     {
 
 
-        if (CanFire(energy, stats))
+        if (CanFire(energy))
         {
             flameCone.SetActive(true);
             //  Debug.Log("fired a bullet");

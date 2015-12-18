@@ -9,7 +9,8 @@ public class WeaponInventory : Inventory
     // public GameObject weapon_Inv;
     Weapon weaponScript;
 
-
+    SaveGameInfo playerStats;
+    public bool playerOwned = false;
 
     [SerializeField]
     bool aboveShip = false;
@@ -25,6 +26,17 @@ public class WeaponInventory : Inventory
         
         inventoryType = InventoryType.WEAPON_SLOT;
         if (items[0] != null)
+        {
+            SetItemWithIndex(items[0], 0);
+        }
+        
+    }
+
+    public void init(SaveGameInfo info,bool isPlayer)
+    {
+        playerStats = info;
+        playerOwned = isPlayer;
+        if(items[0] != null)
         {
             SetItemWithIndex(items[0], 0);
         }
@@ -99,7 +111,8 @@ public class WeaponInventory : Inventory
                 Debug.LogError("You are trying to set up an item that is not a weapon!");
                 return;
             }
-            weaponScript.Init(this.transform);
+            weaponScript.Init(playerStats,playerOwned);
+            
             // gets the sprite from the game object.            
             SpriteRenderer weaponSprite = wep.GetComponent<SpriteRenderer>();
 

@@ -5,7 +5,7 @@ using Game.Interfaces;
 
 public class ControlSwitcher : MonoBehaviour {
 
-    public    GameObject shipCore;
+    //public    GameObject shipCore;
     public    GameObject mainShip;
    // [SerializeField]    FollowTransform cameraFollower;
     [SerializeField]    PlayerMenu menu;
@@ -20,11 +20,9 @@ public class ControlSwitcher : MonoBehaviour {
 
     [SerializeField]    LoadShipFromSave loadShipFromSave;
 
-    public SaveGameInfo playerStats;
-
-    PlayerEXPManager expManager;
-    ScrapperScript scrapperScript;
-    Ship ship;
+    public SaveGameInfo saveGameInfo;
+    
+    PlayerShip ship;
     GameLogic logic;
     InventoryManager inventoryManager;
 
@@ -32,33 +30,32 @@ public class ControlSwitcher : MonoBehaviour {
 	void Start () {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<GameLogic>();
 
-        expManager = GetComponent<PlayerEXPManager>();
-        scrapperScript = GetComponent<ScrapperScript>();
         inventoryManager = GetComponent<InventoryManager>();
 
         // TODO set the player id correctly
         LoadSavedShip();
 
-        playerStats.playerId = 1;
-       // Debug.Log(playerStats.primaryType);
+        saveGameInfo.playerId = 1;
+       
 
-        statHolderScript.SaveGameInfo = playerStats;
-        expManager.saveGameInfo = playerStats;
-        scrapperScript.saveGameInfo = playerStats;
+        statHolderScript.SaveGameInfo = saveGameInfo;
+       
+       
         inventoryManager.ship = ship;
-        if(scrapperScript.saveGameInfo == null)
-        {
-            Debug.LogError("scrip wasnt set correctly");
-        }
+        //if(scrapperScript.saveGameInfo == null)
+        //{
+        //    Debug.LogError("scrip wasnt set correctly");
+        //}
 
 
         if (mainShip.activeInHierarchy)
         {
             SwitchToMainShip();
-        } else if (shipCore.activeInHierarchy)
-        {         
-            SwitchToShipCore();           
         }
+        //else if (shipCore.activeInHierarchy)
+        //{         
+        //    SwitchToShipCore();           
+        //}
 	}
 	// Update is called once per frame
 	void Update () {
@@ -71,30 +68,30 @@ public class ControlSwitcher : MonoBehaviour {
        shield.setImage(ship.currentShield, ship.maxShield);	
 	}
 
-    public void SwitchToShipCore()
-    {
+    //public void SwitchToShipCore()
+    //{
         
-        shipCore.SetActive(true);
-        shipCore.transform.position = mainShip.transform.position;
-        mainShip.SetActive(false);
-        //cameraFollower.followObject = shipCore.transform;
-        menu.SetShip(shipCore);
-        shipCore.GetComponent<PlayerController>().disableInput = false;
-        menu.playerController = shipCore.GetComponent<PlayerController>();
-        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats,true);
-        inventoryManager.ship = ship;
-    }
+    //    shipCore.SetActive(true);
+    //    shipCore.transform.position = mainShip.transform.position;
+    //    mainShip.SetActive(false);
+    //    //cameraFollower.followObject = shipCore.transform;
+    //    menu.SetShip(shipCore);
+    //    shipCore.GetComponent<PlayerController>().disableInput = false;
+    //    menu.playerController = shipCore.GetComponent<PlayerController>();
+    //    shipCore.GetComponent<ShipCore>().SetActualStats(saveGameInfo,true);
+    //    inventoryManager.ship = ship;
+    //}
 
     public void SwitchToMainShip()
     {
         mainShip.SetActive(true);
-        mainShip.transform.position = shipCore.transform.position;
-        shipCore.SetActive(false);
+       // mainShip.transform.position = shipCore.transform.position;
+       // shipCore.SetActive(false);
       //  cameraFollower.followObject = mainShip.transform;
         menu.playerController = mainShip.GetComponent<PlayerController>();
         menu.SetShip(mainShip);
         reloadShipStats(true);
-        ship = mainShip.GetComponent<Ship>();
+        ship = mainShip.GetComponent<PlayerShip>();
         if(logic)
         logic.TrackTarget(mainShip.transform);
         if(inventoryManager)
@@ -104,13 +101,13 @@ public class ControlSwitcher : MonoBehaviour {
     public void reloadShipStats(bool heal)
     {
         //Debug.Log("reloading shipSttast");
-        shipCore.GetComponent<ShipCore>().SetActualStats(playerStats,heal);
-        mainShip.GetComponent<Ship>().SetActualStats(playerStats,heal);
-        playerDetails.ship = mainShip.GetComponent<Ship>();
+        //shipCore.GetComponent<ShipCore>().SetActualStats(saveGameInfo,heal);
+        mainShip.GetComponent<PlayerShip>().SetActualStats(saveGameInfo,heal);
+        playerDetails.ship = mainShip.GetComponent<PlayerShip>();
         playerDetails.ReadPlayerStats();
     }
 
-    public void SetShip(Ship newShip)
+    public void SetShip(PlayerShip newShip)
     {
         if (mainShip)
         {
@@ -128,7 +125,7 @@ public class ControlSwitcher : MonoBehaviour {
     [Obsolete("Use SetShip instead")]
     public void SetMainShip(GameObject shipPrefab)
     {
-        shipCore.transform.position = mainShip.transform.position;
+        ///shipCore.transform.position = mainShip.transform.position;
         GameObject newShip = Instantiate(shipPrefab, mainShip.transform.position, Quaternion.identity) as GameObject;
 
         // set the parent to nulll so the menu doesnt think its an inventory it should read from
@@ -151,7 +148,7 @@ public class ControlSwitcher : MonoBehaviour {
     {
         NextUpgrade nextShip =  ship.GetComponent<NextUpgrade>();
 
-        if(playerStats.money < nextShip.upgradeCost)
+        if(saveGameInfo.money < nextShip.upgradeCost)
         {
             return;
         }
@@ -161,7 +158,7 @@ public class ControlSwitcher : MonoBehaviour {
             return;
         }
 
-        playerStats.money -= nextShip.upgradeCost;
+        saveGameInfo.money -= nextShip.upgradeCost;
 
 
         
@@ -174,7 +171,12 @@ public class ControlSwitcher : MonoBehaviour {
     public void LoadSavedShip()
     {
         string fileName = PlayerPrefs.GetString(LoadPannel.current);
-        playerStats = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
+        saveGameInfo = SaveGameSystem.LoadGame(fileName) as SaveGameInfo;
+        if(saveGameInfo == null)
+        {
+            Debug.Log("Could not load player stats...");
+            saveGameInfo = new SaveGameInfo();
+        }
         loadShipFromSave.Load();
 
     }

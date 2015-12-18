@@ -24,7 +24,7 @@ public class PlayerMenu : MonoBehaviour
 
 
     public GameObject ship;
-    Ship shipScript;
+    PlayerShip shipScript;
 
     public bool shipNearChest = false;
 
@@ -222,7 +222,7 @@ public class PlayerMenu : MonoBehaviour
     public void SetShip(GameObject shipObject)
     {
         this.ship = shipObject;
-        shipScript = ship.GetComponent<Ship>();
+        shipScript = ship.GetComponent<PlayerShip>();
         Sprite shipSprite = ship.GetComponent<SpriteRenderer>().sprite;
 
         shipImage.GetComponent<Image>().sprite = shipSprite;

@@ -17,11 +17,24 @@ public class SniperCannonWeaponScript : Weapon{
 	
 	}
 
+    public override void Init(SaveGameInfo sgi, bool playerOwned)
+    {
+        base.Init(sgi, playerOwned);
 
-    public override bool TryToFire(ref float energy, bool isPlayer, SaveGameInfo stats)
+        if (playerOwned)
+        {
+            layers = LayerMask.GetMask(new string[]{"enemy","Neutral"});
+        }
+        else
+        {
+            layers = LayerMask.GetMask(new string[] { "Neutral", "player" });
+        }
+    }
+
+    public override bool TryToFire(ref float energy)
     {
         //return base.TryToFire(ref energy, isPlayer, stats);
-        if (CanFire(energy, stats))
+        if (CanFire(energy))
         {
            
             createSmokeTrail();
