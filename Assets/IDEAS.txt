@@ -10,7 +10,6 @@ have a high score and timer
 
 final boss
 
-
 Classes:
 	Neutreul nothing special. 
 
@@ -44,16 +43,11 @@ It will have a boss that you have to beat to unlock the portal.
 
 It will be filled with enimies most in groups.
 
-
-
 ai   
 
 tracking range increases dramatically when you hit enenmy. 
 
-
 done- camera needs to extend pass where you can actually go.... 
-
-
 
 worlds(8){	
 	fire, ice, acid, electric, dark, light, normal, boss
@@ -212,17 +206,41 @@ each region has a different way to unlock the boss{
 
 	light - heal enemy ship
 	dark -- create a black hole
-
-
-
+	
 }
-
-
-
 
 make the ai learn by using this method, this will take a while. 
 https://github.com/lordjesus/UnityNEAT
 
 just make more enmies.
 make them all kinda stupid
+
+
+
+wave ideas{
+	start with asteriods that can hurt you i guess..
+	then add enimies and 
+}
+
+shop{
+  weapons , utility , deffense
+ }
+mechanic {
+	upgrade your ship
+	like health 
+}
+
+shipDealer{
+	buy ships, allows you to buy any ship... should have certain ones locked
+}
+
+scrapYard{
+	You can "sell stuff here"
+}
+
+Bank{
+	store the items that don't fit in your ship...
+}
+
+
 

@@ -125,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -116.759605, y: 54.6415558, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449020}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.79999924, z: 0}
+  m_LocalPosition: {x: 0, y: 1.7999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 415670}
@@ -203,8 +203,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.1400001, z: 0}
-  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
+  m_LocalPosition: {x: 0, y: -2.14, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 404456}
   m_RootOrder: 0
@@ -215,9 +215,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106588}
+  m_UseAutoMass: 0
   m_Mass: 3
   m_LinearDrag: 3
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -231,6 +232,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106588}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
@@ -249,33 +251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionSprites: []
-  weaponSlots:
-  - {fileID: 11480178}
-  capacitors: []
-  engines: []
-  thrusters: []
-  armors: []
-  switcher: {fileID: 0}
-  baseHealth: 5
-  baseArmor: 0
-  baseMaxShield: 0
-  baseMaxEnergy: 100
-  baseEnergyRegen: 100
-  baseMoveForce: 8000
-  baseMaxSpeed: 20
-  baseTurnRate: 540
-  maxHealth: 0
-  currentHealth: 0
-  armor: 0
-  maxShield: 0
-  currentShield: 0
-  maxEnergy: 0
-  currentEnergy: 0
-  energyRegen: 0
-  moveForce: 0
-  maxSpeed: 0
-  turnRate: 0
-  id: 0
   playerStats:
     exp: 0
     level: 0
@@ -321,8 +296,38 @@ MonoBehaviour:
     d4: 0
     d5: 0
     d6: 0
+  weaponSlots:
+  - {fileID: 11480178}
+  capacitors: []
+  engines: []
+  thrusters: []
+  armors: []
+  baseHealth: 5
+  baseArmor: 0
+  baseMaxShield: 0
+  baseMaxEnergy: 100
+  baseEnergyRegen: 100
+  baseMoveForce: 8000
+  baseMaxSpeed: 20
+  baseTurnRate: 540
+  maxHealth: 0
+  currentHealth: 0
+  armor: 0
+  maxShield: 0
+  currentShield: 0
+  maxEnergy: 0
+  currentEnergy: 0
+  energyRegen: 0
+  moveForce: 0
+  maxSpeed: 0
+  turnRate: 0
+  id: 0
   playerControlled: 0
   playerAtSpaceStation: 0
+  alive: 1
+  lastWeaponSoundPlayed: 0
+  weaponSoundRate: 0.1
+  switcher: {fileID: 0}
 --- !u!114 &11470922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,6 +372,7 @@ MonoBehaviour:
   relativeInput: 1
   disableInput: 0
   id: 0
+  ship: {fileID: 0}
 --- !u!114 &11476988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -402,7 +408,7 @@ MonoBehaviour:
   buildCost: 1
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
-  damageRatio: .200000003
+  damageRatio: 0.2
   explosionRatio: 0
   laserRatio: 0
   projectileRatio: 0
@@ -410,6 +416,7 @@ MonoBehaviour:
   fireRate: 1
   energyCost: 1
   knockBackForce: 2
+  playerOwned: 0
 --- !u!114 &11480178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -428,6 +435,7 @@ MonoBehaviour:
   - {fileID: 11478738}
   inventoryType: 3
   cargo: {fileID: 428942}
+  playerOwned: 0
   aboveShip: 0
 --- !u!114 &11497434
 MonoBehaviour:
@@ -462,14 +470,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: -9
   m_Sprite: {fileID: 21300000, guid: b5927166899907d428798bd0d8ba7504, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!212 &21273706
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -488,14 +500,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1bf991c84e2e55f4e9343b9a8777f312, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!212 &21285354
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -514,14 +530,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3dc1b9be07f46574f908373aa4030a9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

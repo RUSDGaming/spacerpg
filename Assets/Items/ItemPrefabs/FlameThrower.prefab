@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 483956}
   - 212: {fileID: 21230102}
   - 114: {fileID: 11490236}
+  - 61: {fileID: 6122440}
   m_Layer: 17
   m_Name: FlameThrower
   m_TagString: Untagged
@@ -95,6 +96,20 @@ PolygonCollider2D:
       - {x: 2.3932505, y: 14.361618}
       - {x: 0.433856, y: 0.96324503}
       - {x: -0.34914494, y: 0.96324563}
+--- !u!61 &6122440
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113746}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
 --- !u!114 &11400100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -107,9 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ticRate: 0.25
-  damageMin: 0.5
-  damageMax: 1.5
-  damageIncr: 0.5
+  damageMin: 1
+  damageMax: 6
+  damageIncr: 1
   burnDurration: 0.5
   playerId: 1
 --- !u!114 &11490236
@@ -125,10 +140,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   id: 5
+  name: Flame Thrower
   stackSize: 1
   currentSize: 1
-  scrapValue: 1
-  buildCost: 1
+  scrapValue: 10
+  buildCost: 10
   projectile: {fileID: 128674, guid: ab8598fd658e39b45b97e89086e3bd12, type: 2}
   weaponSound: {fileID: 0}
   damageRatio: 0.2
@@ -139,6 +155,7 @@ MonoBehaviour:
   fireRate: 30
   energyCost: 0
   knockBackForce: 0
+  playerOwned: 0
   flameAngle: 10
   flameCone: {fileID: 115284}
 --- !u!212 &21230102
@@ -177,7 +194,35 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: damageMin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damageMax
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damageIncr
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: name
+      value: Flame Thrower
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buildCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: scrapValue
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113746}

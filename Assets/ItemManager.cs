@@ -6,7 +6,7 @@ public class ItemManager : MonoBehaviour {
 
     public static ItemManager instance;
 
-    [SerializeField]    Item[] items;
+    public  Item[] items;
 	// Use this for initialization
 	void Start () {
 	}

@@ -118,11 +118,11 @@ public class WeaponInventory : Inventory
 
             if (aboveShip)
             {
-                weaponSprite.sortingOrder = 2;
+                weaponSprite.sortingOrder = 3;
             }
             else
             {
-                weaponSprite.sortingOrder = 0;
+                weaponSprite.sortingOrder = 1;
             }
 
         }

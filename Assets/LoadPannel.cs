@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class LoadPannel : MonoBehaviour
 {
 
@@ -85,7 +85,9 @@ public class LoadPannel : MonoBehaviour
         else
         {
            Debug.Log("Starting a game " + info.primaryType);
-            Application.LoadLevel("FunLevel");
+            Application.LoadLevel("SideLevel");
+           // SceneManager.L
+            
         }
 
     }

@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 415918}
   - 212: {fileID: 21236298}
   - 114: {fileID: 11484628}
-  - 65: {fileID: 6598422}
+  - 61: {fileID: 6160878}
   m_Layer: 0
   m_Name: MiniGun
   m_TagString: Untagged
@@ -30,18 +30,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!65 &6598422
-BoxCollider:
+--- !u!61 &6160878
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110252}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2}
 --- !u!114 &11484628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   id: 3
+  name: Mini Gun
   stackSize: 1
   currentSize: 1
   scrapValue: 40
@@ -69,6 +72,7 @@ MonoBehaviour:
   fireRate: 1.35
   energyCost: 1
   knockBackForce: 2
+  playerOwned: 0
   maxFireRate: 0.1
   fireRateDecrease: 0.15
   minFireRate: 1.5
@@ -152,6 +156,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: scrapValue
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: name
+      value: Mini Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

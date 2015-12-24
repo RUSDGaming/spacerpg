@@ -49,7 +49,17 @@ public class FlameThrowerWeaponScript : Weapon {
 
             float randomRot = Random.Range(-flameAngle, flameAngle);
             projectileInstance.transform.localRotation =   Quaternion.Euler(new Vector3(0, 0, projectileInstance.transform.localEulerAngles.z + randomRot));
-           // ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
+            FlameParticleScript flame = projectileInstance.GetComponent<FlameParticleScript>();
+            Rigidbody2D body = GetComponentInParent<Rigidbody2D>();
+            if (body)
+            {
+                //Debug.Log("Found the body");
+                flame.init(body.velocity);
+            }
+            else
+            {
+                flame.init(Vector2.zero);
+            }
             //projectileScript.IsPlayer(isPlayer);
             // could optimize code by saving damage values. 
             //projectileScript.damage = getWeaponDamage(stats);

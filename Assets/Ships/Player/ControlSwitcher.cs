@@ -34,13 +34,8 @@ public class ControlSwitcher : MonoBehaviour {
 
         // TODO set the player id correctly
         LoadSavedShip();
-
-        saveGameInfo.playerId = 1;
-       
-
-        statHolderScript.SaveGameInfo = saveGameInfo;
-       
-       
+        saveGameInfo.playerId = 1;  
+        statHolderScript.SaveGameInfo = saveGameInfo; 
         inventoryManager.ship = ship;
         //if(scrapperScript.saveGameInfo == null)
         //{
@@ -85,6 +80,7 @@ public class ControlSwitcher : MonoBehaviour {
     public void SwitchToMainShip()
     {
         mainShip.SetActive(true);
+        //mainShip.swi
        // mainShip.transform.position = shipCore.transform.position;
        // shipCore.SetActive(false);
       //  cameraFollower.followObject = mainShip.transform;

@@ -96,7 +96,6 @@ public class EnemyAI2 : MonoBehaviour
                 if (angle <= ship.turnRate)
                 {
                     //   Debug.Log("Hate");
-                     ship.TryToFire(0, false);
                     if (Vector2.Distance(ship.transform.position, tracking.transform.position) > minDist)
                     {
                         ship.MoveUnit(Vector2.up, true);
@@ -106,6 +105,7 @@ public class EnemyAI2 : MonoBehaviour
                         ship.MoveUnit(Vector2.zero, true);
                     }
                 }
+                     ship.TryToFire(0, false);
             }
            
 
@@ -169,11 +169,12 @@ public class EnemyAI2 : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("playerProjectile"))
         {
-            bullets.Add(other.transform);
+            //bullets.Add(other.transform);
         }
         else if (other.CompareTag("Player"))
         {
             playerShips.Add(other.transform);
+            SetTurretTracking(other.transform);
            // Debug.Log("player enter");
         }
 
@@ -197,7 +198,7 @@ public class EnemyAI2 : MonoBehaviour
         
         if (other.gameObject.layer == LayerMask.NameToLayer("playerProjectile"))
         {
-            bullets.Remove(other.transform);
+            //bullets.Remove(other.transform);
         }
         else if (other.CompareTag("Player"))
         {

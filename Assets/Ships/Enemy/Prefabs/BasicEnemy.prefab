@@ -115,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -79.8, z: 0}
+  m_LocalPosition: {x: -20.7, y: 7.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 453882}
@@ -211,6 +211,7 @@ MonoBehaviour:
   fireRate: 1
   energyCost: 1
   knockBackForce: 2
+  playerOwned: 0
 --- !u!114 &11433890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,6 +242,7 @@ MonoBehaviour:
   - {fileID: 11410466}
   inventoryType: 3
   cargo: {fileID: 453882}
+  playerOwned: 0
   aboveShip: 1
 --- !u!114 &11460034
 MonoBehaviour:
@@ -263,9 +265,57 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 833566adcfc9c4f4fb1181005999bac5, type: 3}
   - {fileID: 21300000, guid: e9690a11fadf1f34d82848d73b562208, type: 3}
   - {fileID: 21300000, guid: 69e267788efe8db4bb1be8d5d5a87314, type: 3}
-  alive: 1
+  playerStats:
+    exp: 0
+    level: 0
+    points: 0
+    money: 0
+    HEALTH: 0
+    ARMOR: 0
+    SHIELD: 0
+    TURN_RATE: 0
+    MOVE_SPEED: 0
+    DAMAGE: 0
+    FIRE_RATE: 0
+    LASER: 0
+    PROJECTILE: 0
+    EXPLOSION: 0
+    ENERGY_REGENERATION: 0
+    ENERGY_CAPACITY: 0
+    FIRE: 0
+    ELECTRIC: 0
+    ACID: 0
+    ICE: 0
+    LIGHT: 0
+    DARK: 0
+    primaryType: 0
+    p1: 0
+    p2: 0
+    p3: 0
+    a1: 0
+    a2: 0
+    a3: 0
+    a4: 0
+    a5: 0
+    a6: 0
+    u1: 0
+    u2: 0
+    u3: 0
+    u4: 0
+    u5: 0
+    u6: 0
+    d1: 0
+    d2: 0
+    d3: 0
+    d4: 0
+    d5: 0
+    d6: 0
   weaponSlots:
   - {fileID: 11445658}
+  capacitors: []
+  engines: []
+  thrusters: []
+  armors: []
   baseHealth: 0
   baseArmor: 0
   baseMaxShield: 0
@@ -285,6 +335,12 @@ MonoBehaviour:
   moveForce: 8000
   maxSpeed: 15
   turnRate: 720
+  id: -1
+  playerControlled: 0
+  playerAtSpaceStation: 0
+  alive: 1
+  lastWeaponSoundPlayed: 0
+  weaponSoundRate: 0.1
   exp: 20
 --- !u!114 &11483230
 MonoBehaviour:

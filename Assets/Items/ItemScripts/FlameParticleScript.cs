@@ -12,18 +12,18 @@ public class FlameParticleScript : MonoBehaviour
     [SerializeField]
     float speed = 100;
     // Use this for initialization
-    void Start()
+    
+    void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-
-        init();
 
     }
 
 
-    protected void init()
+    public void init(Vector2 currentVelocity)
     {
         //iTween.Init(gameObject);
+        body.velocity = currentVelocity;
         body.AddRelativeForce(Vector2.up * speed);
 
         //iTween.ScaleTo(gameObject,

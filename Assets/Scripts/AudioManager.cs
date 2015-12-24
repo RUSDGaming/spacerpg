@@ -13,6 +13,8 @@ public class AudioManager: MonoBehaviour {
     List<AudioSource> audioList;
     [SerializeField]    int numAudio = 16;
 
+    AudioClip[] sounds;
+
     // Use this for initialization
     void Start () {
 
@@ -38,6 +40,20 @@ public class AudioManager: MonoBehaviour {
         //Debug.Log(audioList.Count);
         //Debug.Log(audioList[0]);
         playSound(clip, 1, .5f);
+
+    }
+
+    public static void PlaySoundById(int id)
+    {
+        //if(instance != null)
+        //{
+        //    playSound(instance.sounds[id], 1, .5f);
+        //   // instance.audioList[0].;
+        //}
+    }
+
+    private static void PlaySoundByName()
+    {
 
     }
 

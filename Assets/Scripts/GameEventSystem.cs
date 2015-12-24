@@ -30,6 +30,11 @@ namespace Game.Events
 
         public static void RegisterSubScriber(SubScriber sub)
         {
+            if(instance == null)
+            {
+                Debug.LogError("You didnt set up the GameEvent system");
+                return;
+            }
             if (instance.subscribers == null)
             {
                 instance.subscribers = new List<SubScriber>();

@@ -57,20 +57,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   id: 6
+  name: Charge Laser
   stackSize: 1
   currentSize: 1
   scrapValue: 1
-  buildCost: 1
+  buildCost: 10
   projectile: {fileID: 144294, guid: bb282d6772cb8e5498e405034590a659, type: 2}
   weaponSound: {fileID: 8300000, guid: 07323822eb99ad24b8e2c60890043c7f, type: 3}
-  damageRatio: 0.2
+  damageRatio: 1
   explosionRatio: 0
-  laserRatio: 0
+  laserRatio: 2
   projectileRatio: 0
+  fireRateRatio: 0.1
   damage: 1
   fireRate: 1
   energyCost: 0
-  knockBackForce: 2
+  knockBackForce: 0
+  playerOwned: 0
   chargeTime: 1
   sprites:
   - {fileID: 21300000, guid: 9327858602f1bc44388852120895928a, type: 3}
@@ -116,7 +119,27 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: name
+      value: Charge Laser
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buildCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockBackForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damageRatio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: laserRatio
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139896}

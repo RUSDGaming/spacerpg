@@ -41,5 +41,9 @@ namespace Game.Events
         public float exp;
     }
 
+    public class LevelCompleted : GameEventArgs
+    {
+        public int levelId;
+    }
 
 }

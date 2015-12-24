@@ -17,6 +17,8 @@ public class PlayerMenu : MonoBehaviour
     [SerializeField]    GameObject storage;
     [SerializeField]    GameObject upgradeButton;
     [SerializeField]    GameObject scrapper;
+    [SerializeField]    GameObject upgradeMenu;
+    [SerializeField]    GameObject shop;
 
     [SerializeField]    Sprite defaultSprite;
     [SerializeField]    ControlSwitcher switcher;
@@ -65,9 +67,24 @@ public class PlayerMenu : MonoBehaviour
                 storage.SetActive(true);
                 upgradeButton.SetActive(true);
                 scrapper.SetActive(true);
-
-
             }
+            if (shipScript.playerAtCrusher)
+            {
+                scrapper.SetActive(true);
+            }
+            if (shipScript.playerAtMechanic)
+            {
+                upgradeMenu.SetActive(true);
+            }
+            if (shipScript.playerAtBank)
+            {
+                storage.SetActive(true);
+            }
+            if (shipScript.playerAtShop)
+            {
+                shop.SetActive(true);
+            }
+
         }
         LevelUpText.SetActive(false);
         playerController.disableInput = true;
@@ -91,7 +108,9 @@ public class PlayerMenu : MonoBehaviour
         storage.SetActive(false);
         upgradeButton.SetActive(false);
         scrapper.SetActive(false);
+        upgradeMenu.SetActive(false);
         menuOpen = false;
+        shop.SetActive(false);
     }
 
 

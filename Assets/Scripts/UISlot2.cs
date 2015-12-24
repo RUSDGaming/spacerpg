@@ -127,6 +127,9 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
         {
             Vector3 dropPos = Camera.main.ScreenToWorldPoint(eventData.position);
             dropPos.z = 0;
+            if (item)
+            {
+
             item.transform.parent = null;
             item.gameObject.transform.position = dropPos;
             item.gameObject.SetActive(true);
@@ -140,6 +143,7 @@ public class UISlot2 : MonoBehaviour, IDragHandler,IBeginDragHandler, IEndDragHa
                 juice.enabled = true;
 
             SetItem(null);
+            }
             //item = null;
             //image.sprite = startSprite;
         }

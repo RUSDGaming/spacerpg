@@ -57,7 +57,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   id: 0
-  stackSize: 10
+  name: Scrap (5)
+  stackSize: 1000
   currentSize: 1
   scrapValue: 5
   buildCost: 5
@@ -117,6 +118,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stackSize
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: name
+      value: Scrap (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

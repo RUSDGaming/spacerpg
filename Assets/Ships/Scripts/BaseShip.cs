@@ -60,7 +60,7 @@ public abstract class BaseShip : MonoBehaviour, iShip {
 
     public int id = -1;
     public bool playerControlled = false;
-    public bool playerAtSpaceStation = false;
+    
     public bool alive = true;
 
     public float lastWeaponSoundPlayed;
@@ -130,11 +130,11 @@ public abstract class BaseShip : MonoBehaviour, iShip {
                 Weapon weapon = weaponSlot.items[0].GetComponent<Weapon>();
                 if (weapon.TryToFire(ref currentEnergy))
                 {
-                    if (Time.time - lastWeaponSoundPlayed > weaponSoundRate)
-                    {
-                        lastWeaponSoundPlayed = Time.time;
-                        weapon.PlaySound();
-                    }
+                    //if (Time.time - lastWeaponSoundPlayed > weaponSoundRate)
+                    //{
+                    //    lastWeaponSoundPlayed = Time.time;
+                    //    weapon.PlaySound();
+                    //}
                     body.AddForce(-weapon.transform.up * weapon.knockBackForce, ForceMode2D.Impulse);
                 }
             }
@@ -160,19 +160,26 @@ public abstract class BaseShip : MonoBehaviour, iShip {
     }
     public virtual void Damage(float damage, int damagerId)
     {
+
+        if (!alive)
+        {
+            return;
+        }
+
         float damageToShip = 0;
         damageToShip = DamageShield(damage);
         damageToShip = DamageArmor(damageToShip);
         currentHealth -= damageToShip;
         if (currentHealth <= 0)
         {
+            alive = false;
             KillShip(damagerId);
         }
 
         PlayerHitEventArgs args = new PlayerHitEventArgs { playerId = 1, damageDelt = damageToShip };
         GameEventSystem.PublishEvent(typeof(PlayerDamagedSubscriber), args);
         if (damageToShip > 0)
-            InfoBlurbManager.CreateInfoBlurb(this.transform.position, "" + damageToShip, Color.red);
+            InfoBlurbManager.CreateInfoBlurb(this.transform.position, "" + damageToShip.ToString("0.0"), Color.red);
     }
 
     float DamageArmor(float damage)
@@ -289,7 +296,7 @@ public abstract class BaseShip : MonoBehaviour, iShip {
 
     protected IEnumerator ShowDamage(float damageToShip)
     {
-        InfoBlurbManager.CreateInfoBlurb(this.transform.position, damageToShip.ToString(".0"), Color.red);
+        InfoBlurbManager.CreateInfoBlurb(this.transform.position, damageToShip.ToString("0.00"), Color.red);
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = new Color(1, .5f, .5f);
         yield return new WaitForSeconds(.1f);

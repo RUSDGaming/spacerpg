@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 420736}
   - 212: {fileID: 21287176}
   - 114: {fileID: 11469038}
+  - 61: {fileID: 6128252}
   m_Layer: 0
   m_Name: SniperCannon
   m_TagString: Untagged
@@ -58,6 +59,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 420736}
   m_RootOrder: 0
+--- !u!61 &6128252
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179734}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
 --- !u!114 &11469038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,21 +86,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   id: 7
+  name: Sniper Cannon
   stackSize: 1
   currentSize: 1
-  scrapValue: 1
-  buildCost: 1
+  scrapValue: 50
+  buildCost: 50
   projectile: {fileID: 0}
   weaponSound: {fileID: 0}
-  damageRatio: 0.2
+  damageRatio: 2
   explosionRatio: 0
   laserRatio: 0
   projectileRatio: 0
+  fireRateRatio: 0.01
   damage: 5
-  fireRate: 4
-  energyCost: 0
-  knockBackForce: 2
-  maxDist: 100
+  fireRate: 0.5
+  energyCost: 1
+  knockBackForce: 1
+  playerOwned: 0
+  maxDist: 300
   layers:
     serializedVersion: 2
     m_Bits: 17408
@@ -156,7 +174,47 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: name
+      value: Sniper Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: scrapValue
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buildCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fireRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: energyCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damageRatio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fireRateRatio
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockBackForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxDist
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179734}

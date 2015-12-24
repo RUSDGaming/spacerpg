@@ -34,11 +34,19 @@ public class StatHolderScript : MonoBehaviour {
 
 
 
-    public bool LevelUpStat(PlayerStats.STATS stat)
+    public bool LevelUpStat(PlayerStats.STATS stat, ref int levelValue)
     {
-
         if (saveGameInfo.points < 1)
             return false;
+
+        int points = 1;
+        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            if (SaveGameInfo.points >= 5)
+                points = 5;
+            else
+                points = saveGameInfo.points;
+        }
 
         //int statLevel;
         //if (statBook.TryGetValue(stat, out statLevel))
@@ -52,63 +60,81 @@ public class StatHolderScript : MonoBehaviour {
         switch (stat)
         {
             case PlayerStats.STATS.HEALTH:
-                saveGameInfo.HEALTH++;
+                saveGameInfo.HEALTH += points;
+                levelValue = saveGameInfo.HEALTH;
                 break;
             case PlayerStats.STATS.ARMOR:
-                saveGameInfo.ARMOR++;
+                saveGameInfo.ARMOR += points;
+                levelValue = saveGameInfo.ARMOR;
                 break;
             case PlayerStats.STATS.SHIELD:
-                saveGameInfo.SHIELD++;
+                saveGameInfo.SHIELD += points;
+                levelValue = saveGameInfo.SHIELD;
                 break;
             case PlayerStats.STATS.TURN_RATE:
-                saveGameInfo.TURN_RATE++;
+                saveGameInfo.TURN_RATE += points;
+                levelValue = saveGameInfo.TURN_RATE;
                 break;
             case PlayerStats.STATS.MOVE_SPEED:
-                saveGameInfo.MOVE_SPEED++;
+                saveGameInfo.MOVE_SPEED += points;
+                levelValue = saveGameInfo.MOVE_SPEED;
                 break;
             case PlayerStats.STATS.DAMAGE:
-                saveGameInfo.DAMAGE++;
+                saveGameInfo.DAMAGE += points;
+                levelValue = saveGameInfo.DAMAGE;
                 break;
             case PlayerStats.STATS.FIRE_RATE:
-                saveGameInfo.FIRE_RATE++;
+                saveGameInfo.FIRE_RATE += points;
+                levelValue = saveGameInfo.FIRE_RATE;
                 break;
             case PlayerStats.STATS.LASER:
-                saveGameInfo.LASER++;
+                saveGameInfo.LASER += points;
+                levelValue = saveGameInfo.LASER;
                 break;
             case PlayerStats.STATS.PROJECTILE:
-                saveGameInfo.PROJECTILE++;
+                saveGameInfo.PROJECTILE += points;
+                levelValue = saveGameInfo.PROJECTILE;
                 break;
             case PlayerStats.STATS.EXPLOSION:
-                saveGameInfo.EXPLOSION++;
+                saveGameInfo.EXPLOSION += points;
+                levelValue = saveGameInfo.EXPLOSION;
                 break;
             case PlayerStats.STATS.ENERGY_REGENERATION:
-                saveGameInfo.ENERGY_REGENERATION ++;
+                saveGameInfo.ENERGY_REGENERATION += points;
+                levelValue = saveGameInfo.ENERGY_REGENERATION;
                 break;
             case PlayerStats.STATS.ENERGY_CAPACITY:
-                saveGameInfo.ENERGY_CAPACITY++;
+                saveGameInfo.ENERGY_CAPACITY += points;
+                levelValue = saveGameInfo.ENERGY_CAPACITY;
                 break;
             case PlayerStats.STATS.FIRE:
-                saveGameInfo.FIRE++;
+                saveGameInfo.FIRE += points;
+                levelValue = saveGameInfo.FIRE;
                 break;
             case PlayerStats.STATS.ELECTRIC:
-                saveGameInfo.ELECTRIC++;
+                saveGameInfo.ELECTRIC += points;
+                levelValue = saveGameInfo.ELECTRIC;
                 break;
             case PlayerStats.STATS.ACID:
-                saveGameInfo.ACID++;
+                saveGameInfo.ACID += points;
+                levelValue = saveGameInfo.ACID;
                 break;
             case PlayerStats.STATS.ICE:
-                saveGameInfo.ICE ++;
+                saveGameInfo.ICE += points;
+                levelValue = saveGameInfo.ICE;
                 break;
             case PlayerStats.STATS.LIGHT:
-                saveGameInfo.LIGHT++;
+                saveGameInfo.LIGHT += points;
+                levelValue = saveGameInfo.LIGHT;
                 break;
             case PlayerStats.STATS.DARK:
-                saveGameInfo.DARK++;
+                saveGameInfo.DARK += points;
+                levelValue = saveGameInfo.DARK;
                 break;
             default:
                 break;
         }
-        saveGameInfo.points--;
+        saveGameInfo.points -= points;
         switcher.reloadShipStats(true);
 
         SaveGameSystem.SaveGame(saveGameInfo, PlayerPrefs.GetString(LoadPannel.current));
@@ -116,19 +142,13 @@ public class StatHolderScript : MonoBehaviour {
     }
 
 
-
-
     // loads a dictionary with all the player stats.  This is mainly done for readablityl and code maintaiblitly. 
     private void LoadPlayerStats()
     {
-
-        //Debug.Log("loading players statsss");
-        
-
+        //Debug.Log("loading players statsss");       
         int i = 0;
         foreach (PlayerStats.STATS stat in Enum.GetValues(typeof(PlayerStats.STATS)))
-        {
-            
+        {            
             int statLevel = 0;
             switch (stat)
             {

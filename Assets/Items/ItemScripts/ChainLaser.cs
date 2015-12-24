@@ -54,7 +54,7 @@ public class ChainLaser : Weapon {
         ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
         projectileScript.IsPlayer(playerOwned);
         // could optimize code by saving damage values. 
-        projectileScript.damage = getWeaponDamage(stats);
+        projectileScript.damage = getWeaponDamage();
         if(stats != null)
         projectileScript.id = stats.playerId;
 

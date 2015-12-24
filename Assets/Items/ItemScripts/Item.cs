@@ -12,6 +12,7 @@ public class Item : MonoBehaviour
     public ItemType itemType;
     public int id = -1;
 
+    public string name = "Set the fucking Name";
     public int stackSize = 1;
     public int currentSize = 1;
     public int scrapValue = 1;

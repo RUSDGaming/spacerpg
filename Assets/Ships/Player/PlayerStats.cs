@@ -234,7 +234,7 @@ public class PlayerStats : MonoBehaviour , EnemyDiedSubscriber
         PlayerPrefs.SetFloat(EXP, exp);
         PlayerPrefs.SetInt(LEVEL, level);
         PlayerPrefs.SetInt(POINTS, points);
-        InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp, Color.green);
+        InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp.ToString("0.00"), Color.green);
     }
 
     

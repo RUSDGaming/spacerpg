@@ -44,6 +44,8 @@ public class SniperCannonWeaponScript : Weapon{
         return false;
     }
 
+ 
+
 
     void createSmokeTrail()
     {
@@ -57,10 +59,10 @@ public class SniperCannonWeaponScript : Weapon{
             iDamage target = hit.collider.gameObject.GetComponent<iDamage>();
             if (target != null)
             {
-                target.Damage(damage, 1);
+                target.Damage(getWeaponDamage(), 1);
             }
 
-            Debug.Log(hit.collider.gameObject);
+           // Debug.Log(hit.collider.gameObject);
             smokePos.y = hit.distance / 2;
             scale.y = hit.distance * 8;
             StartCoroutine(HideSmoke());

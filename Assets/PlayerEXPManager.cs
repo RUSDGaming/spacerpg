@@ -58,12 +58,12 @@ public class PlayerEXPManager : MonoBehaviour, EnemyDiedSubscriber
         if (e.playerId == switcher.saveGameInfo.playerId)
         {
             switcher.saveGameInfo.exp += e.exp;
-            InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp, Color.green);
+            InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp.ToString("0"), Color.green);
         }
         else
         {
             switcher.saveGameInfo.exp += e.exp / 2f;
-            InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + e.exp / 2f, Color.green);
+            InfoBlurbManager.CreateInfoBlurb(switcher.mainShip.transform.position, "EXP " + (e.exp / 2f).ToString("0"), Color.green);
         }
         // if you level up you get points;
         int tempLevel = switcher.saveGameInfo.level;

@@ -17,10 +17,20 @@ public class LaserBeamWeaponScript : Weapon
         itemType = ItemType.WEAPON;
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public override void Init(SaveGameInfo sgi, bool playerOwned)
     {
-        
+        base.Init(sgi, playerOwned);
+
+        if (playerOwned)
+        {
+            layers = LayerMask.GetMask(new string[] { "enemy", "Neutral" });
+        }
+        else
+        {
+            layers = LayerMask.GetMask(new string[] { "Neutral", "player" });
+        }
     }
 
 

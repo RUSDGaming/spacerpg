@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon :Item {
+public class Weapon : Item
+{
 
-    
+
 
     public GameObject projectile;
 
@@ -12,33 +13,36 @@ public class Weapon :Item {
     [SerializeField]
     protected AudioClip weaponSound;
 
-   // protected AudioManager audioManager;
+    // protected AudioManager audioManager;
 
     public float damageRatio = .2f;
     public float explosionRatio = 0;
     public float laserRatio = 0;
     public float projectileRatio = 0;
+    public float fireRateRatio = .1f;
 
     public float damage;
-    public float fireRate = 1f;    
+    public float fireRate = 1f;
     public float energyCost;
     public float knockBackForce = 2f;
-    
+
 
     protected float lastShot = 0;
 
     protected SaveGameInfo stats;
 
-    [SerializeField] protected bool playerOwned;
- 
+    [SerializeField]
+    protected bool playerOwned;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start()
+    {
         itemType = ItemType.WEAPON;
         //TODO set the players id when you set the weapon
-        
-	}
-	public virtual void Init(SaveGameInfo sgi,bool playerOwned)
+
+    }
+    public virtual void Init(SaveGameInfo sgi, bool playerOwned)
     {
         stats = sgi;
         lastShot = -fireRate;
@@ -46,12 +50,12 @@ public class Weapon :Item {
     }
     protected virtual bool CanFire(float energy)
     {
-        if(energy >= energyCost)
+        if (energy >= energyCost)
         {
 
             if (Time.time - lastShot > 1 / shotsPerSecond(stats))
             {
-                
+
                 return true;
             }
         }
@@ -59,7 +63,7 @@ public class Weapon :Item {
         return false;
 
     }
-   
+
     public virtual void MouseUp()
     {
 
@@ -67,30 +71,32 @@ public class Weapon :Item {
 
     public virtual bool TryToFire(ref float energy)
     {
-        
-            if(CanFire(energy))
-            {       
-              //  Debug.Log("fired a bullet");
-                energy -= energyCost;
-                GameObject projectileInstance = (GameObject) Instantiate(projectile,transform.position,transform.rotation);
-                
-                ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
-                projectileScript.Init();
-                projectileScript.IsPlayer(playerOwned);
-                // could optimize code by saving damage values. 
-                projectileScript.damage = getWeaponDamage(stats);
-                projectileScript.Init();
 
-                if(stats != null)
-                {
-                    projectileScript.id = stats.playerId;
-                    //Debug.Log("player id that was fired is : " + stats.playerId);
-                }
-                lastShot = Time.time;
+        if (CanFire(energy))
+        {
+            //  Debug.Log("fired a bullet");
+            energy -= energyCost;
+            GameObject projectileInstance = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
 
-                return true;
+            ProjectileScript projectileScript = projectileInstance.GetComponent<ProjectileScript>();
+            projectileScript.Init();
+            projectileScript.IsPlayer(playerOwned);
+            // could optimize code by saving damage values. 
+            projectileScript.damage = getWeaponDamage();
+            projectileScript.Init();
+
+            if (stats != null)
+            {
+                projectileScript.id = stats.playerId;
+                //Debug.Log("player id that was fired is : " + stats.playerId);
+
             }
-        
+            PlaySound();
+            lastShot = Time.time;
+
+            return true;
+        }
+
         return false;
 
     }
@@ -98,33 +104,35 @@ public class Weapon :Item {
     {
         if (stats != null)
         {
-            float rate = fireRate * (1+ stats.FIRE_RATE * .1f);
+            float rate = fireRate * (1 + stats.FIRE_RATE * fireRateRatio);
             return rate;
         }
         return fireRate;
 
     }
 
-    protected    float getWeaponDamage(SaveGameInfo stats) {
+    public float getWeaponDamage()
+    {
 
         float damage2 = 0f;
         if (stats != null)
         {
-           damage2 += damage;
-           damage2 += stats.DAMAGE * damageRatio;
-           damage2 += stats.LASER * laserRatio;
-           damage2 += stats.EXPLOSION * explosionRatio;
-           damage2 += stats.PROJECTILE * projectileRatio;
+            damage2 += damage;
+            damage2 += stats.DAMAGE * damageRatio;
+            damage2 += stats.LASER * laserRatio;
+            damage2 += stats.EXPLOSION * explosionRatio;
+            damage2 += stats.PROJECTILE * projectileRatio;
             return damage2;
         }
 
         return damage;
     }
-    
-    
+
+
     public void PlaySound()
     {
-        AudioManager.playSound(weaponSound);
+     //   AudioManager.playSound(weaponSound);
+       // Debug.Log("Playing Sound");
     }
 
 

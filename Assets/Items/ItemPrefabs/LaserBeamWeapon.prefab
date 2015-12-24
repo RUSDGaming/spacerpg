@@ -150,10 +150,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   id: 4
+  name: Laser Beam
   stackSize: 1
   currentSize: 1
   scrapValue: 140
-  buildCost: 1
+  buildCost: 140
   projectile: {fileID: 0}
   weaponSound: {fileID: 0}
   damageRatio: 0.2
@@ -164,6 +165,7 @@ MonoBehaviour:
   fireRate: 1
   energyCost: 0
   knockBackForce: 0
+  playerOwned: 0
   maxDist: 40
   damageTickRate: 0.32
   layers:
@@ -244,6 +246,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: maxDist
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: name
+      value: Laser Beam
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: buildCost
+      value: 140
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c8ef875ca665dca4cb6162cdaee787ac
+timeCreated: 1450851687
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - backPortal: {instanceID: 0}
+  - enemy: {instanceID: 0}
+  - movingAsteroid: {fileID: 11493512, guid: 1bc469a7dc418f84290e94af4a7834e8, type: 2}
+  - staticAsteroid: {instanceID: 0}
+  - wall: {instanceID: 0}
+  - DeleterWall: {instanceID: 0}
+  - backWall: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

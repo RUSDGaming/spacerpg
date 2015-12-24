@@ -8,8 +8,8 @@ public class FlameConeDamageScript : MonoBehaviour
     
 
     public float ticRate = .25f;
-    public float damageMin = .5f;
-    public float damageMax = 1.5f;
+    public float damageMin = 1f;
+    public float damageMax = 6f;
     public float damageIncr = .1f;
     public float burnDurration = .5f;
 

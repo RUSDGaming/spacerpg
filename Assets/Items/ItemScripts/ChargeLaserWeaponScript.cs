@@ -30,7 +30,7 @@ public class ChargeLaserWeaponScript : Weapon
             projectileScript.Init();
             projectileScript.IsPlayer(playerOwned);
             // could optimize code by saving damage values. 
-            projectileScript.damage = getWeaponDamage(null) * Mathf.Pow(currentCharge,1.5f );
+            projectileScript.damage = getWeaponDamage() * Mathf.Pow(currentCharge,1.5f );
             
             PlaySound();
             // fire projectile

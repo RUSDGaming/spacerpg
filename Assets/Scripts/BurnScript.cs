@@ -21,14 +21,14 @@ public class BurnScript : MonoBehaviour
     {
         du = GetComponent<iDamage>();
         burnTime = burnDurration;
-        burnerId = -1;
+        burnerId = id;
         this.damage = damage;
         this.burnRate = burnRate;
         lastBurn = -burnRate;
     }
     public void refresh(float burnDurration,float burnRate, float damage, int id)
     {
-        burnerId = -1;
+        burnerId = id;
         this.damage = damage;
         this.burnRate = burnRate;
         burnTime = burnDurration;

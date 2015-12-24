@@ -22,7 +22,7 @@ public class LaserBeamDamageScript : MonoBehaviour
             if(target != null)
             {
                 damageTimer = laser.damageTickRate;
-                target.Damage(laser.damage * laser.damageTickRate,1);
+                target.Damage(laser.getWeaponDamage() * laser.damageTickRate,1);
             }
         }
     }
